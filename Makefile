@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/06 14:31:17 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/06 19:41:16 by yoav             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ LDLIBS 			= -lpthread
 
 #---------- IMPLICT RULES ----------
 $(addprefix $(OBJ_DIR)/, %.o): $(addprefix $(SRC_DIR)/, %.c) $(HEAD)
-	@mkdir -p  $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $< -o $(@)
 
 #---------- RULES ----------
@@ -66,14 +65,14 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN)$(NAME) READY!$(NC)"
 
 clean:
-	@$(RM) $(OBJ)
+	@$(RM) -rf $(OBJ_DIR)
 	@echo "$(RED)Objects Removed!$(NC)"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(RED)$(NAME) Removed!$(NC)"
 
-re: fclean $(NAME)
+re: fclean all
 
 $(addprefix $(TEST_DIR)/, %.t.out): $(addprefix $(OBJ_DIR)/, %.o) $(addprefix $(TEST_DIR)/, %.t.c)
 	@$(CC) $(TEST_CFLAGS) $^ $(TEST_HEAD_DIR) $(TEST_LDLIBS) -o $@
@@ -81,4 +80,4 @@ $(addprefix $(TEST_DIR)/, %.t.out): $(addprefix $(OBJ_DIR)/, %.o) $(addprefix $(
 	@$(RM) $@
 	@$(RM) $(TEST_RES)
 
-check: $(TEST_OUT)
+check: $(OBJ_DIR) $(OBJ) $(TEST_OUT)
