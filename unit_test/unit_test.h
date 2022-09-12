@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 09:43:07 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/12 15:21:01 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <string.h>
 # include "CUnit/Basic.h"
+# include "CUnit/MyMem.h"
 
 # define TEST_RES "unit_test_result.txt"
 # define DEFAULT_SUITE	"SUITE"

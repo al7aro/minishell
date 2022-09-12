@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 15:12:53 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/12 15:47:32 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,32 @@ static FILE* g_temp_file = NULL;
 
 // Every test needs a declaration here
 
-void test_dll_swap_value(void);
-void test_dll_create_and_destroy_elem(void);
-void test_dll_clear_list(void);
+void	test_dll_add_before(void);
+void	test_dll_swap_value(void);
+void	test_dll_create_and_destroy_elem(void);
+void	test_dll_clear_list(void);
+void	test_dll_add_last(void);
+void	test_dll_add_after(void);
+void	test_dll_get_last_elem(void);
 
 // and to be added to this array
 static t_unit_test g_all_tests[] = {
+	{
+		test_dll_get_last_elem,
+		"test_dll_get_last_elem"
+	},
+	{
+		test_dll_add_last,
+		"test_dll_add_last"
+	},
+	{
+		test_dll_add_before,
+		"test_dll_add_before"
+	},
+	{
+		test_dll_add_after,
+		"test_dll_add_after"
+	},
 	{
 		test_dll_swap_value,
 		"test_dll_swap_value"
@@ -58,7 +78,7 @@ int	clean_suite(void)
 CU_ErrorCode	loop_all_tests(CU_pSuite pSuite)
 {
 	int	i	= 0;
-	
+	CU_TestInfo s;
 	while (NULL != g_all_tests[i].f)
 	{
 		if ((NULL == CU_add_test(pSuite, g_all_tests[i].name, g_all_tests[i].f)))

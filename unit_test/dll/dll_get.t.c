@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll.t.c                                            :+:      :+:    :+:   */
+/*   dll_get.t.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 15:33:08 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/12 15:17:36 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/12 15:47:18 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dll.h"
 #include "unit_test.h"
 
-void test_dll_create_and_destroy_elem(void)
+void	test_dll_get_last_elem(void)
 {
-	int		i = 6;
-	t_dll	*node;
+	int i1 = 1;
+	int i2 = 2;
+	int i3 = 3;
+	t_dll *lst = NULL;
+	t_dll *node = NULL;
 
-	node = dll_create_elem(&i);
-	CU_ASSERT_PTR_NOT_NULL(node);
-	CU_ASSERT(*(int *)(node->value) == 6);
-	dll_destroy_elem(node);
-}
-
-void test_dll_clear_list(void)
-{
-	int		i = 1;
-	t_dll	*lst = NULL;
-	
-	dll_add_last(&lst, dll_create_elem(&i));
-	dll_add_last(&lst, dll_create_elem(&i));
-	dll_add_last(&lst, dll_create_elem(&i));
+	dll_add_last(&lst, dll_create_elem(&i1));
+	dll_add_last(&lst, dll_create_elem(&i2));
+	dll_add_last(&lst, dll_create_elem(&i3));
+	node = dll_get_last_elem(lst);
+	CU_ASSERT_EQUAL(*(int *)node->value, 3);
 	dll_clear_list(lst);
 }

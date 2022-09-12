@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/12 15:02:53 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/12 15:22:05 by yoav             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ fclean: clean
 
 re: fclean all
 
-test: $(OBJ_DIR) $(OBJ_NO_MAIN) $(TEST_OBJ)
+test: $(OBJ_DIR) $(OBJ_NO_MAIN) $(TEST_OBJ) $(LIBFT)
 	@$(CC) $(LDFLAGS) $(TEST_MAIN) $(OBJ_NO_MAIN) $(TEST_OBJ) $(TEST_LDLIBS) -o $(TEST_EXEC)
 	@./$(TEST_EXEC)
 	@$(RM) $(TEST_EXEC)
