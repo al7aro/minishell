@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 09:50:24 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/12 15:12:53 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static FILE* g_temp_file = NULL;
 
 // Every test needs a declaration here
 
-void test_dll_create_elem(void);
 void test_dll_swap_value(void);
+void test_dll_create_and_destroy_elem(void);
+void test_dll_clear_list(void);
 
 // and to be added to this array
 static t_unit_test g_all_tests[] = {
@@ -26,8 +27,12 @@ static t_unit_test g_all_tests[] = {
 		"test_dll_swap_value"
 	},
 	{
-		test_dll_create_elem,
-		"test_dll_create_elem"
+		test_dll_create_and_destroy_elem,
+		"test_dll_create_and_destroy_elem"
+	},
+	{
+		test_dll_clear_list,
+		"test_dll_clear_list"
 	},
 	{
 		NULL,

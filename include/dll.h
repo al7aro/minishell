@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 
+# include "libft.h"
 # include "macros.h"
 
 typedef struct s_dll	t_dll;

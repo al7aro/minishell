@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/12 14:58:23 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/12 15:02:53 by yoav             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,10 @@ LIBFT			= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 #---------- TEST ----------
 TEST_DIR		= unit_test
 TEST_HEAD_DIR	= -I$(TEST_DIR) -I$(HEAD_DIR)
-TEST_LDLIBS		= -lcunit 
+TEST_LDLIBS		= -lcunit $(LDLIBS)
 TEST_EXEC		= test.out
 TEST_MAIN		= $(addprefix $(TEST_DIR)/, unit_test_main.c)
 TEST_RES		= "unit_test_result.txt"
-TEST_CFLAGS		= -D TEST_RES='$(TEST_RES)'
 TEST_SRC 		= $(wildcard $(TEST_DIR)/**/*.t.c)
 TEST_OBJ 		= $(TEST_SRC:.t.c=.t.o)
 
@@ -58,7 +57,7 @@ $(addprefix $(OBJ_DIR)/, %.o): $(addprefix $(SRC_DIR)/, %.c) $(HEAD)
 	@$(CC) $(CFLAGS) $< -o $(@)
 
 $(addprefix $(TEST_DIR)/, %.t.o): $(addprefix $(TEST_DIR)/, %.t.c)
-	@$(CC) $(TEST_CFLAGS) -c $^ $(TEST_HEAD_DIR) -o $@
+	@$(CC) $(CFLAGS) -c $^ $(TEST_HEAD_DIR) -o $@
 
 #---------- RULES ----------
 .PHONY: clean fclean re all check
@@ -91,7 +90,7 @@ fclean: clean
 re: fclean all
 
 test: $(OBJ_DIR) $(OBJ_NO_MAIN) $(TEST_OBJ)
-	@$(CC) $(TEST_CFLAGS) $(TEST_MAIN) $(OBJ_NO_MAIN) $(TEST_OBJ) $(TEST_LDLIBS) -o $(TEST_EXEC)
+	@$(CC) $(LDFLAGS) $(TEST_MAIN) $(OBJ_NO_MAIN) $(TEST_OBJ) $(TEST_LDLIBS) -o $(TEST_EXEC)
 	@./$(TEST_EXEC)
 	@$(RM) $(TEST_EXEC)
 	@$(RM) $(TEST_RES)
