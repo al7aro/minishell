@@ -1,5 +1,8 @@
 # minishell
 
+	### ~Reader
+
+
 Heredocs
 	substitute for STDIN
 	send input to command
