@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/12 15:22:05 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/12 16:29:41 by yoav             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ TEST_DIR		= unit_test
 TEST_HEAD_DIR	= -I$(TEST_DIR) -I$(HEAD_DIR)
 TEST_LDLIBS		= -lcunit $(LDLIBS)
 TEST_EXEC		= test.out
-TEST_MAIN		= $(addprefix $(TEST_DIR)/, unit_test_main.c)
 TEST_RES		= "unit_test_result.txt"
 TEST_SRC 		= $(wildcard $(TEST_DIR)/**/*.t.c)
 TEST_OBJ 		= $(TEST_SRC:.t.c=.t.o)
@@ -90,7 +89,7 @@ fclean: clean
 re: fclean all
 
 test: $(OBJ_DIR) $(OBJ_NO_MAIN) $(TEST_OBJ) $(LIBFT)
-	@$(CC) $(LDFLAGS) $(TEST_MAIN) $(OBJ_NO_MAIN) $(TEST_OBJ) $(TEST_LDLIBS) -o $(TEST_EXEC)
+	@$(CC) $(LDFLAGS) $(OBJ_NO_MAIN) $(TEST_OBJ) $(TEST_LDLIBS) -o $(TEST_EXEC)
 	@./$(TEST_EXEC)
 	@$(RM) $(TEST_EXEC)
 	@$(RM) $(TEST_RES)

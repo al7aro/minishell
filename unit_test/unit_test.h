@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 15:21:01 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/12 16:42:29 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,26 @@
 # include <stdio.h>
 # include <string.h>
 # include "CUnit/Basic.h"
-# include "CUnit/MyMem.h"
 
 # define TEST_RES "unit_test_result.txt"
-# define DEFAULT_SUITE	"SUITE"
 
-typedef void (*t_unit_test_func)(void);
+extern CU_TestInfo g_dll_tests[];
+extern CU_SuiteInfo g_suites[];
 
-typedef struct s_unit_test
-{
-	t_unit_test_func	f;
-	const char *		name;
-}	t_unit_test;
+// main
+int	init_suite(void);
+int	clean_suite(void);
+
+// dll tests
+void	test_dll_add_before(void);
+void	test_dll_swap_value(void);
+void	test_dll_create_and_destroy_elem(void);
+void	test_dll_clear_list(void);
+void	test_dll_add_last(void);
+void	test_dll_add_after(void);
+void	test_dll_get_last_elem(void);
+void	test_dll_remove_first_elem(void);
+void	test_dll_remove_last_elem(void);
+void	test_dll_remove_elem(void);
 
 #endif

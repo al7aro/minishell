@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll.t.c                                            :+:      :+:    :+:   */
+/*   main.t.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 16:31:14 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/12 16:33:45 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
 #include "unit_test.h"
 
-void test_dll_create_and_destroy_elem(void)
-{
-	int		i = 6;
-	t_dll	*node;
+static FILE* g_temp_file = NULL;
 
-	node = dll_create_elem(&i);
-	CU_ASSERT_PTR_NOT_NULL(node);
-	CU_ASSERT(*(int *)(node->value) == 6);
-	dll_destroy_elem(node);
+int	init_suite(void)
+{
+	if (NULL == (g_temp_file = fopen(TEST_RES, "w+")))
+		return -1;
+	return 0;
 }
 
-void test_dll_clear_list(void)
+int	clean_suite(void)
 {
-	int		i = 1;
-	t_dll	*lst = NULL;
-	
-	dll_add_last(&lst, dll_create_elem(&i));
-	dll_add_last(&lst, dll_create_elem(&i));
-	dll_add_last(&lst, dll_create_elem(&i));
-	dll_clear_list(lst);
+	if (0 != fclose(g_temp_file))
+		return -1;
+	g_temp_file = NULL;
+	return 0;
+}
+
+int	main(void)
+{
+	if (CUE_SUCCESS != CU_initialize_registry())
+		return CU_get_error();
+	CU_register_suites(g_suites);
+	CU_basic_set_mode(CU_BRM_NORMAL);
+	CU_basic_run_tests();
+	CU_cleanup_registry();
+	return CU_get_error();
 }
