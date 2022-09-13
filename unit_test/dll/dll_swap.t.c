@@ -6,14 +6,14 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 09:42:48 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dll.h"
 #include "unit_test.h"
 
-void test_dll_swap_value(void)
+void	test_dll_swap_value(void)
 {
 	int		a;
 	int		b;
