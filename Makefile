@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/12 16:29:41 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/13 09:57:28 by yoav             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,10 +79,12 @@ $(NAME): $(OBJ) $(LIBFT)
 clean:
 	@$(MAKE) clean -sC $(LIBFT_DIR)
 	@$(RM) -rf $(OBJ_DIR)
+	@$(RM) $(TEST_OBJ)
 	@echo "$(RED)Objects Removed!$(NC)"
 
 fclean: clean
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
+	@$(RM) $(TEST_EXEC)
 	@$(RM) $(NAME)
 	@echo "$(RED)$(NAME) Removed!$(NC)"
 
@@ -91,7 +93,4 @@ re: fclean all
 test: $(OBJ_DIR) $(OBJ_NO_MAIN) $(TEST_OBJ) $(LIBFT)
 	@$(CC) $(LDFLAGS) $(OBJ_NO_MAIN) $(TEST_OBJ) $(TEST_LDLIBS) -o $(TEST_EXEC)
 	@./$(TEST_EXEC)
-	@$(RM) $(TEST_EXEC)
 	@$(RM) $(TEST_RES)
-	@$(RM) $(TEST_OBJ)
-	

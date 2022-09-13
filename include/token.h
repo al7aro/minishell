@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_suites.t.c                                    :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 09:54:24 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/13 09:35:29 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/13 09:54:53 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#ifndef TOKEN_H
+# define TOKEN_H
 
-CU_SuiteInfo g_suites[] = 
+# include <stdlib.h>
+
+# include "error_code.h"
+# include "libft.h"
+
+typedef enum e_token_type
 {
-	{
-		"token",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_token_tests,
-	},
-	{
-		"dll",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_dll_tests,
-	},
-	CU_SUITE_INFO_NULL,
-};
+	WORD,
+	OPERATOR,	
+}	t_token_type;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
+}	t_token;
+
+t_error_code	token_create(t_token **ret, char *ptr, t_token_type type);
+void 			token_destroy(t_token **t);
+
+#endif

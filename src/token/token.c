@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_suites.t.c                                    :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 09:54:24 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/13 09:38:31 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/13 09:48:27 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#include "token.h"
 
-CU_SuiteInfo g_suites[] = 
+t_error_code	token_create(t_token **ret, char *ptr, t_token_type type)
 {
-	{
-		"token",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_token_tests,
-	},
-	{
-		"dll",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_dll_tests,
-	},
-	CU_SUITE_INFO_NULL,
-};
+	*ret = ft_calloc(1, sizeof(t_token));
+	if (!*ret)
+		return (ALLOCATION_ERROR);
+	(*ret)->type = type;
+	(*ret)->value = ptr;
+	return (SUCCESS);
+}
+
+void	token_destroy(t_token **t)
+{
+	ft_bzero(*t, sizeof(t_token));
+	free(*t);
+	*t = NULL;
+}
+

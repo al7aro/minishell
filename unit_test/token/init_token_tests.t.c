@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_suites.t.c                                    :+:      :+:    :+:   */
+/*   init_token_tests.t.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 09:54:24 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 09:54:14 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_test.h"
 
-CU_SuiteInfo g_suites[] = 
+CU_TestInfo g_token_tests[] =
 {
 	{
-		"token",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_token_tests,
+		"test_token_create_destroy",
+		test_token_create_destroy,
 	},
-	{
-		"dll",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_dll_tests,
-	},
-	CU_SUITE_INFO_NULL,
+	CU_TEST_INFO_NULL,
 };
