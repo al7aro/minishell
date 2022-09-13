@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_suites.t.c                                    :+:      :+:    :+:   */
+/*   token_list.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:28:41 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/13 10:06:23 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/13 10:38:56 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#ifndef TOKEN_LIST_H
+# define TOKEN_LIST_H
 
-CU_SuiteInfo g_suites[] = 
+#include "token.h"
+#include "error_code.h"
+#include "dll.h"
+
+typedef struct s_token_list
 {
-	{
-		"token_list",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_token_list_tests,
-	},
-	{
-		"token",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_token_tests,
-	},
-	{
-		"dll",
-		init_suite,
-		clean_suite,
-		NULL,
-		NULL,
-		g_dll_tests,
-	},
-	CU_SUITE_INFO_NULL,
-};
+	t_dll	*tok_lst;
+}	t_token_list;
+
+t_error_code	token_list_create(t_token_list **ret);
+void			token_list_destroy(t_token_list	**lst);
+t_error_code	token_list_add_last(t_token_list *lst, t_token *node);
+
+#endif

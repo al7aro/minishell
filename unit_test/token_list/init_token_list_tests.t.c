@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   init_token_list_tests.t.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/06 13:32:16 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/13 10:28:20 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "unit_test.h"
 
-typedef enum e_error_code
+CU_TestInfo g_token_list_tests[] =
 {
-	ERROR = -1,
-	SUCCESS = 0,
-}	t_error_code;
-
-#endif
+	{
+		"test_tok_lst_create_destroy",
+		test_tok_lst_create_destroy,
+	},
+	CU_TEST_INFO_NULL,
+};

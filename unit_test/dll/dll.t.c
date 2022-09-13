@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 16:31:14 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 10:35:37 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void test_dll_clear_list(void)
 	dll_add_last(&lst, dll_create_elem(&i));
 	dll_add_last(&lst, dll_create_elem(&i));
 	dll_add_last(&lst, dll_create_elem(&i));
-	dll_clear_list(lst);
+	dll_clear_list(lst, NULL);
 }

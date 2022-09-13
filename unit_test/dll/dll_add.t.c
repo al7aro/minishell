@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:17:36 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 15:46:10 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 10:35:26 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	test_dll_add_after(void)
 	CU_ASSERT_EQUAL(*(int *)lst->value, 1);
 	CU_ASSERT_EQUAL(*(int *)lst->next->value, 2);
 	CU_ASSERT_EQUAL(lst->next, new);
-	dll_clear_list(lst);
+	dll_clear_list(lst, NULL);
 }
 
 void	test_dll_add_before(void)
@@ -37,7 +37,7 @@ void	test_dll_add_before(void)
 	dll_add_before(lst, new);
 	CU_ASSERT_EQUAL(*(int *)lst->value, 2);
 	CU_ASSERT_EQUAL(*(int *)lst->next->value, 1);
-	dll_clear_list(lst);
+	dll_clear_list(lst, NULL);
 }
 
 void	test_dll_add_last(void)
@@ -50,6 +50,6 @@ void	test_dll_add_last(void)
 	dll_add_last(&lst, dll_create_elem(&i2));
 	CU_ASSERT_EQUAL(*(int *)lst->value, 1);
 	CU_ASSERT_EQUAL(*(int *)lst->next->value, 2);
-	dll_clear_list(lst);
+	dll_clear_list(lst, NULL);
 }
 

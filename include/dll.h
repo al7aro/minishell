@@ -16,8 +16,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 
+# include "error_code.h"
 # include "libft.h"
-# include "macros.h"
 
 typedef struct s_dll	t_dll;
 
@@ -29,11 +29,12 @@ typedef struct s_dll
 }				t_dll;
 
 typedef int				(*t_dll_iter)(t_dll *elem, void *param);
+typedef void			(*t_dll_destroy_func)(void **ptr);
 
 // dll
 t_dll	*dll_create_elem(void *value);
 void	dll_destroy_elem(t_dll *elem);
-void	dll_clear_list(t_dll *lst);
+void	dll_clear_list(register t_dll *lst, t_dll_destroy_func f);
 void	dll_swap_value(t_dll *a, t_dll *b);
 
 // iterate

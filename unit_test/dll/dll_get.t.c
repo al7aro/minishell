@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:17:36 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/12 15:47:18 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 10:35:32 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	test_dll_get_last_elem(void)
 	dll_add_last(&lst, dll_create_elem(&i3));
 	node = dll_get_last_elem(lst);
 	CU_ASSERT_EQUAL(*(int *)node->value, 3);
-	dll_clear_list(lst);
+	dll_clear_list(lst, NULL);
 }
