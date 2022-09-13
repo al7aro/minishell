@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:19:27 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:40:53 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 10:59:58 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	test_tok_lst_create_destroy(void)
 	t_token_list	*lst;
 	t_token			*t;
 	char			*s;
-	
+
 	s = "str";
 	err = token_list_create(&lst);
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);

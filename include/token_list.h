@@ -6,16 +6,16 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 10:06:23 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:38:56 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/13 11:02:20 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_LIST_H
 # define TOKEN_LIST_H
 
-#include "token.h"
-#include "error_code.h"
-#include "dll.h"
+# include "token.h"
+# include "error_code.h"
+# include "dll.h"
 
 typedef struct s_token_list
 {
