@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/14 11:41:22 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 13:52:30 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include <stdlib.h>
 
-void	test_dll_swap_value(void)
+#include "libft.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	size_t		len1;
+	size_t		len2;
+	char		*ret;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	ret = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (ret)
+	{
+		ret[len1 + len2] = 0;
+		ft_memcpy(ret, s1, len1);
+		ft_memcpy((ret + len1), s2, len2);
+	}
+	return (ret);
 }

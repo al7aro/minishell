@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/13 18:11:02 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 11:42:49 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include "libft.h"
 
-void	test_dll_swap_value(void)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	unsigned int	l;
+	size_t			i;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	i = 0;
+	l = ft_strlen(little);
+	if (!l)
+		return ((char *)big);
+	while (big[i] && (i + l - 1) < len)
+	{
+		if (!ft_strncmp((big + i), little, l))
+			return ((char *)big + i);
+		++i;
+	}
+	return ((char *)0);
 }

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/13 18:06:29 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 13:58:12 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include <stddef.h>
 
-void	test_dll_swap_value(void)
+#include "libft.h"
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	size_t				i;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	str1 = (const unsigned char *)s1;
+	str2 = (const unsigned char *)s2;
+	i = 0;
+	if (!n)
+		return (0);
+	while (str1[i] == str2[i] && i < n)
+		++i;
+	if (i == n)
+		return (0);
+	return ((int)(str1[i] - str2[i]));
 }

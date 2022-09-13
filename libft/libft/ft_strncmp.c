@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/13 17:48:25 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/13 17:57:38 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include <stddef.h>
 
-void	test_dll_swap_value(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	size_t	i;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	i = 0;
+	if (!n)
+		return (0);
+	while (*s1 && *s1 == *s2 && i < n)
+	{
+		++s1;
+		++s2;
+		++i;
+	}
+	if (i == n)
+		return (0);
+	return (*(int *)s1 - *(int *)s2);
 }

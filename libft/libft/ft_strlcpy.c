@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/14 10:29:24 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 13:56:04 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include <stddef.h>
 
-void	test_dll_swap_value(void)
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	size_t	i;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	i = 0;
+	if (!size)
+		return (ft_strlen(src));
+	while (i + 1 < size && src[i])
+	{
+		dst[i] = src[i];
+		++i;
+	}
+	dst[i] = '\0';
+	while (src[i])
+		++i;
+	return (i);
 }

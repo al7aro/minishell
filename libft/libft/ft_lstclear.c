@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/15 11:03:57 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 11:08:45 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include <stddef.h>
 
-void	test_dll_swap_value(void)
+#include "libft.h"
+
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	t_list	*tmp;
+	t_list	*node;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	if (!lst | !del)
+		return ;
+	node = *lst;
+	while (node)
+	{
+		tmp = node->next;
+		ft_lstdelone(node, del);
+		node = tmp;
+	}
+	*lst = NULL;
 }

@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/14 19:46:53 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/14 19:53:12 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include "libft.h"
 
-void	test_dll_swap_value(void)
+void	rec(long n, int fd)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	if (n / BASE_DEC)
+	{
+		rec(n / 10, fd);
+		rec(n % 10, fd);
+	}
+	if (n < BASE_DEC)
+		ft_putchar_fd(n + '0', fd);
+}
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	nbr;
+
+	nbr = (long)n;
+	if (nbr < 0)
+	{
+		nbr *= -1;
+		ft_putchar_fd('-', fd);
+	}
+	rec(nbr, fd);
 }

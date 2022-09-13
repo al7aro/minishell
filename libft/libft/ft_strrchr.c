@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/13 17:37:56 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 13:56:31 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include "libft.h"
 
-void	test_dll_swap_value(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	char	*ret;
+	int		i;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	if (!s)
+		return (0);
+	ret = (char *)s;
+	c = (int)((char)c);
+	i = (int)ft_strlen(s);
+	if (!c)
+		return (ret + i);
+	--i;
+	while (i >= 0 && ret[i] != c)
+		--i;
+	if (i == -1)
+		return ((char *)0);
+	return (ret + i);
 }

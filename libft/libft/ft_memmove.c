@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_swap.t.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 14:21:17 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 10:54:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/06/14 11:02:24 by yoav              #+#    #+#             */
+/*   Updated: 2022/06/15 13:48:49 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
-#include "unit_test.h"
+#include <stddef.h>
 
-void	test_dll_swap_value(void)
+#include "libft.h"
+
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int		a;
-	int		b;
-	t_dll	e1;
-	t_dll	e2;
+	char		*d;
+	const char	*s;
 
-	a = 2;
-	b = 55;
-	e1.value = &a;
-	e2.value = &b;
-	dll_swap_value(&e1, &e2);
-	CU_ASSERT(*(int *)(e1.value) == 55);
-	CU_ASSERT(*(int *)(e2.value) == 2);
+	if (!dest || !src)
+		return (NULL);
+	if (dest < src)
+		return (ft_memcpy(dest, src, n));
+	d = (char *)dest;
+	s = (const char *)src;
+	while (n)
+	{
+		--n;
+		d[n] = s[n];
+	}
+	return (dest);
 }
