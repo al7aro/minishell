@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/13 11:00:47 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/14 09:52:37 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define TEST_RES "unit_test_result.txt"
 
+extern CU_TestInfo	g_shell_op_tests[];
+extern CU_TestInfo	g_tab_tests[];
 extern CU_TestInfo	g_token_list_tests[];
 extern CU_TestInfo	g_token_tests[];
 extern CU_TestInfo	g_dll_tests[];
@@ -27,6 +29,14 @@ extern CU_SuiteInfo	g_suites[];
 // main
 int		init_suite(void);
 int		clean_suite(void);
+
+// shell_op
+void	test_shell_op_create_destroy_empty(void);
+void	test_shell_op_create_destroy_with_tab(void);
+void	test_shell_op_create_destroy_with_token_list(void);
+
+// tab
+void	test_tab_create_destroy(void);
 
 // token
 void	test_token_create_destroy(void);
