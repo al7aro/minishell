@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/14 01:09:20 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/09/14 09:19:56 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,25 @@ int	cnt_char(char *str, char c)
 	return (cnt);
 }
 
+/*
+ * TODO Create improved split to treat "" as a hole 
+ **/
 char	*dquote(char **line)
 {
+	char	*tmp;
 	char	*new_content;
 
-	(void)new_content;
+	tmp = NULL;
 	while (cnt_char(*line, '\"') % 2 != 0) //quotes are opened
 	{
+		tmp = *line;
+		new_content = readline("dquote> ");
+		*line = ft_strjoin(*line, new_content);
+		free(tmp);
+		tmp = *line;
 		*line = ft_strjoin(*line, " ");
-		*line = ft_strjoin(*line, readline("dquote> "));
-		*line = ft_strjoin(*line, "\n");
+		free(tmp);
+		free(new_content);
 	}
 	return NULL;
 }
@@ -73,6 +82,8 @@ char	*dquote(char **line)
  * Handle dquote (open quotes)
  * whats inside "" should not be splitted
  * 		it should be sent as a hole
+ * 	TODO
+ * 		LEAK: free tab..?
  * */
 char **reader()
 {
