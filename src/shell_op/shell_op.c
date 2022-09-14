@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:52:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/14 08:51:16 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/14 09:51:26 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ t_error_code	shell_op_create(t_shell_op **ret)
 
 void	shell_op_destroy(t_shell_op **sp)
 {
-	// if (sp->input)
+	if ((*sp)->input)
+		tab_destroy(&((*sp)->input));
 	if ((*sp)->token_list)
-		token_list_destroy((*sp)->input);
+		token_list_destroy(&((*sp)->token_list));
 	ft_bzero(*sp, sizeof(t_shell_op));
 	free(*sp);
 	*sp = NULL;
