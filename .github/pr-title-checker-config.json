@@ -4,14 +4,11 @@
 	  "color": "EEEEEE"
 	},
 	"CHECKS": {
-	  "prefixes": ["fix: ", "feat: "],
-	  "regexp": "docs\\(v[0-9]\\): ",
-	  "regexpFlags": "i",
-	  "ignoreLabels" : ["dont-check-PRs-with-this-label", "meta"]
+	  "regexp": "[A-Z]([A-Z0-9]*[a-z][a-z0-9]*[A-Z]|[a-z0-9]*[A-Z][A-Z0-9]*[a-z])[A-Za-z0-9]*"
 	},
 	"MESSAGES": {
-	  "success": "All OK",
-	  "failure": "Failing CI test",
+	  "success": "Title is OK :)",
+	  "failure": "Title has an issue (Must be CamelCase)",
 	  "notice": ""
 	}
   }
