@@ -12,6 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Env
+      run: env
+  
     - name: Install Dependencies
       run: ./script/install_dependencies.sh
 
