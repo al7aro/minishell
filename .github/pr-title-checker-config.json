@@ -1,6 +1,6 @@
 {
 	"LABEL": {
-	  "name": "title needs formatting",
+	  "name": "Format title to CamelCase",
 	  "color": "EEEEEE"
 	},
 	"CHECKS": {
