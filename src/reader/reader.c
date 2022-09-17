@@ -6,11 +6,13 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/14 09:19:56 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/09/14 12:09:31 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "reader.h"
+#include "tab.h"
 #include "error_code.h"
 #include <stdio.h>
 #include <readline/readline.h>
@@ -19,25 +21,34 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void	tmp_print_input_table(char **input_table)
+void	arg_reader(int argc, char **argv)
+{
+	char	**tab;
+
+	(void)argc;
+	(void)argv;
+	if (argc != 1)
+	{
+		tab = argv + 1;
+		info_log_input_table(tab);
+		//tab = ft_split_copy(argv + 1); //returns TAB
+		//exec_command();
+		exit(0);
+	}
+}
+
+void	info_log_input_table(char **input_table)
 {
 	int	i;
 
 	i = 0;
 	if (input_table)
-	while (*(input_table + i))
-	{
-		printf("[%d] %s\n", i, *(input_table + i));
-		i++;
-	}
+		while (*(input_table + i))
+		{
+			printf("[%d] %s\n", i, *(input_table + i));
+			i++;
+		}
 }
-
-char	**first_read(int argc, char **argv)
-{
-	(void)argc;
-	(void)argv;
-
-	return (NULL); }
 
 int	cnt_char(char *str, char c)
 {
@@ -57,6 +68,7 @@ int	cnt_char(char *str, char c)
 
 /*
  * TODO Create improved split to treat "" as a hole 
+ * TODO Each dqoute line is ADDED TO HISTORY following by a ''\n' rather than ' '
  **/
 char	*dquote(char **line)
 {
@@ -82,8 +94,6 @@ char	*dquote(char **line)
  * Handle dquote (open quotes)
  * whats inside "" should not be splitted
  * 		it should be sent as a hole
- * 	TODO
- * 		LEAK: free tab..?
  * */
 char **reader()
 {
@@ -91,9 +101,11 @@ char **reader()
 	char	**tab;
 
 	line = readline(">_");
+	if (!line)
+		exit(0);
 	dquote(&line);
 	add_history(line);
-	tab = ft_split(line, ' ');
+	tab = ft_split(line, ' '); //make smart split
 	free(line);
 	return (tab);
 }

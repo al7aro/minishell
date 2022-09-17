@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader.h                                           :+:      :+:    :+:   */
+/*   ft_split_smart.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 00:21:18 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/14 12:02:45 by al7aro           ###   ########.fr       */
+/*   Created: 2022/09/14 11:32:13 by al7aro            #+#    #+#             */
+/*   Updated: 2022/09/14 11:44:25 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READER_H
-# define READER_H
+#include <stdio.h>
 
-void	info_log_input_table(char **input_table);
-char	**ft_split_smart(char *str, char c, char del);
-void	arg_reader(int argc, char **argv);
-char	**reader();
-
-#endif
+// Split STR using C but leave everything inside pairs of DEL as is
+// 	if DEL is not an even number it is ignored
+char **ft_split_smart(char *str, char c, char del)
+{
+	(void)str;
+	(void)c;
+	(void)del;
+ 	return (NULL);
+}
