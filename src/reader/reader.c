@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/17 17:51:08 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:40:52 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	paired(char *str)
 	char	q;
 	char	i;
 
-	printf("%c\n", *str);
 	i = 1;
 	q = *str;
 	while (*(str + i) && *(str + i) != q)
@@ -67,36 +66,31 @@ char	paired(char *str)
 
 char	*dquote(char **line)
 {
-	char	*str;
 	char	*tmp;
 	char	*new_content;
 	char	i;
 
-	str = *line;
-	tmp = NULL;
 	i = 0;
-	while (*(str + i))
+	while (*(*line + i))
 	{
-		if (*(str + i) == '\"' || *(str + i) == '\'')
+		if (*(*line + i) == '\"' || *(*line + i) == '\'')
 		{
-			while (!paired(str + i)) 
+			while (!paired(*line + i)) 
 			{
-				tmp = str;
+				tmp = *line;
 				new_content = readline("dquote> ");
-				str = ft_strjoin(str, new_content);
+				*line = ft_strjoin(*line, new_content);
 				free(tmp);
-				tmp = str;
-				str = ft_strjoin(str, " ");
+				tmp = *line;
+				*line = ft_strjoin(*line, " ");
 				free(tmp);
 				free(new_content);
 			}
-			i += paired(str + i);
+			i += paired(*line + i);
 		}
 		i++;
 	}
-	*line = str;
 	return NULL;
-
 }
 
 /*
@@ -109,13 +103,15 @@ char **reader()
 	char	*line;
 	char	**tab;
 
+	(void)tab;
+	fflush(stdout);
 	line = readline(">_");
 	if (!line)
 		exit(0);
 	dquote(&line);
+	fflush(stdout);
 	add_history(line);
-	printf("%s\n", line);
-	tab = ft_split_smart(line, ' ', '\'');
+	tab = ft_split_smart(line, ' ', '\"');
 	free(line);
 	return (tab);
 }

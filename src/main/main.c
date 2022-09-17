@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/14 12:08:28 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/09/17 18:23:06 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int argc, char **argv)
 	{
 		input_table = reader(); //returns TAB
 				info_log_input_table(input_table);
-		free(input_table);
+		if (input_table)
+			free(input_table);
 	}
 	return (0);
 }
