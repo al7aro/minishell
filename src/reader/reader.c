@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/14 12:09:31 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/09/17 17:51:08 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,49 +45,58 @@ void	info_log_input_table(char **input_table)
 	if (input_table)
 		while (*(input_table + i))
 		{
-			printf("[%d] %s\n", i, *(input_table + i));
+			printf("[%d] %s$\n", i, *(input_table + i));
 			i++;
 		}
 }
 
-int	cnt_char(char *str, char c)
+char	paired(char *str)
 {
-	int		i;
-	int		cnt;
+	char	q;
+	char	i;
 
-	i = 0;
-	cnt = 0;
-	while (*(str + i))
-	{
-		if (*(str + i) == c)
-			cnt++;
+	printf("%c\n", *str);
+	i = 1;
+	q = *str;
+	while (*(str + i) && *(str + i) != q)
 		i++;
-	}
-	return (cnt);
+	if (*(str + i) == q)
+		return (i);
+	return (0);
 }
 
-/*
- * TODO Create improved split to treat "" as a hole 
- * TODO Each dqoute line is ADDED TO HISTORY following by a ''\n' rather than ' '
- **/
 char	*dquote(char **line)
 {
+	char	*str;
 	char	*tmp;
 	char	*new_content;
+	char	i;
 
+	str = *line;
 	tmp = NULL;
-	while (cnt_char(*line, '\"') % 2 != 0) //quotes are opened
+	i = 0;
+	while (*(str + i))
 	{
-		tmp = *line;
-		new_content = readline("dquote> ");
-		*line = ft_strjoin(*line, new_content);
-		free(tmp);
-		tmp = *line;
-		*line = ft_strjoin(*line, " ");
-		free(tmp);
-		free(new_content);
+		if (*(str + i) == '\"' || *(str + i) == '\'')
+		{
+			while (!paired(str + i)) 
+			{
+				tmp = str;
+				new_content = readline("dquote> ");
+				str = ft_strjoin(str, new_content);
+				free(tmp);
+				tmp = str;
+				str = ft_strjoin(str, " ");
+				free(tmp);
+				free(new_content);
+			}
+			i += paired(str + i);
+		}
+		i++;
 	}
+	*line = str;
 	return NULL;
+
 }
 
 /*
@@ -105,7 +114,8 @@ char **reader()
 		exit(0);
 	dquote(&line);
 	add_history(line);
-	tab = ft_split(line, ' '); //make smart split
+	printf("%s\n", line);
+	tab = ft_split_smart(line, ' ', '\'');
 	free(line);
 	return (tab);
 }
