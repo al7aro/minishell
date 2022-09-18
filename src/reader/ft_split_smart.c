@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:32:13 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 04:09:44 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 04:15:53 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ char	allocate_words(char *src, char ***ret, int size)
 		len = is_word(src + i, &aux) - 1;
 		if (len == 0)
 			len++;
-		printf("I: %d\nL: %d\n\n", i, len);
 		if (aux)
 			*((*ret + words)) = ft_substr(src, i, len);
 		else
