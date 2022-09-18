@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 01:31:02 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:23:33 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+/*
+ * tab = ft_split_copy(argv + 1); //returns TAB
+ * exec_command();
+ * */
 void	arg_reader(int argc, char **argv)
 {
 	char	**tab;
@@ -31,8 +35,6 @@ void	arg_reader(int argc, char **argv)
 	{
 		tab = argv + 1;
 		info_log_input_table(tab);
-		//tab = ft_split_copy(argv + 1); //returns TAB
-		//exec_command();
 		exit(0);
 	}
 }
@@ -43,11 +45,13 @@ void	info_log_input_table(char **input_table)
 
 	i = 0;
 	if (input_table)
+	{
 		while (*(input_table + i))
 		{
 			printf("[%d] %s$\n", i, *(input_table + i));
 			i++;
 		}
+	}
 }
 
 char	paired(char *str)
@@ -75,7 +79,7 @@ char	*dquote(char **line)
 	{
 		if (*(*line + i) == '\"' || *(*line + i) == '\'')
 		{
-			while (!paired(*line + i)) 
+			while (!paired(*line + i))
 			{
 				tmp = *line;
 				new_content = readline("dquote> ");
@@ -90,7 +94,7 @@ char	*dquote(char **line)
 		}
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 /*
@@ -98,7 +102,7 @@ char	*dquote(char **line)
  * whats inside "" should not be splitted
  * 		it should be sent as a hole
  * */
-char **reader()
+char	**reader(void)
 {
 	char	*line;
 	char	**tab;

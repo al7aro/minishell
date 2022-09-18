@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 01:30:24 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:24:18 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	main(int argc, char **argv)
 	char	**input_table;
 
 	printf("~Minishell~\n\n");
-	arg_reader(argc, argv);	
-	while(1)
+	arg_reader(argc, argv);
+	while (1)
 	{
-		input_table = reader(); //returns TAB
+		input_table = reader();
 		info_log_input_table(input_table);
 		free(input_table);
 	}

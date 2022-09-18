@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:32:13 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 02:18:49 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:35:56 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,13 @@ int	is_word(char *str, int *aux)
 		return (is_special(str, aux));
 	del = ' ';
 	if (*str == '\'' || *str == '\"' || *str == ' ')
-	{
-		del = *str;
-		i++;
-	}
+		del = *(str + ++i);
 	while (*(str + ++i) && *(str + i) != del)
 	{
 		if (del == ' ' && is_special(str + i, aux))
-		{
-			i--;
-			break;
-		}
-		if (*(str + i) == '\"' && *(str + i) != del && del != '\'')
-			del = *(str + i++);
-		if (*(str + i) == '\'' && *(str + i) != del && del != '\"')
+			return (i);
+		if ((*(str + i) == '\"' && *(str + i) != del && del != '\'')
+			|| (*(str + i) == '\'' && *(str + i) != del && del != '\"'))
 			del = *(str + i++);
 		if (del != ' ' && *(str + i + 1) == del && *(str + i + 2) != ' ')
 		{
@@ -106,7 +99,7 @@ char	allocate_words(char *src, char ***ret, int size)
 	int		i;
 	int		aux;
 	int		len;
-	
+
 	len = 0;
 	i = 0;
 	words = -1;
@@ -124,7 +117,7 @@ char	allocate_words(char *src, char ***ret, int size)
 		while (*(src + i) == ' ')
 			i++;
 	}
-	return 0;
+	return (0);
 }
 
 char	**ft_split_arg(char *str)
@@ -133,7 +126,6 @@ char	**ft_split_arg(char *str)
 	char	**tab;
 
 	words = cnt_words(str);
-	printf("WORDS: %d\n\n", words);
 	tab_create(&tab, words);
 	allocate_words(str, &tab, words);
 	return (tab);

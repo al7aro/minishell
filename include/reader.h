@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:21:18 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/17 21:33:11 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:21:07 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 void	info_log_input_table(char **input_table);
 char	**ft_split_arg(char *str);
 void	arg_reader(int argc, char **argv);
-char	**reader();
+char	**reader(void);
 
 #endif
