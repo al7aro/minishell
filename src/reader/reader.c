@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 02:23:33 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 04:14:42 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ char	paired(char *str)
 
 	i = 1;
 	q = *str;
-	while (*(str + i) && *(str + i) != q)
+	while ((*(str + i) && *(str + i) != q))
 		i++;
 	if (*(str + i) == q)
 		return (i);
 	return (0);
 }
 
-char	*dquote(char **line)
+void	dquote(char **line)
 {
 	char	*tmp;
 	char	*new_content;
 	char	i;
 
-	i = 0;
-	while (*(*line + i))
+	i = -1;
+	while (*(*line + ++i))
 	{
 		if (*(*line + i) == '\"' || *(*line + i) == '\'')
 		{
@@ -92,9 +92,7 @@ char	*dquote(char **line)
 			}
 			i += paired(*line + i);
 		}
-		i++;
 	}
-	return (NULL);
 }
 
 /*
@@ -111,6 +109,7 @@ char	**reader(void)
 	if (!line)
 		exit(0);
 	dquote(&line);
+	printf("LINE: %s\n", line);
 	add_history(line);
 	tab = ft_split_arg(line);
 	free(line);
