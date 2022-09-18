@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/17 18:40:52 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:31:02 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,12 @@ char **reader()
 	char	*line;
 	char	**tab;
 
-	(void)tab;
-	fflush(stdout);
 	line = readline(">_");
 	if (!line)
 		exit(0);
 	dquote(&line);
-	fflush(stdout);
 	add_history(line);
-	tab = ft_split_smart(line, ' ', '\"');
+	tab = ft_split_arg(line);
 	free(line);
 	return (tab);
 }
