@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 05:00:22 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 12:05:51 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	info_log_input_table(char **input_table)
 	{
 		while (*(input_table + i))
 		{
-			printf("[%d] %s\n", i, *(input_table + i));
+			printf("[%d]%s$\n", i, *(input_table + i));
 			i++;
 		}
 	}

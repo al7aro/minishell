@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:32:13 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 04:53:29 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 13:06:13 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_special(char *str, int *aux)
 	int	i;
 
 	i = 0;
-	(void)aux;
+	aux = 0;
 	if (*str == '<')
 	{
 		while (*(str + i) == '<')
@@ -37,8 +37,6 @@ int	is_special(char *str, int *aux)
 	}
 	if (*str == '|')
 		return (1);
-	if (*str == ';')
-		return (1);
 	return (0);
 }
 
@@ -51,24 +49,20 @@ int	is_word(char *str, int *aux)
 	if (is_special(str, aux))
 		return (is_special(str, aux));
 	del = ' ';
-	if (*str == '\'' || *str == '\"' || *str == ' ')
-		del = *(str + ++i);
 	while (*(str + ++i) && *(str + i) != del)
 	{
 		if (del == ' ' && is_special(str + i, aux))
 			return (i);
 		if ((*(str + i) == '\"' && *(str + i) != del && del != '\'')
 			|| (*(str + i) == '\'' && *(str + i) != del && del != '\"'))
-			del = *(str + i++);
-		if (del != ' ' && *(str + i + 1) == del && *(str + i + 2) != ' ')
+			del = *(str + i);
+		if (del != ' ' && *(str + i + 1) == del)
 		{
 			del = ' ';
-			i++;
+			i += 1;
 		}
 	}
-	if ((del == '\'' || del == '\"') && i == 1)
-		*aux = 0;
-	return (i + 1);
+	return (i + 1 + (del == '\"' || del == '\'') - (*(str + i) == ' '));
 }
 
 int	cnt_words(char *str)
@@ -108,7 +102,7 @@ void	allocate_words(char *src, char ***ret, int size)
 		aux = 1;
 		while (*(src + i) == ' ')
 			i++;
-		len = is_word(src + i, &aux) - 1;
+		len = is_word(src + i, &aux);
 		if (len == 0)
 			len++;
 		if (aux)
