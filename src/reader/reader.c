@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 04:14:42 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 04:58:49 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-/*
- * tab = ft_split_copy(argv + 1); //returns TAB
- * exec_command();
- * */
-void	arg_reader(int argc, char **argv)
-{
-	char	**tab;
-
-	(void)argc;
-	(void)argv;
-	if (argc != 1)
-	{
-		tab = argv + 1;
-		info_log_input_table(tab);
-		exit(0);
-	}
-}
-
-void	info_log_input_table(char **input_table)
-{
-	int	i;
-
-	i = 0;
-	if (input_table)
-	{
-		while (*(input_table + i))
-		{
-			printf("[%d] %s$\n", i, *(input_table + i));
-			i++;
-		}
-	}
-}
 
 char	paired(char *str)
 {
@@ -68,7 +35,7 @@ char	paired(char *str)
 	return (0);
 }
 
-void	dquote(char **line)
+t_error_code	dquote(char **line)
 {
 	char	*tmp;
 	char	*new_content;
@@ -86,32 +53,57 @@ void	dquote(char **line)
 				*line = ft_strjoin(*line, new_content);
 				free(tmp);
 				tmp = *line;
-				*line = ft_strjoin(*line, " ");
+				*line = ft_strjoin(*line, "");
 				free(tmp);
 				free(new_content);
 			}
 			i += paired(*line + i);
 		}
 	}
+	return (SUCCESS);
 }
 
-/*
- * Handle dquote (open quotes)
- * whats inside "" should not be splitted
- * 		it should be sent as a hole
- * */
-char	**reader(void)
+void	info_log_input_table(char **input_table)
 {
-	char	*line;
-	char	**tab;
+	int	i;
+
+	i = 0;
+	if (input_table)
+	{
+		while (*(input_table + i))
+		{
+			printf("[%d] %s\n", i, *(input_table + i));
+			i++;
+		}
+	}
+}
+
+void	arg_reader(int argc, char **argv)
+{
+	t_error_code	err;
+	char			**tab;
+
+	if (argc != 1)
+	{
+		err = ft_split_arg(*(argv + 1), &tab);
+		if (err == ERROR)
+			exit(err);
+		info_log_input_table(tab);
+		exit(err);
+	}
+}
+
+t_error_code	reader(char ***ret)
+{
+	t_error_code	err;
+	char			*line;
 
 	line = readline(">_");
+	dquote(&line);
 	if (!line)
 		exit(0);
-	dquote(&line);
-	printf("LINE: %s\n", line);
 	add_history(line);
-	tab = ft_split_arg(line);
+	err = ft_split_arg(line, ret);
 	free(line);
-	return (tab);
+	return (err);
 }

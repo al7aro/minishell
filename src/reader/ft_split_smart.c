@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:32:13 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 04:15:53 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/18 04:53:29 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	cnt_words(char *str)
 	return (words);
 }
 
-char	allocate_words(char *src, char ***ret, int size)
+void	allocate_words(char *src, char ***ret, int size)
 {
 	int		words;
 	int		i;
@@ -119,16 +119,15 @@ char	allocate_words(char *src, char ***ret, int size)
 		while (*(src + i) == ' ')
 			i++;
 	}
-	return (0);
 }
 
-char	**ft_split_arg(char *str)
+t_error_code	ft_split_arg(char *str, char ***ret)
 {
-	int		words;
-	char	**tab;
+	t_error_code	err;
+	int				words;
 
 	words = cnt_words(str);
-	tab_create(&tab, words);
-	allocate_words(str, &tab, words);
-	return (tab);
+	err = tab_create(ret, words);
+	allocate_words(str, ret, words);
+	return (err);
 }
