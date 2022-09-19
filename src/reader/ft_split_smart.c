@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:32:13 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/18 13:06:13 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:08:09 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 #include "libft.h"
 #include "tab.h"
 
-int	is_special(char *str, int *aux)
+int	is_special(char *str)
 {
 	int	i;
 
 	i = 0;
-	aux = 0;
 	if (*str == '<')
 	{
 		while (*(str + i) == '<')
@@ -37,21 +36,23 @@ int	is_special(char *str, int *aux)
 	}
 	if (*str == '|')
 		return (1);
+	if (*str == ';')
+		return (1);
 	return (0);
 }
 
-int	is_word(char *str, int *aux)
+int	is_word(char *str)
 {
 	char	del;
 	int		i;
 
 	i = -1;
-	if (is_special(str, aux))
-		return (is_special(str, aux));
+	if (is_special(str))
+		return (is_special(str));
 	del = ' ';
 	while (*(str + ++i) && *(str + i) != del)
 	{
-		if (del == ' ' && is_special(str + i, aux))
+		if (del == ' ' && is_special(str + i))
 			return (i);
 		if ((*(str + i) == '\"' && *(str + i) != del && del != '\'')
 			|| (*(str + i) == '\'' && *(str + i) != del && del != '\"'))
@@ -68,19 +69,16 @@ int	is_word(char *str, int *aux)
 int	cnt_words(char *str)
 {
 	int	i;
-	int	aux;
 	int	words;
 
 	i = 0;
 	words = 0;
 	while (*(str + i))
 	{
-		aux = 1;
 		while (*(str + i) == ' ')
 			i++;
-		i += is_word(str + i, &aux);
-		if (aux)
-			words++;
+		i += is_word(str + i);
+		words++;
 		while (*(str + i) == ' ')
 			i++;
 	}
@@ -91,7 +89,6 @@ void	allocate_words(char *src, char ***ret, int size)
 {
 	int		words;
 	int		i;
-	int		aux;
 	int		len;
 
 	len = 0;
@@ -99,17 +96,13 @@ void	allocate_words(char *src, char ***ret, int size)
 	words = -1;
 	while (++words < size)
 	{
-		aux = 1;
 		while (*(src + i) == ' ')
 			i++;
-		len = is_word(src + i, &aux);
+		len = is_word(src + i);
 		if (len == 0)
 			len++;
-		if (aux)
-			*((*ret + words)) = ft_substr(src, i, len);
-		else
-			words--;
-		i += is_word(src + i, &aux);
+		*((*ret + words)) = ft_substr(src, i, len);
+		i += is_word(src + i);
 		while (*(src + i) == ' ')
 			i++;
 	}
