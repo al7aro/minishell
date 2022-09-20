@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:49:12 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/20 15:18:37 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/20 14:26:55 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	test(void)
 {
-	CU_ASSERT(CU_FALSE);
+	// CU_ASSERT(CU_FALSE);
+	CU_ASSERT_STRING_EQUAL("s1", "s2");
 }
