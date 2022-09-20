@@ -6,7 +6,11 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/18 16:29:00 by yoav             ###   ########.fr       */
+=======
+/*   Updated: 2022/09/20 15:19:17 by yoav             ###   ########.fr       */
+>>>>>>> 330329d... YoavReaderDel
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +80,14 @@ CU_SuiteInfo	g_suites[] = {
 	NULL,
 	NULL,
 	g_dll_tests,
+},
+{
+	"reader",
+	init_suite,
+	clean_suite,
+	NULL,
+	NULL,
+	g_reader_tests,
 },
 	CU_SUITE_INFO_NULL,
 };

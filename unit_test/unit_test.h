@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/18 16:28:43 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/20 15:29:22 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 
 # define TEST_RES "unit_test_result.txt"
 
-extern CU_TestInfo	g_cmd_list_tests[];
-extern CU_TestInfo	g_arg_list_tests[];
-extern CU_TestInfo	g_laxer_tests[];
+extern CU_TestInfo	g_reader_tests[];
 extern CU_TestInfo	g_shell_op_tests[];
 extern CU_TestInfo	g_tab_tests[];
 extern CU_TestInfo	g_token_list_tests[];
@@ -68,5 +66,8 @@ void	test_dll_get_last_elem(void);
 void	test_dll_remove_first_elem(void);
 void	test_dll_remove_last_elem(void);
 void	test_dll_remove_elem(void);
+
+// reader
+void	test(void);
 
 #endif
