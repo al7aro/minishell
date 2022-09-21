@@ -11,17 +11,18 @@
 /* ************************************************************************** */
 
 #include "reader.h"
+#include "tab.h"
 
-char	paired(char *str)
+char	quote_is_closed(char *str)
 {
-	char	q;
+	char	quote_char;
 	char	i;
 
 	i = 1;
-	q = *str;
-	while ((*(str + i) && *(str + i) != q))
+	quote_char = *str;
+	while ((*(str + i) && *(str + i) != quote_char))
 		i++;
-	if (*(str + i) == q)
+	if (*(str + i) == quote_char)
 		return (i);
 	return (0);
 }
@@ -35,9 +36,9 @@ t_error_code	dquote(char **line)
 	i = -1;
 	while (*(*line + ++i))
 	{
-		if (*(*line + i) == '\"' || *(*line + i) == '\'')
+		if (is_squote(*(*line + i)) || is_dquote(*(*line + i)))
 		{
-			while (!paired(*line + i))
+			while (!quote_is_closed(*line + i))
 			{
 				tmp = *line;
 				new_content = readline("dquote> ");
@@ -48,42 +49,31 @@ t_error_code	dquote(char **line)
 				free(tmp);
 				free(new_content);
 			}
-			i += paired(*line + i);
+			i += quote_is_closed(*line + i);
 		}
 	}
 	return (SUCCESS);
 }
 
-void	info_log_input_table(char **input_table)
-{
-	int	i;
-
-	i = 0;
-	if (input_table)
-	{
-		while (*(input_table + i))
-		{
-			printf("[%d]%s$\n", i, *(input_table + i));
-			i++;
-		}
-	}
-}
-
-void	arg_reader(int argc, char **argv)
+void	reader_arg(int argc, char **argv)
 {
 	t_error_code	err;
 	char			**tab;
 
 	if (argc != 1)
 	{
-		err = ft_split_arg(*(argv + 1), &tab);
-		if (err == ERROR)
+		err = reader_split_arg(*(argv + 1), &tab);
+		if (ERROR == err)
 			exit(err);
-		info_log_input_table(tab);
+		tab_print(tab);
 		exit(err);
 	}
 }
 
+/*
+ * TODO CREATE QUOTE_CONSTANT
+ * DO NOT EXIT HERE
+ **/
 t_error_code	reader(char ***ret)
 {
 	t_error_code	err;
@@ -94,7 +84,7 @@ t_error_code	reader(char ***ret)
 	if (!line)
 		exit(0);
 	add_history(line);
-	err = ft_split_arg(line, ret);
+	err = reader_split_arg(line, ret);
 	free(line);
 	return (err);
 }

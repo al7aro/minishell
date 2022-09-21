@@ -23,8 +23,12 @@
 # include "tab.h"
 # include "macro.h"
 
-t_error_code	ft_split_arg(char *str, char ***ret);
-void			arg_reader(int argc, char **argv);
+t_error_code	reader_split_arg(char *str, char ***ret);
+void			reader_arg(int argc, char **argv);
 t_error_code	reader(char ***ret);
+int				is_special(char *str);
+int				is_dquote(char c);
+int				is_squote(char c);
+int				is_space(char c);
 
 #endif

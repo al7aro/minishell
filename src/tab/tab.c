@@ -12,6 +12,21 @@
 
 #include "tab.h"
 
+void	tab_print(char **input_table)
+{
+	int	i;
+
+	i = 0;
+	if (input_table)
+	{
+		while (*(input_table + i))
+		{
+			printf("[%d]%s$\n", i, *(input_table + i));
+			i++;
+		}
+	}
+}
+
 t_error_code	tab_create(char	***ret, size_t size)
 {
 	char	**tab;
