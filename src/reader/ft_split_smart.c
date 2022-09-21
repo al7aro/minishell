@@ -17,19 +17,19 @@ static int	is_special(char *str)
 	int	i;
 
 	i = 0;
-	if (*str == '<')
+	if (*str == RL_CHAR)
 	{
-		while (*(str + i) == '<')
+		while (*(str + i) == RL_CHAR)
 			i++;
 		return (i);
 	}
-	if (*str == '>')
+	if (*str == RR_CHAR)
 	{
-		while (*(str + i) == '>')
+		while (*(str + i) == RR_CHAR)
 			i++;
 		return (i);
 	}
-	if (*str == '|')
+	if (*str == PIPE_CHAR)
 		return (1);
 	if (*str == ';')
 		return (1);
@@ -44,21 +44,23 @@ int	is_word(char *str)
 	i = -1;
 	if (is_special(str))
 		return (is_special(str));
-	del = ' ';
+	del = SPACE_CHAR;
 	while (*(str + ++i) && *(str + i) != del)
 	{
-		if (del == ' ' && is_special(str + i))
+		if (del == SPACE_CHAR && is_special(str + i))
 			return (i);
-		if ((*(str + i) == '\"' && *(str + i) != del && del != '\'')
-			|| (*(str + i) == '\'' && *(str + i) != del && del != '\"'))
+		if ((*(str + i) == DOUBLE_QUOTE_CHAR
+				&& *(str + i) != del && del != SINGLE_QUOTE_CHAR)
+			|| (*(str + i) == SINGLE_QUOTE_CHAR
+				&& *(str + i) != del && del != DOUBLE_QUOTE_CHAR))
 			del = *(str + i);
-		if (del != ' ' && *(str + i + 1) == del)
+		if (del != SPACE_CHAR && *(str + i + 1) == del)
 		{
-			del = ' ';
+			del = SPACE_CHAR;
 			i += 1;
 		}
 	}
-	return (i + 1 + (del == '\"' || del == '\'') - (*(str + i) == ' '));
+	return (i + 1 + (del == DOUBLE_QUOTE_CHAR || del == SINGLE_QUOTE_CHAR) - (*(str + i) == SPACE_CHAR));
 }
 
 int	cnt_words(char *str)
@@ -70,11 +72,11 @@ int	cnt_words(char *str)
 	words = 0;
 	while (*(str + i))
 	{
-		while (*(str + i) == ' ')
+		while (*(str + i) == SPACE_CHAR)
 			i++;
 		i += is_word(str + i);
 		words++;
-		while (*(str + i) == ' ')
+		while (*(str + i) == SPACE_CHAR)
 			i++;
 	}
 	return (words);
@@ -91,14 +93,14 @@ void	allocate_words(char *src, char ***ret, int size)
 	words = -1;
 	while (++words < size)
 	{
-		while (*(src + i) == ' ')
+		while (*(src + i) == SPACE_CHAR)
 			i++;
 		len = is_word(src + i);
 		if (len == 0)
 			len++;
 		*((*ret + words)) = ft_substr(src, i, len);
 		i += is_word(src + i);
-		while (*(src + i) == ' ')
+		while (*(src + i) == SPACE_CHAR)
 			i++;
 	}
 }

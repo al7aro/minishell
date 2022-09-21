@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/18 12:00:03 by yoav             ###   ########.fr       */
+/*   Updated: 2022/09/21 12:44:32 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define NEW_LINE_CHAR		'\n'
 # define SINGLE_QUOTE_CHAR	'\''
 # define DOUBLE_QUOTE_CHAR	'\"'
+# define SPACE_CHAR			' '
 
 typedef enum e_bool
 {
