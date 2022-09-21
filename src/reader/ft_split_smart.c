@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-
-#include "libft.h"
-#include "tab.h"
+#include "reader.h"
 
 int	is_special(char *str)
 {

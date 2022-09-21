@@ -10,16 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "reader.h"
-#include "tab.h"
-#include "error_code.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 char	paired(char *str)
 {
