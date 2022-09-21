@@ -12,7 +12,7 @@
 
 #include "reader.h"
 
-int	is_special(char *str)
+static int	is_special(char *str)
 {
 	int	i;
 
