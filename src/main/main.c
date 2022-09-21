@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/20 10:49:25 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/09/21 00:49:45 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	printf("~Minishell~\n\n");
+	printer_print("~Minishell~\n\n");
 	return (0);
 }
