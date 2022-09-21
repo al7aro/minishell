@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list.t.c                                     :+:      :+:    :+:   */
+/*   arg_list.t.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 10:19:27 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/18 11:07:23 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/18 15:56:36 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/18 16:31:32 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_test.h"
-#include "token_list.h"
+#include "arg_list.h"
 
-void	test_tok_lst_create_destroy(void)
+void	test_arg_list_create_destroy(void)
 {
 	t_error_code	err;
-	t_token_list	*lst;
-	t_token			*t;
-	char			*s;
+	t_arg_list		*lst;
+	char			*tab[3];
 
-	s = "str";
-	err = token_list_create(&lst);
+	tab[0] = "echo";
+	tab[1] = "a";
+	tab[2] = "b";
+	err = arg_list_create(&lst);
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
-	err = token_create(&t, s, NEW_LINE);
+	err = arg_list_add_last(lst, tab[0]);
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
-	token_list_add_last(lst, t);
+	err = arg_list_add_last(lst, tab[1]);
+	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
+	err = arg_list_add_last(lst, tab[2]);
+	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
 	CU_ASSERT_PTR_NOT_NULL_FATAL(lst);
-	CU_ASSERT_PTR_NOT_NULL_FATAL(lst->tok_lst);
-	CU_ASSERT_PTR_NOT_NULL_FATAL(lst->tok_lst->value);
-	CU_ASSERT_PTR_EQUAL(t, lst->tok_lst->value);
-	token_list_destroy(&lst);
+	CU_ASSERT_PTR_NOT_NULL_FATAL(lst->lst);
+	CU_ASSERT_PTR_NOT_NULL_FATAL(lst->lst->value);
+	CU_ASSERT_PTR_EQUAL(tab[0], lst->lst->value);
+	arg_list_destroy(&lst);
 	CU_ASSERT_PTR_NULL(lst);
 }

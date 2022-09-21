@@ -1,44 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 09:35:29 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/18 10:42:38 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/18 15:46:10 by yoav              #+#    #+#             */
+/*   Updated: 2022/09/18 16:07:22 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#ifndef CMD_H
+# define CMD_H
 
-# include <stdio.h>
 # include <stdlib.h>
 
 # include "error_code.h"
-# include "libft.h"
+# include "arg_list.h"
 
-typedef enum e_token_type
+typedef struct s_cmd
 {
-	WORD,
-	SEMICOLON,
-	PIPE,
-	NEW_LINE,
-	REDIRECT,
-	SEMI_REDIRECT,
-}	t_token_type;
+	t_arg_list	*args;
+	int			in;
+	int			out;
+	int			err;
+	int			stt;
+}	t_cmd;
 
-typedef struct s_token
-{
-	t_token_type	type;
-	char			*value;
-}	t_token;
-
-t_error_code	token_create(t_token **ret, char *ptr, t_token_type type);
-void			token_destroy(t_token **t);
-
-// print
-void			token_print(t_token *t);
+t_error_code	cmd_create(t_cmd **ret);
+void			cmd_destroy(t_cmd **cmd);
+t_error_code	cmd_add_arg(t_cmd *c, char *arg);
 
 #endif
