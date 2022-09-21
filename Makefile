@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/18 15:41:35 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/21 13:01:01 by al7aro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,19 +51,11 @@ SCRIPT_DIR				= script
 TEST_SCRIPT				= $(addprefix $(SCRIPT_DIR)/, test.sh)
 
 #---------- FLAGS ----------
-<<<<<<< HEAD
 CC 					= cc
 I_FLAG 				= -I$(HEAD_DIR) -I$(LIBFT_HEAD_DIR)
 CFLAGS 				= -c -Wall -Wextra -Werror $(I_FLAG)
 LDFLAGS 			= -L$(LIBFT_DIR)
 LDLIBS 				= -lpthread -lft -lreadline
-=======
-CC 						= cc
-I_FLAG 					= -I$(HEAD_DIR) -I$(LIBFT_HEAD_DIR)
-CFLAGS 					= -c -Wall -Wextra -Werror $(I_FLAG)
-LDFLAGS 				= -L$(LIBFT_DIR)
-LDLIBS 					= -lpthread -lft
->>>>>>> main
 
 #---------- IMPLICT RULES ----------
 $(addprefix $(OBJ_DIR)/, %.o): $(addprefix $(SRC_DIR)/, %.c) $(HEAD)
