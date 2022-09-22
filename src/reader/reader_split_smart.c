@@ -79,8 +79,6 @@ static void	allocate_words(char *src, char ***ret, int size)
 			len++;
 		*(*ret + words) = ft_substr(src, i, len);
 		i += is_word(src + i);
-		// while (SPACE_CHAR == *(src + i)) <- probably redundant
-		// 	i++;
 	}
 }
 
