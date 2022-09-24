@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_arg_list_tests.t.c                            :+:      :+:    :+:   */
+/*   shell_op_get.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/18 16:26:48 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/11 10:40:13 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/12 11:52:41 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#include "shell_op.h"
 
-CU_TestInfo	g_arg_list_tests[] = {
+t_cmd_list	*shell_op_get_cmd_list(t_shell_op *sp)
 {
-	"test_arg_list_create_destroy",
-	test_arg_list_create_destroy,
-},
-	CU_TEST_INFO_NULL,
-};
+	return (sp->cmd_list);
+}

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_code.h                                       :+:      :+:    :+:   */
+/*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 09:45:15 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/05 15:34:39 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/24 12:20:11 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/12 12:20:40 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_CODE_H
-# define ERROR_CODE_H
+#ifndef EXECUTER_H
+# define EXECUTER_H
 
-# include <stdio.h>
+# include <string.h>
+# include <unistd.h>
+# include <errno.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
-typedef enum s_error_code
-{
-	ERROR = -1,
-	SUCCESS = 0,
-	ALLOCATION_ERROR,
-	SYNTAX_ERROR,
-	SYNTAX_PIPE_STILL_OPEN,
-	NEW_PROC_ERROR,
-}	t_error_code;
+# include "macro.h"
+# include "cmd.h"
+# include "shell_op.h"
+# include "error_code.h"
 
-void	error_code_print(t_error_code err);
+t_error_code	executer_run_cmd(t_cmd *c);
+t_error_code	executer_run_all_cmds(t_shell_op *sp);
 
 #endif

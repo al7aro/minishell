@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_code.h                                       :+:      :+:    :+:   */
+/*   init_executer_tests.t.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 09:45:15 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/05 15:34:39 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/12 12:25:41 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_CODE_H
-# define ERROR_CODE_H
+#include "unit_test.h"
 
-# include <stdio.h>
-
-typedef enum s_error_code
+CU_TestInfo	g_executer_tests[] = {
 {
-	ERROR = -1,
-	SUCCESS = 0,
-	ALLOCATION_ERROR,
-	SYNTAX_ERROR,
-	SYNTAX_PIPE_STILL_OPEN,
-	NEW_PROC_ERROR,
-}	t_error_code;
-
-void	error_code_print(t_error_code err);
-
-#endif
+	"test_multi_cmd_exec",
+	test_multi_cmd_exec,
+},
+{
+	"test_basic_executer",
+	test_basic_executer,
+},
+	CU_TEST_INFO_NULL,
+};
