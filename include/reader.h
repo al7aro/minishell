@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:21:18 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/21 13:00:21 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:50:21 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # include "macro.h"
 
 t_error_code	reader_split_arg(char *str, char ***ret);
-void			reader_arg(int argc, char **argv);
+t_error_code	reader_from_arg(int argc, char **argv);
 t_error_code	reader(char ***ret);
-int				is_special(char *str);
-int				is_dquote(char c);
-int				is_squote(char c);
-int				is_space(char c);
+int            	is_special(char *str);
+t_bool      	is_dquote(char c);
+t_bool      	is_squote(char c);
+t_bool      	is_space(char c);
 
 #endif
