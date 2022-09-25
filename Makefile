@@ -6,7 +6,7 @@
 #    By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/09/18 15:41:35 by yoav             ###   ########.fr        #
+#    Updated: 2022/09/25 04:06:20 by alopez-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ TEST_LDLIBS				= -lcunit $(LDLIBS)
 export TEST_EXEC		= test.out
 export TEST_RES			= unit_test_result.txt
 export VALGRIND_OUTPUT 	= valgrind_out.txt
+export NORMINETTE_OUTPUT	= norm_out.txt
+export NORMINETTE_RES	= norminette_result.txt
 TEST_SRC 				= $(wildcard $(TEST_DIR)/**/*.t.c)
 TEST_OBJ 				= $(TEST_SRC:.t.c=.t.o)
 
@@ -90,6 +92,9 @@ check: $(TEST_EXEC)
 
 check/leaks: $(TEST_EXEC)
 	@bash $(TEST_SCRIPT) memory
+
+check/norm: $(TEST_EXEC)
+	@bash $(TEST_SCRIPT) norm
 	
 clean:
 	@$(MAKE) clean -sC $(LIBFT_DIR)
