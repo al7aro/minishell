@@ -28,6 +28,11 @@ char	quote_is_closed(char *str)
 
 /*
  * line 53 is probably redundant
+// tmp = *line;
+// *line = ft_strjoin(*line, EMPTY_STRING);
+// if (!(*line))
+// 	return (ALLOCATION_ERROR);
+// free(tmp);
  * */
 t_error_code	dquote(char **line)
 {
@@ -45,15 +50,12 @@ t_error_code	dquote(char **line)
 			{
 				tmp = *line;
 				new_content = readline(DQUOTE_PROMPT);
+				if (!new_content)
+					return (ERROR);
 				*line = ft_strjoin(*line, new_content);
+				free(tmp);
 				if (!(*line))
 					return (ALLOCATION_ERROR);
-				free(tmp);
-				tmp = *line;
-				*line = ft_strjoin(*line, EMPTY_STRING);
-				if (!(*line))
-					return (ALLOCATION_ERROR);
-				free(tmp);
 				free(new_content);
 			}
 		}
@@ -69,7 +71,7 @@ t_error_code	reader_from_arg(int argc, char **argv)
 	err = SUCCESS;
 	if (argc != 1)
 		err = reader_split_arg(*(argv + 1), &tab);
-	return(err);
+	return (err);
 }
 
 /*
@@ -81,6 +83,8 @@ t_error_code	reader(char ***ret)
 	char			*line;
 
 	line = readline(MAIN_PROMPT);
+	if (!line)
+		return (ERROR);
 	dquote(&line);
 	if (!line)
 		return (ERROR);
