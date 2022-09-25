@@ -6,16 +6,15 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/21 00:49:45 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/09/13 10:45:27 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	printer_print("~Minishell~\n\n");
+	printer_print("~Minishell~");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/18 04:38:59 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/09/04 15:20:02 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 # define MAIN_H
 
 # include "printer.h"
-# include "reader.h"
-# include "shell_op.h"
 
 #endif
