@@ -34,6 +34,7 @@ t_error_code	env_init(t_env_list *env);
 char			*env_get(t_env_list *env, char *key);
 t_error_code	env_set(t_env_list *env, char *key, char *value);
 void			env_unset(t_env_list *env, char *key);
+void			env_remove(t_env_list *env, char *key);
 
 void			env_list_print(t_env_list *lst);
 #endif

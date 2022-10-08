@@ -24,6 +24,6 @@ typedef struct	s_env
 }				t_env;
 
 t_env	*env_create(char *key, char *value);
-void	env_destroy(t_env *env);
+void	env_destroy(t_env **env);
 
 #endif

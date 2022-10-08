@@ -65,7 +65,7 @@ t_error_code	env_set(t_env_list *env_lst, char *key, char *value)
 	while (env_dll)
 	{
 		env = (t_env *)(env_dll->value);
-		if (ft_strcmp(key, env->key))
+		if (!ft_strcmp(key, env->key))
 		{
 			env->value = value;
 			return (SUCCESS);
@@ -89,7 +89,7 @@ void	env_unset(t_env_list *env_lst, char *key)
 		env = (t_env *)(env_dll->value);
 		if (ft_strcmp(key, env->key))
 		{
-			env_destroy(env);
+			env->value = "";
 			return ;
 		}
 		env_dll = env_dll->next;

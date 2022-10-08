@@ -22,9 +22,9 @@ t_env	*env_create(char *key, char *value)
 	return (env);
 }
 
-void	env_destroy(t_env *env)
+void	env_destroy(t_env **env)
 {
-	free(env);
+	free(*env);
 }
 
 void	env_list_print(t_env_list *env_lst)
@@ -38,5 +38,6 @@ void	env_list_print(t_env_list *env_lst)
 	{
 		env = (t_env *)(env_dll->value);
 		printf("%s: [%s]\n", env->key, env->value);
+		env_dll = env_dll->next;
 	}
 }
