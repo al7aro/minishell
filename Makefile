@@ -93,7 +93,7 @@ check: $(TEST_EXEC)
 check/leaks: $(TEST_EXEC)
 	@bash $(TEST_SCRIPT) memory
 
-check/norm: $(TEST_EXEC)
+check/norm:
 	@bash $(TEST_SCRIPT) norm
 	
 clean:
