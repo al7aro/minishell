@@ -26,14 +26,6 @@ t_bool	quote_is_closed(char *str)
 	return (0);
 }
 
-/*
- * line 53 is probably redundant
-// tmp = *line;
-// *line = ft_strjoin(*line, EMPTY_STRING);
-// if (!(*line))
-// 	return (ALLOCATION_ERROR);
-// free(tmp);
- * */
 t_error_code	dquote(char **line)
 {
 	char	*tmp;
@@ -74,9 +66,6 @@ t_error_code	reader_from_arg(int argc, char **argv)
 	return (err);
 }
 
-/*
- * TODO CREATE QUOTE_CONSTANT
- **/
 t_error_code	reader(char ***ret)
 {
 	t_error_code	err;

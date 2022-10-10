@@ -39,9 +39,6 @@ static int	is_word(char *str)
 	return (i + 1 + (is_dquote(del) || is_squote(del)) - is_space(*(str + i)));
 }
 
-/*
- *
- **/
 int	cnt_words(char *str)
 {
 	int	i;

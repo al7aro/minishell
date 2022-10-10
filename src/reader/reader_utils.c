@@ -12,14 +12,6 @@
 
 #include "reader.h"
 
-/*
- * TODO
- * 		is_quote()
- * 		is_duote()
- * 		is_special()
- * 		is_space()
- * 		skip_spaces()
- * */
 int	is_special(char *str)
 {
 	int	i;
