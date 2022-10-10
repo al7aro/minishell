@@ -42,7 +42,7 @@ static int	is_word(char *str)
 /*
  *
  **/
-static int	cnt_words(char *str)
+int	cnt_words(char *str)
 {
 	int	i;
 	int	words;

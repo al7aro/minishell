@@ -12,7 +12,7 @@
 
 #include "reader.h"
 
-char	quote_is_closed(char *str)
+t_bool	quote_is_closed(char *str)
 {
 	char	quote_char;
 	char	i;

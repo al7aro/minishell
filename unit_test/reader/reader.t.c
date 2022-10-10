@@ -16,5 +16,20 @@
 
 void	test_reader(void)
 {
-	CU_ASSERT(CU_FALSE);
+	char 			**tab;
+	t_error_code	err;
+
+	CU_ASSERT(quote_is_closed("\'\'"));
+	CU_ASSERT(!quote_is_closed("\'"));
+	CU_ASSERT(quote_is_closed("\"\""));
+	CU_ASSERT(!quote_is_closed("\""));
+
+	CU_ASSERT(cnt_words("Alvaro Lopez <Gomez>> and|Yoav|") == 9);
+	CU_ASSERT(cnt_words("|<|") == 3);
+	CU_ASSERT(cnt_words("|<<<<|") == 3);
+
+	err = tab_create(&tab, 9);
+	CU_ASSERT(err == SUCCESS);
+	err = allocate_words("Alvaro Lopez <Gomez>> and|Yoav|", &tab, 9);
+	CU_ASSERT(err == SUCCESS);
 }
