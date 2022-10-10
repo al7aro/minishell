@@ -32,4 +32,5 @@ void	test_reader(void)
 	CU_ASSERT(err == SUCCESS);
 	err = allocate_words("Alvaro Lopez <Gomez>> and|Yoav|", &tab, 9);
 	CU_ASSERT(err == SUCCESS);
+	tab_destroy(&tab);
 }
