@@ -23,6 +23,7 @@
 # define SPACE_CHAR			' '
 # define MAIN_PROMPT		"prompt> "
 # define DQUOTE_PROMPT		"dquote> "
+# define SQUOTE_PROMPT		"quote> "
 # define EMPTY_STRING		""
 
 typedef enum e_bool

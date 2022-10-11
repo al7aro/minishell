@@ -15,7 +15,7 @@
 static int	is_word(char *str)
 {
 	char	del;
-	int		i;
+	size_t	i;
 
 	i = is_special(str);
 	if (i)
@@ -39,10 +39,10 @@ static int	is_word(char *str)
 	return (i + 1 + (is_dquote(del) || is_squote(del)) - is_space(*(str + i)));
 }
 
-int	cnt_words(char *str)
+static size_t	cnt_words(char *str)
 {
-	int	i;
-	int	words;
+	size_t	i;
+	size_t	words;
 
 	i = 0;
 	words = 0;
@@ -58,11 +58,11 @@ int	cnt_words(char *str)
 	return (words);
 }
 
-t_error_code	allocate_words(char *src, char ***ret, int size)
+static t_error_code	allocate_words(char *src, char ***ret, int size)
 {
 	int		words;
-	int		i;
-	int		len;
+	size_t	i;
+	size_t	len;
 
 	len = 0;
 	i = 0;
@@ -82,10 +82,10 @@ t_error_code	allocate_words(char *src, char ***ret, int size)
 	return (SUCCESS);
 }
 
-t_error_code	reader_split_arg(char *str, char ***ret)
+t_error_code	reader_split_by_token(char *str, char ***ret)
 {
 	t_error_code	err;
-	int				words;
+	size_t			words;
 
 	words = cnt_words(str);
 	err = tab_create(ret, words);

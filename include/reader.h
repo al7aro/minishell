@@ -23,17 +23,12 @@
 # include "tab.h"
 # include "macro.h"
 
-t_error_code	reader_split_arg(char *str, char ***ret);
-t_error_code	reader_from_arg(int argc, char **argv);
-t_error_code	reader(char ***ret);
-int            	is_special(char *str);
+t_error_code	reader_split_by_token(char *str, char ***ret);
+t_error_code	reader_get_tab(char ***ret);
+t_bool			is_special(char *str);
 t_bool      	is_dquote(char c);
 t_bool      	is_squote(char c);
 t_bool      	is_space(char c);
-
-
-t_bool			quote_is_closed(char *str);
-int				cnt_words(char *str);
-t_error_code	allocate_words(char *src, char ***ret, int size);
+char			*get_quote_prompt(char c);
 
 #endif

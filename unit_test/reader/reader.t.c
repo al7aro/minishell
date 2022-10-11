@@ -19,18 +19,19 @@ void	test_reader(void)
 	char 			**tab;
 	t_error_code	err;
 
-	CU_ASSERT(quote_is_closed("\'\'"));
-	CU_ASSERT(!quote_is_closed("\'"));
-	CU_ASSERT(quote_is_closed("\"\""));
-	CU_ASSERT(!quote_is_closed("\""));
-
-	CU_ASSERT(cnt_words("Alvaro Lopez <Gomez>> and|Yoav|") == 9);
-	CU_ASSERT(cnt_words("|<|") == 3);
-	CU_ASSERT(cnt_words("|<<<<|") == 3);
-
 	err = tab_create(&tab, 9);
 	CU_ASSERT(err == SUCCESS);
-	err = allocate_words("Alvaro Lopez <Gomez>> and|Yoav|", &tab, 9);
+	err = reader_split_by_token("Alvaro Lopez <Gomez>> and|Yoav|", &tab);
 	CU_ASSERT(err == SUCCESS);
+
+	CU_ASSERT_STRING_EQUAL(tab[0], "Alvaro")
+	CU_ASSERT_STRING_EQUAL(tab[1], "Lopez")
+	CU_ASSERT_STRING_EQUAL(tab[2], "<")
+	CU_ASSERT_STRING_EQUAL(tab[3], "Gomez")
+	CU_ASSERT_STRING_EQUAL(tab[4], ">>")
+	CU_ASSERT_STRING_EQUAL(tab[5], "and")
+	CU_ASSERT_STRING_EQUAL(tab[6], "|")
+	CU_ASSERT_STRING_EQUAL(tab[7], "Yoav")
+	CU_ASSERT_STRING_EQUAL(tab[8], "|")
 	tab_destroy(&tab);
 }

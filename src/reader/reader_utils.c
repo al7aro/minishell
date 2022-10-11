@@ -12,7 +12,7 @@
 
 #include "reader.h"
 
-int	is_special(char *str)
+t_bool	is_special(char *str)
 {
 	int	i;
 
@@ -49,4 +49,13 @@ t_bool	is_squote(char c)
 t_bool	is_space(char c)
 {
 	return (SPACE_CHAR == c);
+}
+
+char	*get_quote_prompt(char c)
+{
+	if (is_dquote(c))
+		return (DQUOTE_PROMPT);
+	if (is_squote(c))
+		return (SQUOTE_PROMPT);
+	return (NULL);
 }
