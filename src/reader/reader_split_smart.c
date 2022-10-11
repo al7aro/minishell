@@ -27,13 +27,15 @@ static int	get_word(char *str)
 	char	del;
 	size_t	i;
 
+	if (!*str)
+		return (0);
 	i = reader_is_special(str);
 	if (i)
 		return (i);
 	else
-		i = 0;
+		i = -1;
 	del = SPACE_CHAR;
-	while (*(str + i) && *(str + i) != del)
+	while (*(str + ++i) && *(str + i) != del)
 	{
 		if (reader_is_space(del) && reader_is_special(str + i))
 			return (i);
@@ -44,7 +46,6 @@ static int	get_word(char *str)
 			del = SPACE_CHAR;
 			i += 1;
 		}
-		i++;
 	}
 	return (i + 1 + (reader_is_dquote(del) || reader_is_squote(del))
 		- reader_is_space(*(str + i)));
@@ -59,11 +60,11 @@ static size_t	cnt_words(char *str)
 	words = 0;
 	while (*(str + i))
 	{
-		while (reader_is_space(*(str + i)))
+		while (reader_is_space(*(str + i)) && *(str + i))
 			i++;
 		i += get_word(str + i);
 		words++;
-		while (reader_is_space(*(str + i)))
+		while (reader_is_space(*(str + i)) && *(str + i))
 			i++;
 	}
 	return (words);
