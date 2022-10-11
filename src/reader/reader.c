@@ -56,8 +56,8 @@ static t_error_code	close_opened_quote(char **line)
 }
 
 /*
- * add_history(line);
-*/
+ * 	add_history(line);
+ * */
 t_error_code	reader_get_tab(char ***ret)
 {
 	t_error_code	err;
