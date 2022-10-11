@@ -63,6 +63,8 @@ static size_t	cnt_words(char *str)
 		while (reader_is_space(*(str + i)) && *(str + i))
 			i++;
 		i += get_word(str + i);
+		if (i > ft_strlen(str))
+			i--;
 		words++;
 		while (reader_is_space(*(str + i)) && *(str + i))
 			i++;
