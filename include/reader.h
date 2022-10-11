@@ -25,10 +25,10 @@
 
 t_error_code	reader_split_by_token(char *str, char ***ret);
 t_error_code	reader_get_tab(char ***ret);
-t_bool			is_special(char *str);
-t_bool      	is_dquote(char c);
-t_bool      	is_squote(char c);
-t_bool      	is_space(char c);
-char			*get_quote_prompt(char c);
+t_bool			reader_is_special(char *str);
+t_bool      	reader_is_dquote(char c);
+t_bool      	reader_is_squote(char c);
+t_bool      	reader_is_space(char c);
+char			*reader_get_quote_prompt(char c);
 
 #endif
