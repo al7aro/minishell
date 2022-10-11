@@ -89,6 +89,7 @@ static t_error_code	allocate_words(char *src, char ***ret, int size)
 			return (ALLOCATION_ERROR);
 		i += get_word(src + i);
 	}
+	*(*ret + words) = NULL;
 	return (SUCCESS);
 }
 
