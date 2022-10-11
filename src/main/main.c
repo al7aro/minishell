@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 #include "main.h"
-#include "reader.h"
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
 	printer_print("~Minishell~");
-	reader_get_tab(&argv);
 	return (0);
 }
