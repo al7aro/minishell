@@ -19,9 +19,10 @@ void	test_reader(void)
 	char 			**tab;
 	t_error_code	err;
 
-	err = tab_create(&tab, 9);
+	err = tab_create(&tab, 2);
 	CU_ASSERT(err == SUCCESS);
-	err = reader_split_by_token("Alvaro Lopez <Gomez>> and|Yoav|", &tab);
+	tab_destroy(&tab);
+	 err = reader_split_by_token("Alvaro Lopez <Gomez>> and|Yoav|", &tab);
 	CU_ASSERT(err == SUCCESS);
 
 	CU_ASSERT_STRING_EQUAL(tab[0], "Alvaro")
