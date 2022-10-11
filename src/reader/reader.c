@@ -35,12 +35,12 @@ static t_error_code	close_opened_quote(char **line)
 	i = -1;
 	while (*(*line + ++i))
 	{
-		if (is_squote(*(*line + i)) || is_dquote(*(*line + i)))
+		if (reader_is_squote(*(*line + i)) || reader_is_dquote(*(*line + i)))
 		{
 			while (!is_quote_closed(*line + i))
 			{
 				tmp = *line;
-				new_content = readline(get_quote_prompt(*(*line + i)));
+				new_content = readline(reader_get_quote_prompt(*(*line + i)));
 				if (!new_content)
 					return (ERROR);
 				*line = ft_strjoin(*line, new_content);

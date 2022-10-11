@@ -53,9 +53,9 @@ t_bool	reader_is_space(char c)
 
 char	*reader_get_quote_prompt(char c)
 {
-	if (is_dquote(c))
+	if (reader_is_dquote(c))
 		return (DQUOTE_PROMPT);
-	if (is_squote(c))
+	if (reader_is_squote(c))
 		return (SQUOTE_PROMPT);
 	return (NULL);
 }

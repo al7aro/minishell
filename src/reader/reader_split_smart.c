@@ -12,12 +12,12 @@
 
 #include "reader.h"
 
-static int	is_word(char *str)
+static int	get_word(char *str)
 {
 	char	del;
 	size_t	i;
 
-	i = is_special(str);
+	i = reader_is_special(str);
 	if (i)
 		return (i);
 	else
@@ -25,18 +25,18 @@ static int	is_word(char *str)
 	del = SPACE_CHAR;
 	while (*(str + ++i) && *(str + i) != del)
 	{
-		if (is_space(del) && is_special(str + i))
+		if (reader_is_space(del) && reader_is_special(str + i))
 			return (i);
-		if ((is_dquote(*(str + i)) && *(str + i) != del && !is_squote(del))
-			|| (is_squote(*(str + i)) && *(str + i) != del && !is_dquote(del)))
+		if ((reader_is_dquote(*(str + i)) && *(str + i) != del && !reader_is_squote(del))
+			|| (reader_is_squote(*(str + i)) && *(str + i) != del && !reader_is_dquote(del)))
 			del = *(str + i);
-		if (!is_space(del) && *(str + i + 1) == del)
+		if (!reader_is_space(del) && *(str + i + 1) == del)
 		{
 			del = SPACE_CHAR;
 			i += 1;
 		}
 	}
-	return (i + 1 + (is_dquote(del) || is_squote(del)) - is_space(*(str + i)));
+	return (i + 1 + (reader_is_dquote(del) || reader_is_squote(del)) - reader_is_space(*(str + i)));
 }
 
 static size_t	cnt_words(char *str)
@@ -48,11 +48,11 @@ static size_t	cnt_words(char *str)
 	words = 0;
 	while (*(str + i))
 	{
-		while (is_space(*(str + i)))
+		while (reader_is_space(*(str + i)))
 			i++;
-		i += is_word(str + i);
+		i += get_word(str + i);
 		words++;
-		while (is_space(*(str + i)))
+		while (reader_is_space(*(str + i)))
 			i++;
 	}
 	return (words);
@@ -69,15 +69,15 @@ static t_error_code	allocate_words(char *src, char ***ret, int size)
 	words = -1;
 	while (++words < size)
 	{
-		while (is_space(*(src + i)))
+		while (reader_is_space(*(src + i)))
 			i++;
-		len = is_word(src + i);
+		len = get_word(src + i);
 		if (len == 0)
 			len++;
 		*(*ret + words) = ft_substr(src, i, len);
 		if (!(*(*ret + words)))
 			return (ALLOCATION_ERROR);
-		i += is_word(src + i);
+		i += get_word(src + i);
 	}
 	return (SUCCESS);
 }
