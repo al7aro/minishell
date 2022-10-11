@@ -26,27 +26,36 @@ void	test_reader_fake_stdin(void)
 
 	reader_get_tab(&tab);
 	tab_print(tab);
+	CU_ASSERT_STRING_EQUAL(tab[0], "echo")
+	CU_ASSERT_STRING_EQUAL(tab[1], "Hello")
+	CU_ASSERT_STRING_EQUAL(tab[2], "wasup")
+	tab_destroy(&tab);
+	printf("\n");
+
+	reader_get_tab(&tab);
 	tab_destroy(&tab);
 	printf("\n");
 
 	reader_get_tab(&tab);
 	tab_print(tab);
+	CU_ASSERT_STRING_EQUAL(tab[0], "cat")
+	CU_ASSERT_STRING_EQUAL(tab[1], "file")
+	tab_destroy(&tab);
+	printf("\n");
+
+	reader_get_tab(&tab);
 	tab_destroy(&tab);
 	printf("\n");
 
 	reader_get_tab(&tab);
 	tab_print(tab);
-	tab_destroy(&tab);
-	printf("\n");
-
-	reader_get_tab(&tab);
-	tab_print(tab);
-	tab_destroy(&tab);
-	printf("\n");
-
-
-	reader_get_tab(&tab);
-	tab_print(tab);
+	CU_ASSERT_STRING_EQUAL(tab[0], "cat")
+	CU_ASSERT_STRING_EQUAL(tab[1], "other_file")
+	CU_ASSERT_STRING_EQUAL(tab[2], "|")
+	CU_ASSERT_STRING_EQUAL(tab[3], "grep")
+	CU_ASSERT_STRING_EQUAL(tab[4], "-a")
+	CU_ASSERT_STRING_EQUAL(tab[5], "|")
+	CU_ASSERT_STRING_EQUAL(tab[6], "echo")
 	tab_destroy(&tab);
 	printf("\n");
 }

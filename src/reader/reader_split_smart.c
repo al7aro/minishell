@@ -12,6 +12,16 @@
 
 #include "reader.h"
 
+static t_bool	check_inside_quote(char c, char del)
+{
+	return ((reader_is_dquote(c)
+			&& c != del
+			&& !reader_is_squote(del))
+		|| (reader_is_squote(c)
+			&& c != del
+			&& !reader_is_dquote(del)));
+}
+
 static int	get_word(char *str)
 {
 	char	del;
@@ -27,8 +37,7 @@ static int	get_word(char *str)
 	{
 		if (reader_is_space(del) && reader_is_special(str + i))
 			return (i);
-		if ((reader_is_dquote(*(str + i)) && *(str + i) != del && !reader_is_squote(del))
-			|| (reader_is_squote(*(str + i)) && *(str + i) != del && !reader_is_dquote(del)))
+		if (check_inside_quote(*(str + i), del))
 			del = *(str + i);
 		if (!reader_is_space(del) && *(str + i + 1) == del)
 		{
@@ -36,7 +45,8 @@ static int	get_word(char *str)
 			i += 1;
 		}
 	}
-	return (i + 1 + (reader_is_dquote(del) || reader_is_squote(del)) - reader_is_space(*(str + i)));
+	return (i + 1 + (reader_is_dquote(del) || reader_is_squote(del))
+		- reader_is_space(*(str + i)));
 }
 
 static size_t	cnt_words(char *str)
