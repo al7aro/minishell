@@ -63,6 +63,7 @@ void	test_tab_create_destroy(void);
 
 // reader
 void	test_reader(void);
+void	test_reader_fake_stdin(void);
 
 // token
 void	test_token_create_destroy(void);

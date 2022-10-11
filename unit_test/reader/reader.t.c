@@ -13,6 +13,43 @@
 #include "unit_test_util.h"
 #include "unit_test.h"
 #include "reader.h"
+#include <fcntl.h>
+
+void	test_reader_fake_stdin(void)
+{
+	int		fd;
+	char	**tab;
+
+	fd = open("./unit_test/resources/simple_cmd.sh", O_RDONLY);
+	close(STDIN_FILENO);
+	dup2(fd, STDIN_FILENO);
+
+	reader_get_tab(&tab);
+	tab_print(tab);
+	tab_destroy(&tab);
+	printf("\n");
+
+	reader_get_tab(&tab);
+	tab_print(tab);
+	tab_destroy(&tab);
+	printf("\n");
+
+	reader_get_tab(&tab);
+	tab_print(tab);
+	tab_destroy(&tab);
+	printf("\n");
+
+	reader_get_tab(&tab);
+	tab_print(tab);
+	tab_destroy(&tab);
+	printf("\n");
+
+
+	reader_get_tab(&tab);
+	tab_print(tab);
+	tab_destroy(&tab);
+	printf("\n");
+}
 
 void	test_reader(void)
 {
