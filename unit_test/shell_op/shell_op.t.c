@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 09:31:06 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/16 00:57:00 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:22:19 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	test_shell_op_create_destroy_empty(void)
 
 	err = shell_op_create(&sp, g_envp);
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
-	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 	CU_ASSERT_PTR_NULL(sp);
 }
@@ -37,7 +36,6 @@ void	test_shell_op_create_destroy_with_tab(void)
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
 	tab = util_create_tab(2, "123", "abd");
 	shell_op_set_input(sp, tab);
-	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 	CU_ASSERT_PTR_NULL(sp);
 }
@@ -71,7 +69,6 @@ void	test_shell_op_create_destroy_with_token_list(void)
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
 	err = token_list_add_last(tok_lst, tok);
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
-	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 	CU_ASSERT_PTR_NULL(sp);
 }

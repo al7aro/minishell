@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 09:31:06 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/16 01:00:42 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:21:45 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ void	test_parser_token_check(void)
 	err = parser_check_tokens(sp, &bad_str);
 	CU_ASSERT_EQUAL(err, SUCCESS);
 	CU_ASSERT_PTR_NULL(bad_str);
-	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }
