@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 12:51:06 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 22:20:03 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:53:30 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_error_code	env_initenv(char ***env, char **envp);
 char			*env_getvar(char ***env, char *key);
 t_error_code	env_setvar(char ***env, char *key, char *value);
 void			env_unsetvar(char ***env, char *key);
+void			env_destroy(char ***env);
 
-void			env_destroyenv(char ***env);
 char			**env_getenv(char ***env);
 
 #endif

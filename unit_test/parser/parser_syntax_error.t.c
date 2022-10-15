@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 09:31:06 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/12 11:50:23 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/16 01:00:35 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	test_parser_bad_first_tok(void)
 	err = parser_check_tokens(sp, &bad_str);
 	CU_ASSERT_EQUAL(err, SYNTAX_ERROR);
 	CU_ASSERT_STRING_EQUAL(bad_str, "|");
+	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }
 
@@ -48,6 +49,7 @@ void	test_parser_open_pipe(void)
 	err = parser_check_tokens(sp, &bad_str);
 	CU_ASSERT_EQUAL(err, SYNTAX_PIPE_STILL_OPEN);
 	CU_ASSERT_PTR_NULL(bad_str);
+	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }
 
@@ -67,5 +69,6 @@ void	test_parser_semi_redirect_error(void)
 	CU_ASSERT_EQUAL(err, SYNTAX_ERROR);
 	CU_ASSERT_PTR_NOT_NULL_FATAL(bad_str);
 	CU_ASSERT_STRING_EQUAL(bad_str, "<");
+	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }
