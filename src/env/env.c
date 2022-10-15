@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 21:19:15 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:20:18 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,4 @@ t_error_code	env_initenv(t_cmd *sp, char **envp)
 		i++;
 	}
 	return (SUCCESS);
-}
-
-void	env_destroyenv(t_cmd *sp)
-{
-	tab_deep_destroy(&(sp->env));
 }
