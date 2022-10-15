@@ -6,11 +6,13 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 20:50:38 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:58:56 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+//TODO CLEAN FILE
 
 static char	*get_key_value_pair(char *key, char *value)
 {
