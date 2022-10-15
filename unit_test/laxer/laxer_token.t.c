@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 09:31:06 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/12 11:50:00 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/16 00:58:06 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	test_laxer_check_all_tokens(void)
 	err = laxer_create_token_list(sp);
 	CU_ASSERT_EQUAL_FATAL(err, SUCCESS);
 	assert_tokens(sp->token_list->tok_lst);
+	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }

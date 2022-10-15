@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:56:36 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/12 12:27:19 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/16 01:04:07 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	test_multi_cmd_exec(void)
 	CU_ASSERT_EQUAL_FATAL(SUCCESS, err);
 	util_check_file_and_remove(TEST_FILE);
 	util_check_file_and_remove(TEST_FILE2);
+	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }

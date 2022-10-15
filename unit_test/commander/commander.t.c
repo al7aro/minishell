@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 09:31:06 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/12 12:14:49 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/16 00:59:06 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	test_commander(void)
 	cmd = sp->cmd_list->lst->next->next->value;
 	CU_ASSERT_STRING_EQUAL(cmd->argv[0], "pwd");
 	CU_ASSERT_PTR_NULL(cmd->argv[1]);
+	env_destroy(&(sp->envp));
 	shell_op_destroy(&sp);
 }

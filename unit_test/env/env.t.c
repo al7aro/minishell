@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 22:19:18 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:53:52 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "unit_test.h"
 #include "env.h"
 #include "tab.h"
+#include "shell_op.h"
 
 void	test_env(void)
 {
@@ -44,5 +45,5 @@ void	test_env(void)
 	CU_ASSERT_STRING_EQUAL(*(sp.envp + 4), "KEY 5=VALUE 5.2");
 	CU_ASSERT_STRING_EQUAL(*(sp.envp + 5), "KEY 7=VALUE 7");
 	CU_ASSERT_STRING_EQUAL(*(sp.envp + 6), "KEY 8=VALUE 8");
-	tab_deep_destroy(&(sp.envp));
+	env_destroy(&(sp.envp));
 }
