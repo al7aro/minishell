@@ -6,22 +6,22 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 21:20:18 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:31:59 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
 //easy version
-void	env_unsetvar(t_cmd *sp, char *key)
+void	env_unsetvar(t_shell_op *sp, char *key)
 {
 	int		i;
 	int		esize;
 	char	**env;
 
 	i = 0;
-	esize = env_size(sp->env);
-	env = sp->env;
+	esize = env_size(sp->envp);
+	env = sp->envp;
 	while (*(env + i))
 	{
 		if (key_compare(*(env + i), key))
@@ -35,11 +35,11 @@ void	env_unsetvar(t_cmd *sp, char *key)
 	}
 }
 
-char	*env_getvar(t_cmd *sp, char *key)
+char	*env_getvar(t_shell_op *sp, char *key)
 {
 	char	**env;
 
-	env = sp->env;
+	env = sp->envp;
 	while (*env)
 	{
 		if (key_compare(*env, key))
@@ -49,13 +49,13 @@ char	*env_getvar(t_cmd *sp, char *key)
 	return (NULL);
 }
 
-t_error_code	env_setvar(t_cmd *sp, char *key, char *value)
+t_error_code	env_setvar(t_shell_op *sp, char *key, char *value)
 {
 	char	**env;
 	char	i;
 
 	i = 0;
-	env = sp->env;
+	env = sp->envp;
 	if (env)
 	{
 		while (*(env + i))
@@ -73,7 +73,7 @@ t_error_code	env_setvar(t_cmd *sp, char *key, char *value)
 	return (SUCCESS);
 }
 
-t_error_code	env_initenv(t_cmd *sp, char **envp)
+t_error_code	env_initenv(t_shell_op *sp, char **envp)
 {
 	t_error_code	err;
 	int				esize;
@@ -81,15 +81,15 @@ t_error_code	env_initenv(t_cmd *sp, char **envp)
 
 	i = 0;
 	if (!envp)
-		return (tab_create(&sp->env, 1));
+		return (tab_create(&sp->envp, 1));
 	esize = env_size(envp);
-	err = tab_create(&sp->env, esize);
+	err = tab_create(&sp->envp, esize);
 	if (SUCCESS != err)
 		return (err);
-	*(sp->env + esize) = NULL;
+	*(sp->envp + esize) = NULL;
 	while (i < esize)
 	{
-		*(sp->env + i) = ft_strdup(*(envp + i));
+		*(sp->envp + i) = ft_strdup(*(envp + i));
 		i++;
 	}
 	return (SUCCESS);
