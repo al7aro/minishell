@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 20:24:55 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:50:38 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_error_code	env_setvar(t_cmd *sp, char *key, char *value)
 
 	i = 0;
 	env = sp->env;
-	if (env + i)
+	if (env)
 	{
 		while (*(env + i))
 		{
@@ -139,9 +139,8 @@ t_error_code	env_initenv(t_cmd *sp, char **envp)
 	int				i;
 
 	i = 0;
-	sp->env = 0;
 	if (!envp)
-		return (ERROR);
+		return (tab_create(&sp->env, 1));
 	esize = env_size(envp);
 	err = tab_create(&sp->env, esize);
 	if (SUCCESS != err)
