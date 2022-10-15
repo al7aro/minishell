@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 22:20:06 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:17:03 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,9 @@ t_error_code	env_initenv(char ***env, char **envp)
 		i++;
 	}
 	return (SUCCESS);
+}
+
+void	env_destroy(char ***env)
+{
+	tab_deep_destroy(env);
 }
