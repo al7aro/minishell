@@ -6,74 +6,67 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 21:31:59 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:20:06 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
 //easy version
-void	env_unsetvar(t_shell_op *sp, char *key)
+void	env_unsetvar(char ***env, char *key)
 {
 	int		i;
 	int		esize;
-	char	**env;
 
 	i = 0;
-	esize = env_size(sp->envp);
-	env = sp->envp;
-	while (*(env + i))
+	esize = env_size(*env);
+	while (*(*env + i))
 	{
-		if (key_compare(*(env + i), key))
+		if (key_compare(*(*env + i), key))
 		{
-			free(*(env + i));
-			*(env + i) = *(env + esize - 1);
-			*(env + esize - 1) = NULL;
+			free(*(*env + i));
+			*(*env + i) = *(*env + esize - 1);
+			*(*env + esize - 1) = NULL;
 			return ;
 		}
 		i++;
 	}
 }
 
-char	*env_getvar(t_shell_op *sp, char *key)
+char	*env_getvar(char ***env, char *key)
 {
-	char	**env;
-
-	env = sp->envp;
-	while (*env)
+	while (**env)
 	{
-		if (key_compare(*env, key))
-			return (get_value(*env));
-		env++;
+		if (key_compare(**env, key))
+			return (get_value(**env));
+		(*env)++;
 	}
 	return (NULL);
 }
 
-t_error_code	env_setvar(t_shell_op *sp, char *key, char *value)
+t_error_code	env_setvar(char ***env, char *key, char *value)
 {
-	char	**env;
 	char	i;
 
 	i = 0;
-	env = sp->envp;
-	if (env)
+	if (*env)
 	{
-		while (*(env + i))
+		while (*(*env + i))
 		{
-			if (key_compare(*(env + i), key))
+			if (key_compare(*(*env + i), key))
 			{
-				free(*(env + i));
-				*(env + i) = get_key_value_pair(key, value);
+				free(*(*env + i));
+				*(*env + i) = get_key_value_pair(key, value);
 				return (SUCCESS);
 			}
 			i++;
 		}
 	}
-	new_var(sp, key, value);
+	new_var(env, key, value);
 	return (SUCCESS);
 }
 
-t_error_code	env_initenv(t_shell_op *sp, char **envp)
+t_error_code	env_initenv(char ***env, char **envp)
 {
 	t_error_code	err;
 	int				esize;
@@ -81,15 +74,15 @@ t_error_code	env_initenv(t_shell_op *sp, char **envp)
 
 	i = 0;
 	if (!envp)
-		return (tab_create(&sp->envp, 1));
+		return (tab_create(env, 1));
 	esize = env_size(envp);
-	err = tab_create(&sp->envp, esize);
+	err = tab_create(env, esize);
 	if (SUCCESS != err)
 		return (err);
-	*(sp->envp + esize) = NULL;
+	*(*env + esize) = NULL;
 	while (i < esize)
 	{
-		*(sp->envp + i) = ft_strdup(*(envp + i));
+		*(*env + i) = ft_strdup(*(envp + i));
 		i++;
 	}
 	return (SUCCESS);

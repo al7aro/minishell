@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 21:14:27 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 21:32:04 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:14:30 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ char	*get_key_value_pair(char *key, char *value)
 	return (pair);
 }
 
-t_error_code	new_var(t_shell_op *sp, char *key, char *value)
+t_error_code	new_var(char ***env, char *key, char *value)
 {
-	if (!sp->envp)
+	if (!*env)
 	{
-		sp->envp = (char **)malloc(sizeof(char *) + 1);
-		*(sp->envp + 1) = NULL;
+		*env = (char **)malloc(sizeof(char *) + 1);
+		*(*env + 1) = NULL;
 	}
-	return (tab_add(&sp->envp, get_key_value_pair(key, value)));
+	return (tab_add(&(*env), get_key_value_pair(key, value)));
 }
 
 int	env_size(char **envp)
