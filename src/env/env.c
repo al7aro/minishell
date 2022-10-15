@@ -6,72 +6,11 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 20:58:56 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:19:15 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-
-//TODO CLEAN FILE
-
-static char	*get_key_value_pair(char *key, char *value)
-{
-	char	*pair;
-	char	*tmp;
-
-	tmp = ft_strjoin(key, "=");
-	pair = ft_strjoin(tmp, value);
-	free(tmp);
-	return (pair);
-}
-
-static t_error_code	new_var(t_cmd *sp, char *key, char *value)
-{
-	if (!sp->env)
-	{
-		sp->env = (char **)malloc(sizeof(char *) + 1);
-		*(sp->env + 1) = NULL;
-	}
-	return (tab_add(&sp->env, get_key_value_pair(key, value)));
-}
-
-static int	env_size(char **envp)
-{
-	int	env_size;
-
-	if (!envp)
-		return (0);
-	env_size = 0;
-	while (*(envp + env_size))
-		env_size++;
-	return (env_size);
-}
-
-static char	*get_value(char *env_var)
-{
-	char	*pos;
-
-	pos = ft_strchr((const char *)env_var, '=');
-	return (pos + 1);
-}
-
-static t_bool	key_compare(char *env, char *key)
-{
-	char	*pos;
-	char	i;
-
-	pos = ft_strchr((const char *)env, '=');
-	i = 0;
-	while ((env + i) != pos && *(key + i))
-	{
-		if (*(env + i) != *(key + i))
-			return (FALSE);
-		i++;
-	}
-	if (*(key + i) == '\0' && *(env + i) == '=' )
-		return (TRUE);
-	return (FALSE);
-}
 
 //easy version
 void	env_unsetvar(t_cmd *sp, char *key)
@@ -154,11 +93,6 @@ t_error_code	env_initenv(t_cmd *sp, char **envp)
 		i++;
 	}
 	return (SUCCESS);
-}
-
-char	**env_getenv(t_cmd *sp)
-{
-	return (sp->env);
 }
 
 void	env_destroyenv(t_cmd *sp)

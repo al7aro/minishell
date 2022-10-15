@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 20:57:51 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:11:23 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ void	test_env(void)
 	CU_ASSERT_STRING_EQUAL(*(cmd.env + 4), "KEY 5=VALUE 5.2");
 	CU_ASSERT_STRING_EQUAL(*(cmd.env + 5), "KEY 7=VALUE 7");
 	CU_ASSERT_STRING_EQUAL(*(cmd.env + 6), "KEY 8=VALUE 8");
-	tab_deep_destroy(&cmd.env);
+	env_destroyenv(&cmd);
 }
