@@ -6,40 +6,34 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/16 01:18:23 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:06:43 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-//easy version
-void	env_unsetvar(char ***env, char *key)
+void	env_unsetvar(char **env, char *key)
 {
 	int		i;
 	int		esize;
 
 	i = 0;
-	esize = env_size(*env);
-	while (*(*env + i))
+	esize = tab_count(env);
+	while (*(env + i))
 	{
-		if (key_compare(*(*env + i), key))
-		{
-			free(*(*env + i));
-			*(*env + i) = *(*env + esize - 1);
-			*(*env + esize - 1) = NULL;
-			return ;
-		}
+		if (is_key(*(env + i), key))
+			return (fill_mem(env + i, env + esize - 1));
 		i++;
 	}
 }
 
-char	*env_getvar(char ***env, char *key)
+char	*env_getvar(char **env, char *key)
 {
-	while (**env)
+	while (*env)
 	{
-		if (key_compare(**env, key))
-			return (get_value(**env));
-		(*env)++;
+		if (is_key(*env, key))
+			return (get_value(*env));
+		(env)++;
 	}
 	return (NULL);
 }
@@ -53,7 +47,7 @@ t_error_code	env_setvar(char ***env, char *key, char *value)
 	{
 		while (*(*env + i))
 		{
-			if (key_compare(*(*env + i), key))
+			if (is_key(*(*env + i), key))
 			{
 				free(*(*env + i));
 				*(*env + i) = get_key_value_pair(key, value);
@@ -75,7 +69,7 @@ t_error_code	env_initenv(char ***env, char **envp)
 	i = 0;
 	if (!envp)
 		return (tab_create(env, 1));
-	esize = env_size(envp);
+	esize = tab_count(envp);
 	err = tab_create(env, esize);
 	if (SUCCESS != err)
 		return (err);

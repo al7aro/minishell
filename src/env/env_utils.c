@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 21:14:27 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 22:14:30 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:05:41 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,10 @@ t_error_code	new_var(char ***env, char *key, char *value)
 {
 	if (!*env)
 	{
-		*env = (char **)malloc(sizeof(char *) + 1);
-		*(*env + 1) = NULL;
+		*env = (char **)malloc(sizeof(char *));
+		**env = NULL;
 	}
 	return (tab_add(&(*env), get_key_value_pair(key, value)));
-}
-
-int	env_size(char **envp)
-{
-	int	env_size;
-
-	if (!envp)
-		return (0);
-	env_size = 0;
-	while (*(envp + env_size))
-		env_size++;
-	return (env_size);
 }
 
 char	*get_value(char *env_var)
@@ -53,7 +41,7 @@ char	*get_value(char *env_var)
 	return (pos + 1);
 }
 
-t_bool	key_compare(char *env, char *key)
+t_bool	is_key(char *env, char *key)
 {
 	char	*pos;
 	char	i;
@@ -69,4 +57,11 @@ t_bool	key_compare(char *env, char *key)
 	if (*(key + i) == '\0' && *(env + i) == '=' )
 		return (TRUE);
 	return (FALSE);
+}
+
+void	fill_mem(char **to_empty, char **new_element)
+{
+	free(*to_empty);
+	*to_empty = *new_element;
+	*new_element = NULL;
 }

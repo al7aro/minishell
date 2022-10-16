@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 08:52:49 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/12 09:59:40 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/16 10:30:05 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_error_code	tab_create(char	***ret, size_t size);
 void			tab_deep_destroy(char ***t);
 void			tab_shallow_destroy(char ***t);
 t_error_code	tab_add(char ***tab, char *s);
+size_t			tab_count(char **t);
 
 #endif

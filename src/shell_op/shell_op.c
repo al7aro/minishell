@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:52:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/16 01:15:41 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:38:21 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_error_code	shell_op_create(t_shell_op **ret, char **envp)
 		return (ALLOCATION_ERROR);
 	err = env_initenv(&(*ret)->envp, envp);
 	if (SUCCESS != err)
+	{
+		free(*ret);
 		return (err);
+	}
 	return (SUCCESS);
 }
 
