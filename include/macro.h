@@ -21,11 +21,17 @@
 # define SINGLE_QUOTE_CHAR	'\''
 # define DOUBLE_QUOTE_CHAR	'\"'
 # define SPACE_CHAR			' '
+# define EQUAL_CHAR			'='
+# define MINUS_CHAR			'-'
+# define EQUAL_STR			"="
 # define MAIN_PROMPT		"prompt> "
 # define DQUOTE_PROMPT		"dquote> "
 # define SQUOTE_PROMPT		"quote> "
 # define EMPTY_STRING		""
 # define NEW_PROC			0
+# define EXPANDER_CHAR		'$'
+# define R_BRACKET			')'
+# define L_BRACKET			'('
 
 typedef enum e_bool
 {

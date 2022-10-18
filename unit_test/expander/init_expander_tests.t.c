@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   init_expander_tests.t.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 10:48:14 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/18 10:48:14 by al7aro           ###   ########.fr       */
+/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
+/*   Updated: 2022/10/18 11:00:13 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "unit_test.h"
 
-t_bool	is_key_valid(char *key)
+CU_TestInfo	g_expander_tests[] = {
 {
-	int	i;
-
-	i = 0;
-	while (*(key + ++i))
-	{
-		if (SPACE_CHAR == *(key + i))
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
+	"test_expander",
+	test_expander,
+},
+	CU_TEST_INFO_NULL,
+};

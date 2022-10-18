@@ -13,7 +13,14 @@
 #ifndef EXPANDER_H
 # define EXPANDER_H
 
-char	*expander_remove_external_quotes(char *str);
-char	*expander_expand_vars(char *str);
+# include <stdlib.h>
+# include <unistd.h>
+
+# include "error_code.h"
+# include "libft.h"
+# include "macro.h"
+# include "env.h"
+
+char	*expander_expand(char **env, char *str);
 
 #endif
