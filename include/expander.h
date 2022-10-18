@@ -21,6 +21,7 @@
 # include "macro.h"
 # include "env.h"
 
+char	*expander_remove_quotes(char *str);
 char	*expander_expand(char **env, char *str);
 
 #endif

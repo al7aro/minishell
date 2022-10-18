@@ -17,6 +17,7 @@
 void	test_expander(void)
 {
 	t_shell_op	sp;
+	char		*str;
 
 	env_initenv(&sp.envp, 0);
 	env_setvar(&sp.envp, "USER", "al7arolopez");
@@ -25,9 +26,17 @@ void	test_expander(void)
 	env_setvar(&sp.envp, "PWD", "~/");
 	env_setvar(&sp.envp, "OLD_PWD", "~/Documents/");
 	env_setvar(&sp.envp, "K", "ALVARO LOPEZ");
-	// expander_expand(sp.envp, "Name is $USER :D\n");
-	// expander_expand(sp.envp, "Name is $NAME :D");
-	// expander_expand(sp.envp, "Your name is $PATH :D $PWD $OLD_PWD $USER");
-	expander_expand(sp.envp, "$PWD");
+	str = expander_expand(sp.envp, "Name is $USER :D\n");
+	CU_ASSERT_STRING_EQUAL(str, "Name is al7arolopez :D\n");
+	free(str);
+	str = expander_expand(sp.envp, "Name is $NAME :D");
+	CU_ASSERT_STRING_EQUAL(str, "Name is ALVARO LOPEZ :D");
+	free(str);
+	str = expander_expand(sp.envp, "Your name is $PATH :D $PWD $OLD_PWD");
+	CU_ASSERT_STRING_EQUAL(str, "Your name is /bin/ :D ~/ ~/Documents/");
+	free(str);
+	str = expander_expand(sp.envp, "$PWD");
+	CU_ASSERT_STRING_EQUAL(str, "~/");
+	free(str);
 	env_destroy(&(sp.envp));
 }

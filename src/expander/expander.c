@@ -15,8 +15,8 @@
 
 static t_bool	is_end_of_var_name(char c)
 {
-	if (   SPACE_CHAR == c
-		||  R_BRACKET == c
+	if (SPACE_CHAR == c
+		|| R_BRACKET == c
 		|| MINUS_CHAR == c
 		|| EQUAL_CHAR == c
 		|| '\0' == c)
@@ -83,7 +83,5 @@ char	*expander_expand(char **env, char *str)
 		free(tmp);
 		i += var_len;
 	}
-	printf("\n\n%s\n\n", ret);
-	system("leaks test.out");
 	return (ret);
 }
