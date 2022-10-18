@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tab.h                                              :+:      :+:    :+:   */
+/*   cmd_list_get.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 08:52:49 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/16 10:30:05 by alopez-g         ###   ########.fr       */
+/*   Created: 2022/10/11 10:39:07 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/12 11:43:11 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAB_H
-# define TAB_H
+#include "cmd_list.h"
 
-# include <stddef.h>
-# include <stdlib.h>
+t_dll	*cmd_list_get_list(t_cmd_list *lst)
+{
+	return (lst->lst);
+}
 
-# include "error_code.h"
-# include "libft.h"
-
-void			tab_print(char **input_table);
-t_error_code	tab_create(char	***ret, size_t size);
-void			tab_deep_destroy(char ***t);
-void			tab_shallow_destroy(char ***t);
-t_error_code	tab_add(char ***tab, char *s);
-size_t			tab_count(char **t);
-
-#endif
+t_dll	*cmd_list_get_next_cmd(t_dll *node)
+{
+	return (node->next);
+}

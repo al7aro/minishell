@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tab.h                                              :+:      :+:    :+:   */
+/*   shell_op_get.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 08:52:49 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/16 10:30:05 by alopez-g         ###   ########.fr       */
+/*   Created: 2022/10/11 10:40:13 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/12 11:52:41 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAB_H
-# define TAB_H
+#include "shell_op.h"
 
-# include <stddef.h>
-# include <stdlib.h>
-
-# include "error_code.h"
-# include "libft.h"
-
-void			tab_print(char **input_table);
-t_error_code	tab_create(char	***ret, size_t size);
-void			tab_deep_destroy(char ***t);
-void			tab_shallow_destroy(char ***t);
-t_error_code	tab_add(char ***tab, char *s);
-size_t			tab_count(char **t);
-
-#endif
+t_cmd_list	*shell_op_get_cmd_list(t_shell_op *sp)
+{
+	return (sp->cmd_list);
+}

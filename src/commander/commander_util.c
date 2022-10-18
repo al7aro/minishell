@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tab.h                                              :+:      :+:    :+:   */
+/*   commander_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 08:52:49 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/16 10:30:05 by alopez-g         ###   ########.fr       */
+/*   Created: 2022/10/08 13:19:36 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/10 14:10:02 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAB_H
-# define TAB_H
+#include "commander.h"
 
-# include <stddef.h>
-# include <stdlib.h>
+t_bool	is_cmd(t_dll *n)
+{
+	t_token	*t;
 
-# include "error_code.h"
-# include "libft.h"
+	t = token_list_get_token(n);
+	return (WORD == t->type || REDIRECT == t->type);
+}
 
-void			tab_print(char **input_table);
-t_error_code	tab_create(char	***ret, size_t size);
-void			tab_deep_destroy(char ***t);
-void			tab_shallow_destroy(char ***t);
-t_error_code	tab_add(char ***tab, char *s);
-size_t			tab_count(char **t);
+t_dll	*commander_skip_to_next_cmd(t_dll *n)
+{
+	t_token	*t;
 
-#endif
+	t = token_list_get_token(n);
+	while (t && n && !is_cmd(n))
+	{
+		n = n->next;
+		t = token_list_get_token(n);
+	}
+	return (n);
+}

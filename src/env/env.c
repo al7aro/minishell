@@ -6,74 +6,61 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/15 21:20:18 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:06:43 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-//easy version
-void	env_unsetvar(t_cmd *sp, char *key)
+void	env_unsetvar(char **env, char *key)
 {
 	int		i;
 	int		esize;
-	char	**env;
 
 	i = 0;
-	esize = env_size(sp->env);
-	env = sp->env;
+	esize = tab_count(env);
 	while (*(env + i))
 	{
-		if (key_compare(*(env + i), key))
-		{
-			free(*(env + i));
-			*(env + i) = *(env + esize - 1);
-			*(env + esize - 1) = NULL;
-			return ;
-		}
+		if (is_key(*(env + i), key))
+			return (fill_mem(env + i, env + esize - 1));
 		i++;
 	}
 }
 
-char	*env_getvar(t_cmd *sp, char *key)
+char	*env_getvar(char **env, char *key)
 {
-	char	**env;
-
-	env = sp->env;
 	while (*env)
 	{
-		if (key_compare(*env, key))
+		if (is_key(*env, key))
 			return (get_value(*env));
-		env++;
+		(env)++;
 	}
 	return (NULL);
 }
 
-t_error_code	env_setvar(t_cmd *sp, char *key, char *value)
+t_error_code	env_setvar(char ***env, char *key, char *value)
 {
-	char	**env;
 	char	i;
 
 	i = 0;
-	env = sp->env;
-	if (env)
+	if (*env)
 	{
-		while (*(env + i))
+		while (*(*env + i))
 		{
-			if (key_compare(*(env + i), key))
+			if (is_key(*(*env + i), key))
 			{
-				free(*(env + i));
-				*(env + i) = get_key_value_pair(key, value);
+				free(*(*env + i));
+				*(*env + i) = get_key_value_pair(key, value);
 				return (SUCCESS);
 			}
 			i++;
 		}
 	}
-	new_var(sp, key, value);
+	new_var(env, key, value);
 	return (SUCCESS);
 }
 
-t_error_code	env_initenv(t_cmd *sp, char **envp)
+t_error_code	env_initenv(char ***env, char **envp)
 {
 	t_error_code	err;
 	int				esize;
@@ -81,16 +68,21 @@ t_error_code	env_initenv(t_cmd *sp, char **envp)
 
 	i = 0;
 	if (!envp)
-		return (tab_create(&sp->env, 1));
-	esize = env_size(envp);
-	err = tab_create(&sp->env, esize);
+		return (tab_create(env, 1));
+	esize = tab_count(envp);
+	err = tab_create(env, esize);
 	if (SUCCESS != err)
 		return (err);
-	*(sp->env + esize) = NULL;
+	*(*env + esize) = NULL;
 	while (i < esize)
 	{
-		*(sp->env + i) = ft_strdup(*(envp + i));
+		*(*env + i) = ft_strdup(*(envp + i));
 		i++;
 	}
 	return (SUCCESS);
+}
+
+void	env_destroy(char ***env)
+{
+	tab_deep_destroy(env);
 }

@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:20:11 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/24 13:35:15 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/12 12:20:40 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 
 # include "macro.h"
 # include "cmd.h"
+# include "shell_op.h"
 # include "error_code.h"
 
 t_error_code	executer_run_cmd(t_cmd *c);
+t_error_code	executer_run_all_cmds(t_shell_op *sp);
 
 #endif
