@@ -19,12 +19,15 @@ void	test_expander(void)
 	t_shell_op	sp;
 
 	env_initenv(&sp.envp, 0);
-	env_setvar(&sp.envp, "USER", "al7aro");
+	env_setvar(&sp.envp, "USER", "al7arolopez");
 	env_setvar(&sp.envp, "PATH", "/bin/");
 	env_setvar(&sp.envp, "NAME", "ALVARO LOPEZ");
 	env_setvar(&sp.envp, "PWD", "~/");
 	env_setvar(&sp.envp, "OLD_PWD", "~/Documents/");
-	expander_expand(sp.envp, "Your name is $USER :D");
-	expander_expand(sp.envp, "Your name is $PATH :D $PWD $OLD_PWD $USER");
+	env_setvar(&sp.envp, "K", "ALVARO LOPEZ");
+	// expander_expand(sp.envp, "Name is $USER :D\n");
+	// expander_expand(sp.envp, "Name is $NAME :D");
+	// expander_expand(sp.envp, "Your name is $PATH :D $PWD $OLD_PWD $USER");
+	expander_expand(sp.envp, "$PWD");
 	env_destroy(&(sp.envp));
 }

@@ -34,7 +34,7 @@ char	*env_getvar(char **env, char *key)
 	while (*env)
 	{
 		if (is_key(*env, key))
-			return (get_value(*env));
+			return (ft_strdup(get_value(*env)));
 		env++;
 	}
 	return (NULL);

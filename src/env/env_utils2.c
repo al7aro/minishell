@@ -17,7 +17,7 @@ t_bool	is_key_valid(char *key)
 	int	i;
 
 	i = 0;
-	while (*(key + ++i))
+	while (*(key + i))
 	{
 		if (SPACE_CHAR == *(key + i))
 			return (FALSE);
