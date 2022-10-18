@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:45:15 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/19 16:56:33 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/12 15:11:12 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef enum s_error_code
 	ALLOCATION_ERROR,
 	SYNTAX_ERROR,
 	SYNTAX_PIPE_STILL_OPEN,
+	NEW_PROC_ERROR,
+	EOF_SUCCESS,
 }	t_error_code;
 
 void	error_code_print(t_error_code err);

@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/09/25 16:32:22 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/15 21:49:32 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,20 @@
 # include "error_code.h"
 
 # define TEST_RES "unit_test_tmp.txt"
+# define TEST_FILE "test_file"
+# define TEST_FILE2 "test_file2"
 
+extern char			**g_envp;
+
+extern CU_TestInfo	g_commander_tests[];
+extern CU_TestInfo	g_executer_tests[];
 extern CU_TestInfo	g_parser_tests[];
 extern CU_TestInfo	g_cmd_list_tests[];
-extern CU_TestInfo	g_arg_list_tests[];
 extern CU_TestInfo	g_laxer_tests[];
 extern CU_TestInfo	g_shell_op_tests[];
 extern CU_TestInfo	g_tab_tests[];
 extern CU_TestInfo	g_reader_tests[];
+extern CU_TestInfo	g_env_tests[];
 extern CU_TestInfo	g_token_list_tests[];
 extern CU_TestInfo	g_token_tests[];
 extern CU_TestInfo	g_dll_tests[];
@@ -43,6 +49,9 @@ void	test_parser_semi_redirect_error(void);
 void	test_parser_token_check(void);
 void	test_parser_bad_first_tok(void);
 
+//
+void	test_commander(void);
+
 // cmd_list
 void	test_cmd_list_create_destroy(void);
 
@@ -53,16 +62,25 @@ void	test_arg_list_create_destroy(void);
 void	test_laxer_create_destroy(void);
 void	test_laxer_check_all_tokens(void);
 
+// executer
+void	test_multi_cmd_exec(void);
+void	test_basic_executer(void);
+
 // shell_op
 void	test_shell_op_create_destroy_empty(void);
 void	test_shell_op_create_destroy_with_tab(void);
 void	test_shell_op_create_destroy_with_token_list(void);
 
 // tab
+void	test_tab_add(void);
 void	test_tab_create_destroy(void);
 
 // reader
 void	test_reader(void);
+void	test_reader_fake_stdin(void);
+
+//env
+void	test_env(void);
 
 // token
 void	test_token_create_destroy(void);

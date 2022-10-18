@@ -12,10 +12,10 @@
 
 #include "reader.h"
 
-char	quote_is_closed(char *str)
+static t_bool	is_quote_closed(char *str)
 {
 	char	quote_char;
-	char	i;
+	size_t	i;
 
 	i = 1;
 	quote_char = *str;
@@ -26,30 +26,21 @@ char	quote_is_closed(char *str)
 	return (0);
 }
 
-/*
- * line 53 is probably redundant
-// tmp = *line;
-// *line = ft_strjoin(*line, EMPTY_STRING);
-// if (!(*line))
-// 	return (ALLOCATION_ERROR);
-// free(tmp);
- * */
-t_error_code	dquote(char **line)
+static t_error_code	close_opened_quote(char **line)
 {
 	char	*tmp;
 	char	*new_content;
-	char	i;
+	size_t	i;
 
 	i = -1;
 	while (*(*line + ++i))
 	{
-		if (is_squote(*(*line + i)) || is_dquote(*(*line + i)))
+		if (reader_is_squote(*(*line + i)) || reader_is_dquote(*(*line + i)))
 		{
-			i += quote_is_closed(*line + i);
-			while (!i)
+			while (!is_quote_closed(*line + i))
 			{
 				tmp = *line;
-				new_content = readline(DQUOTE_PROMPT);
+				new_content = readline(reader_get_quote_prompt(*(*line + i)));
 				if (!new_content)
 					return (ERROR);
 				*line = ft_strjoin(*line, new_content);
@@ -58,26 +49,13 @@ t_error_code	dquote(char **line)
 					return (ALLOCATION_ERROR);
 				free(new_content);
 			}
+			i += is_quote_closed(*line + i);
 		}
 	}
 	return (SUCCESS);
 }
 
-t_error_code	reader_from_arg(int argc, char **argv)
-{
-	t_error_code	err;
-	char			**tab;
-
-	err = SUCCESS;
-	if (argc != 1)
-		err = reader_split_arg(*(argv + 1), &tab);
-	return (err);
-}
-
-/*
- * TODO CREATE QUOTE_CONSTANT
- **/
-t_error_code	reader(char ***ret)
+t_error_code	reader_get_tab(char ***ret)
 {
 	t_error_code	err;
 	char			*line;
@@ -85,11 +63,11 @@ t_error_code	reader(char ***ret)
 	line = readline(MAIN_PROMPT);
 	if (!line)
 		return (ERROR);
-	dquote(&line);
+	close_opened_quote(&line);
 	if (!line)
 		return (ERROR);
 	add_history(line);
-	err = reader_split_arg(line, ret);
+	err = reader_split_by_token(line, ret);
 	free(line);
 	return (err);
 }

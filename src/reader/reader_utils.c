@@ -12,15 +12,7 @@
 
 #include "reader.h"
 
-/*
- * TODO
- * 		is_quote()
- * 		is_duote()
- * 		is_special()
- * 		is_space()
- * 		skip_spaces()
- * */
-int	is_special(char *str)
+t_bool	reader_is_special(char *str)
 {
 	int	i;
 
@@ -44,17 +36,26 @@ int	is_special(char *str)
 	return (0);
 }
 
-t_bool	is_dquote(char c)
+t_bool	reader_is_dquote(char c)
 {
 	return (DOUBLE_QUOTE_CHAR == c);
 }
 
-t_bool	is_squote(char c)
+t_bool	reader_is_squote(char c)
 {
 	return (SINGLE_QUOTE_CHAR == c);
 }
 
-t_bool	is_space(char c)
+t_bool	reader_is_space(char c)
 {
 	return (SPACE_CHAR == c);
+}
+
+char	*reader_get_quote_prompt(char c)
+{
+	if (reader_is_dquote(c))
+		return (DQUOTE_PROMPT);
+	if (reader_is_squote(c))
+		return (SQUOTE_PROMPT);
+	return (NULL);
 }

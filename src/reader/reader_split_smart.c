@@ -12,12 +12,24 @@
 
 #include "reader.h"
 
-static int	is_word(char *str)
+static t_bool	check_inside_quote(char c, char del)
+{
+	return ((reader_is_dquote(c)
+			&& c != del
+			&& !reader_is_squote(del))
+		|| (reader_is_squote(c)
+			&& c != del
+			&& !reader_is_dquote(del)));
+}
+
+static int	get_word(char *str)
 {
 	char	del;
-	int		i;
+	size_t	i;
 
-	i = is_special(str);
+	if (!*str)
+		return (0);
+	i = reader_is_special(str);
 	if (i)
 		return (i);
 	else
@@ -25,70 +37,70 @@ static int	is_word(char *str)
 	del = SPACE_CHAR;
 	while (*(str + ++i) && *(str + i) != del)
 	{
-		if (is_space(del) && is_special(str + i))
+		if (reader_is_space(del) && reader_is_special(str + i))
 			return (i);
-		if ((is_dquote(*(str + i)) && *(str + i) != del && !is_squote(del))
-			|| (is_squote(*(str + i)) && *(str + i) != del && !is_dquote(del)))
+		if (check_inside_quote(*(str + i), del))
 			del = *(str + i);
-		if (!is_space(del) && *(str + i + 1) == del)
+		if (!reader_is_space(del) && *(str + i + 1) == del)
 		{
 			del = SPACE_CHAR;
 			i += 1;
 		}
 	}
-	return (i + 1 + (is_dquote(del) || is_squote(del)) - is_space(*(str + i)));
+	return (i + 1 + (reader_is_dquote(del) || reader_is_squote(del))
+		- reader_is_space(*(str + i)));
 }
 
-/*
- *
- **/
-static int	cnt_words(char *str)
+static size_t	cnt_words(char *str)
 {
-	int	i;
-	int	words;
+	size_t	i;
+	size_t	words;
 
 	i = 0;
 	words = 0;
 	while (*(str + i))
 	{
-		while (is_space(*(str + i)))
+		while (reader_is_space(*(str + i)) && *(str + i))
 			i++;
-		i += is_word(str + i);
+		i += get_word(str + i);
+		if (i > ft_strlen(str))
+			i--;
 		words++;
-		while (is_space(*(str + i)))
+		while (reader_is_space(*(str + i)) && *(str + i))
 			i++;
 	}
 	return (words);
 }
 
-t_error_code	allocate_words(char *src, char ***ret, int size)
+static t_error_code	allocate_words(char *src, char ***ret, int size)
 {
 	int		words;
-	int		i;
-	int		len;
+	size_t	i;
+	size_t	len;
 
 	len = 0;
 	i = 0;
 	words = -1;
 	while (++words < size)
 	{
-		while (is_space(*(src + i)))
+		while (reader_is_space(*(src + i)))
 			i++;
-		len = is_word(src + i);
+		len = get_word(src + i);
 		if (len == 0)
 			len++;
 		*(*ret + words) = ft_substr(src, i, len);
 		if (!(*(*ret + words)))
 			return (ALLOCATION_ERROR);
-		i += is_word(src + i);
+		i += get_word(src + i);
 	}
+	*(*ret + words) = NULL;
 	return (SUCCESS);
 }
 
-t_error_code	reader_split_arg(char *str, char ***ret)
+t_error_code	reader_split_by_token(char *str, char ***ret)
 {
 	t_error_code	err;
-	int				words;
+	size_t			words;
 
 	words = cnt_words(str);
 	err = tab_create(ret, words);

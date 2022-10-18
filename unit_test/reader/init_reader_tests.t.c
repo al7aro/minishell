@@ -17,5 +17,9 @@ CU_TestInfo	g_reader_tests[] = {
 	"test_reader",
 	test_reader,
 },
+{
+	"test_reader_fake_stdin",
+	test_reader_fake_stdin,
+},
 	CU_TEST_INFO_NULL,
 };
