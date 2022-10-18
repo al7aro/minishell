@@ -24,7 +24,7 @@ static t_bool	is_end_of_var_name(char c)
 	return (FALSE);
 }
 
-int	expander_get_var(char **env, char *str, char **ret)
+static int	expander_get_var(char **env, char *str, char **ret)
 {
 	int		i;
 	int		start;
@@ -58,7 +58,7 @@ static char	*str_append_char(char *ret, char c)
 	return (ret);
 }
 
-char	*expander_expand(char **env, char *str)
+char	*expander_expand_var(char **env, char *str)
 {
 	char	*ret;
 	char	*exp;
