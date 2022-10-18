@@ -18,6 +18,8 @@ void	env_unsetvar(char **env, char *key)
 	int		esize;
 
 	i = 0;
+	if (!env)
+		return ;
 	esize = tab_count(env);
 	while (*(env + i))
 	{
@@ -33,7 +35,7 @@ char	*env_getvar(char **env, char *key)
 	{
 		if (is_key(*env, key))
 			return (get_value(*env));
-		(env)++;
+		env++;
 	}
 	return (NULL);
 }
@@ -43,6 +45,8 @@ t_error_code	env_setvar(char ***env, char *key, char *value)
 	char	i;
 
 	i = 0;
+	if (!is_key_valid(key))
+		return (ERROR);
 	if (*env)
 	{
 		while (*(*env + i))
@@ -69,8 +73,11 @@ t_error_code	env_initenv(char ***env, char **envp)
 	i = 0;
 	if (!envp)
 		return (tab_create(env, 1));
-	esize = tab_count(envp);
-	err = tab_create(env, esize);
+	else
+	{
+		esize = tab_count(envp);
+		err = tab_create(env, esize);
+	}
 	if (SUCCESS != err)
 		return (err);
 	*(*env + esize) = NULL;

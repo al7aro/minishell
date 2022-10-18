@@ -20,5 +20,6 @@ t_error_code	new_var(char ***env, char *key, char *value);
 t_bool			is_key(char *env, char *key);
 char			*get_value(char *env_var);
 void			fill_mem(char **to_empty, char **new_element);
+t_bool			is_key_valid(char *key);
 
 #endif
