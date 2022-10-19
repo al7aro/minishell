@@ -32,8 +32,8 @@ void	test_expander(void)
 	str = expander_expand_var(sp.envp, "\'Na\"me\' is $NAME");
 	CU_ASSERT_STRING_EQUAL(str, "Na\"me is ALVARO LOPEZ");
 	free(str);
-	str = expander_expand_var(sp.envp, "Yo\'\'\'ur name is $PATH :D $PWD $OLD_PWD");
-	CU_ASSERT_STRING_EQUAL(str, "Yo\'ur name is /bin/ :D ~/ ~/Documents/");
+	str = expander_expand_var(sp.envp, "Yo\'\'\'ur is $PATH :D $PWD $OLD_PWD");
+	CU_ASSERT_STRING_EQUAL(str, "Yo\'ur is /bin/ :D ~/ ~/Documents/");
 	free(str);
 	str = expander_expand_var(sp.envp, "$PWD");
 	CU_ASSERT_STRING_EQUAL(str, "~/");

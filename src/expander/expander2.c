@@ -12,7 +12,6 @@
 
 #include "expander.h"
 
-
 static char	*remove_pair_from_str(char *str, char *c1, char *c2)
 {
 	size_t	len;
@@ -29,7 +28,7 @@ static char	*remove_pair_from_str(char *str, char *c1, char *c2)
 	i = 0;
 	while (*(str + i))
 	{
-		if (str + i !=  c1 && str + i != c2)
+		if (str + i != c1 && str + i != c2)
 		{
 			*(ret + i_ret) = *(str + i);
 			i_ret++;
