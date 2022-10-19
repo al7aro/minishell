@@ -83,5 +83,5 @@ char	*expander_expand_var(char **env, char *str)
 		free(tmp);
 		i += var_len;
 	}
-	return (ret);
+	return (expander_remove_quotes(ret));
 }
