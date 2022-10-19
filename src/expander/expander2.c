@@ -18,9 +18,7 @@ static char	*remove_pair_from_str(char *str, char *c1, char *c2)
 	size_t	i;
 	size_t	i_ret;
 	char	*ret;
-	char	*tmp;
 
-	tmp = str;
 	len = ft_strlen(str) - 2;
 	ret = (char *)malloc(sizeof(char) * len);
 	*(ret + len) = 0;
@@ -28,14 +26,14 @@ static char	*remove_pair_from_str(char *str, char *c1, char *c2)
 	i = 0;
 	while (*(str + i))
 	{
-		if (str + i != c1 && str + i != c2)
+		if (str + i != c1 && str + i != c2 && i_ret < len)
 		{
 			*(ret + i_ret) = *(str + i);
 			i_ret++;
 		}
 		i++;
 	}
-	free(tmp);
+	free(str);
 	return (ret);
 }
 
