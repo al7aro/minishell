@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/13 11:42:47 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/22 23:33:41 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MAIN_H
 
 # include <stdio.h>
+#include <fcntl.h>
 
 # include "error_code.h"
 # include "macro.h"

@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/13 11:44:45 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/22 23:33:15 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 			sp->open_pipe = TRUE;
 			continue ;
 		}
+		if (0 == **(sp->input))
+			continue ;
 		err = handle_valid_input(sp);
 	}
 	shell_op_destroy(&sp);
@@ -80,11 +82,15 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void)argv;
-	if (1 > argc)
+	t_error_code	err;
+	int				fd;
+
+	if (1 < argc)
 	{
-		printf("Can't Handle files\n");
-		return (ERROR);
+		fd = open(*(argv + 1), O_RDONLY);
+		dup2(fd, STDIN_FILENO);
+		err = internal_flow(envp, reader_get_tab_from_file);
+		close(fd);
 	}
 	return (internal_flow(envp, reader_get_tab));
 }
