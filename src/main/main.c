@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/22 23:33:15 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/23 00:14:18 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static	t_error_code	handle_valid_input(t_shell_op *sp)
 {
 	t_error_code	err;
 
+	if (0 == **(sp->input))
+		return (SUCCESS);
 	err = commander_create_cmds(sp);
 	if (SUCCESS != err)
 		return (err);
@@ -72,8 +74,6 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 			sp->open_pipe = TRUE;
 			continue ;
 		}
-		if (0 == **(sp->input))
-			continue ;
 		err = handle_valid_input(sp);
 	}
 	shell_op_destroy(&sp);
