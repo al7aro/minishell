@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:07:51 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/18 21:54:45 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:56:16 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*env_getvar(char **env, char *key)
 	while (*env)
 	{
 		if (is_key(*env, key))
-			return (ft_strdup(get_value(*env)));
+			return (get_value(*env));
 		env++;
 	}
 	return (NULL);

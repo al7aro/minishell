@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/22 20:55:45 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:59:32 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,9 @@ static int	expander_get_var(t_shell_op sp, char *str, char **ret)
 			*ret = env_getvar(sp.envp, str);
 			free(str);
 			if (!*ret)
-				*ret = ft_strdup("");
+				*ret = "";
 			if (i == 1)
-			{
-				free(*ret);
-				*ret = ft_strdup("$");
-			}
+				*ret = "$";
 			return (i - 1);
 		}
 	}
@@ -85,7 +82,6 @@ char	*expander_expand_var(t_shell_op sp, char *str)
 		{
 			var_len += expander_get_var(sp, str + i, &exp);
 			ret = ft_strjoin(tmp, exp);
-			free(exp);
 		}
 		else
 			ret = str_append_char(tmp, *(str + i));

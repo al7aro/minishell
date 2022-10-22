@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/16 10:56:40 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:58:01 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ void	test_env(void)
 	CU_ASSERT_STRING_EQUAL(*(sp.envp + 6), "KEY_8=VALUE 8");
 	tmp = env_getvar(sp.envp, "KEY_1");
 	CU_ASSERT_STRING_EQUAL(tmp, "VALUE 1");
-	free(tmp);
 	env_destroy(&(sp.envp));
 }
