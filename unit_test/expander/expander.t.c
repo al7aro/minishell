@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/22 05:58:46 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 15:59:59 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ void	test_expander(void)
 	str = expander_expand_var(sp.envp, "$PWD");
 	CU_ASSERT_STRING_EQUAL(str, "~/");
 	free(str);
-	str = expander_expand_var(sp.envp, "\"TTT\'a\'qqq\"");
-	CU_ASSERT_STRING_EQUAL(str, "TTT\'a\'qqq");
+	str = expander_expand_var(sp.envp, "\"TTT\'a\'qqq\" $ $ $");
+	CU_ASSERT_STRING_EQUAL(str, "TTT\'a\'qqq $ $ $");
 	free(str);
-	free(expander_expand_var(sp.envp, "\'Na\"me\' is $NAME"));
 	env_destroy(&(sp.envp));
 }

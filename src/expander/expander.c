@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/22 05:49:34 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:03:22 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ static int	expander_get_var(char **env, char *str, char **ret)
 			free(str);
 			if (!*ret)
 				*ret = ft_strdup("");
+			if (i == 1)
+			{
+				free(*ret);
+				*ret = ft_strdup("$");
+			}
 			return (i - 1);
 		}
 	}
