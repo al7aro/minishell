@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/12 10:05:23 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/22 05:55:59 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	test_expander(void)
 
 	env_initenv(&sp.envp, 0);
 	env_setvar(&sp.envp, "USER", "al7arolopez");
-	env_setvar(&sp.envp, "PATH", "/bin/");
 	env_setvar(&sp.envp, "NAME", "ALVARO LOPEZ");
 	env_setvar(&sp.envp, "PWD", "~/");
 	env_setvar(&sp.envp, "OLD_PWD", "~/Documents/");
@@ -32,11 +31,14 @@ void	test_expander(void)
 	str = expander_expand_var(sp.envp, "\'Na\"me\' is $NAME");
 	CU_ASSERT_STRING_EQUAL(str, "Na\"me is ALVARO LOPEZ");
 	free(str);
-	str = expander_expand_var(sp.envp, "Yo\'\'\'ur is $PATH :D $PWD $OLD_PWD");
-	CU_ASSERT_STRING_EQUAL(str, "Yo\'ur is /bin/ :D ~/ ~/Documents/");
+	str = expander_expand_var(sp.envp, "Yo\'\'\'ur is $PATH :D $PWD $K o$Lo");
+	CU_ASSERT_STRING_EQUAL(str, "Yo\'ur is  :D ~/ ALVARO LOPEZ o");
 	free(str);
 	str = expander_expand_var(sp.envp, "$PWD");
 	CU_ASSERT_STRING_EQUAL(str, "~/");
+	free(str);
+	str = expander_expand_var(sp.envp, "$PW'hola'D");
+	CU_ASSERT_STRING_EQUAL(str, "holaD");
 	free(str);
 	env_destroy(&(sp.envp));
 }

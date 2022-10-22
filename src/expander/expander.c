@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/16 10:05:41 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 05:49:34 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static t_bool	is_end_of_var_name(char c)
 		|| R_BRACKET == c
 		|| MINUS_CHAR == c
 		|| EQUAL_CHAR == c
+		|| SINGLE_QUOTE_CHAR == c
+		|| DOUBLE_QUOTE_CHAR == c
 		|| '\0' == c)
 		return (TRUE);
 	return (FALSE);
@@ -40,6 +42,8 @@ static int	expander_get_var(char **env, char *str, char **ret)
 			str = ft_substr(str, start, i - 1);
 			*ret = env_getvar(env, str);
 			free(str);
+			if (!*ret)
+				*ret = ft_strdup("");
 			return (i - 1);
 		}
 	}
