@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/22 16:03:22 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 20:55:45 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_bool	is_end_of_var_name(char c)
 	return (FALSE);
 }
 
-static int	expander_get_var(char **env, char *str, char **ret)
+static int	expander_get_var(t_shell_op sp, char *str, char **ret)
 {
 	int		i;
 	int		start;
@@ -40,7 +40,7 @@ static int	expander_get_var(char **env, char *str, char **ret)
 		if (is_end_of_var_name(*(str + i)))
 		{
 			str = ft_substr(str, start, i - 1);
-			*ret = env_getvar(env, str);
+			*ret = env_getvar(sp.envp, str);
 			free(str);
 			if (!*ret)
 				*ret = ft_strdup("");
@@ -67,7 +67,7 @@ static char	*str_append_char(char *ret, char c)
 	return (ret);
 }
 
-char	*expander_expand_var(char **env, char *str)
+char	*expander_expand_var(t_shell_op sp, char *str)
 {
 	char	*ret;
 	char	*exp;
@@ -83,7 +83,7 @@ char	*expander_expand_var(char **env, char *str)
 		tmp = ret;
 		if (EXPANDER_CHAR == *(str + i))
 		{
-			var_len += expander_get_var(env, str + i, &exp);
+			var_len += expander_get_var(sp, str + i, &exp);
 			ret = ft_strjoin(tmp, exp);
 			free(exp);
 		}
