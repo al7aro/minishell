@@ -6,7 +6,11 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/18 21:53:21 by al7aro           ###   ########.fr       */
+=======
+/*   Updated: 2022/10/20 10:31:52 by yoav             ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +28,9 @@
 # define EQUAL_CHAR			'='
 # define MINUS_CHAR			'-'
 # define EQUAL_STR			"="
+# define COLON_CHAR			':'
+# define SLASH_CHAR			'/'
+# define SLASH_STR			"/"
 # define MAIN_PROMPT		"prompt> "
 # define DQUOTE_PROMPT		"dquote> "
 # define SQUOTE_PROMPT		"quote> "

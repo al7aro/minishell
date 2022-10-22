@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/15 21:49:32 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/22 23:40:25 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include "CUnit/Basic.h"
 
+# include "env.h"
 # include "error_code.h"
 
 # define TEST_RES "unit_test_tmp.txt"
@@ -25,6 +26,7 @@
 
 extern char			**g_envp;
 
+extern CU_TestInfo	g_gnl_tests[];
 extern CU_TestInfo	g_commander_tests[];
 extern CU_TestInfo	g_executer_tests[];
 extern CU_TestInfo	g_parser_tests[];
@@ -50,8 +52,9 @@ void	test_parser_semi_redirect_error(void);
 void	test_parser_token_check(void);
 void	test_parser_bad_first_tok(void);
 
-//
+// commander
 void	test_commander(void);
+void	test_path_var_search(void);
 
 // cmd_list
 void	test_cmd_list_create_destroy(void);
@@ -65,7 +68,7 @@ void	test_laxer_check_all_tokens(void);
 
 // executer
 void	test_multi_cmd_exec(void);
-void	test_basic_executer(void);
+void	test_return_value(void);
 
 // shell_op
 void	test_shell_op_create_destroy_empty(void);
@@ -83,8 +86,11 @@ void	test_reader_fake_stdin(void);
 //expander
 void	test_expander(void);
 
-//env
+// env
 void	test_env(void);
+
+// gnl
+void	test_gnl(void);
 
 // token
 void	test_token_create_destroy(void);
