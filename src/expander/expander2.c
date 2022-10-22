@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 22:07:07 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/18 22:07:07 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/10/22 05:22:16 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*remove_pair_from_str(char *str, char *c1, char *c2)
 	char	*ret;
 
 	len = ft_strlen(str) - 2;
-	ret = (char *)malloc(sizeof(char) * len);
+	ret = (char *)malloc(sizeof(char) * len + 1);
 	*(ret + len) = 0;
 	i_ret = 0;
 	i = 0;
