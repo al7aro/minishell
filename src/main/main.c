@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/13 11:44:45 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/23 13:18:02 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,23 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_error_code	err;
+
 	(void)argv;
+	err = mini_signal_disable();
+	if (SUCCESS != err)
+		return (err);
 	if (1 > argc)
 	{
 		printf("Can't Handle files\n");
 		return (ERROR);
 	}
-	return (internal_flow(envp, reader_get_tab));
+	else
+	{
+		err = mini_signal_interactive_mode();
+		if (SUCCESS != err)
+			return (err);
+		err = internal_flow(envp, reader_get_tab);
+	}
+	return (err);
 }
