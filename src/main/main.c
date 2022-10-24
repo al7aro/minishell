@@ -91,6 +91,7 @@ int	main(int argc, char **argv, char **envp)
 		dup2(fd, STDIN_FILENO);
 		err = internal_flow(envp, reader_get_tab_from_file);
 		close(fd);
+		return (err);
 	}
 	return (internal_flow(envp, reader_get_tab));
 }
