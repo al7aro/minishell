@@ -28,17 +28,17 @@ void	test_expander(void)
 	str = expander_expand_var(sp, "Name is $USER :D\n");
 	CU_ASSERT_STRING_EQUAL(str, "Name is al7arolopez :D\n");
 	free(str);
-	str = expander_expand_var(sp, "\'Na\"me\' is $NAME");
-	CU_ASSERT_STRING_EQUAL(str, "Na\"me is ALVARO LOPEZ");
+	str = expander_expand_var(sp, "Name is $NAME");
+	CU_ASSERT_STRING_EQUAL(str, "Name is \"ALVARO\" \"LOPEZ\"");
 	free(str);
-	str = expander_expand_var(sp, "Yo\'\'\'ur is $PATH :D $PWD $K o$Lo");
-	CU_ASSERT_STRING_EQUAL(str, "Yo\'ur is  :D ~/ ALVARO LOPEZ o");
+	str = expander_expand_var(sp, "Your is $PATH :D $PWD $K o$Lo");
+	CU_ASSERT_STRING_EQUAL(str, "Your is  :D ~/ \"ALVARO\" \"LOPEZ\" o");
 	free(str);
 	str = expander_expand_var(sp, "$PWD");
 	CU_ASSERT_STRING_EQUAL(str, "~/");
 	free(str);
-	str = expander_expand_var(sp, "\"TTT\'a\'qqq\" $ $ $");
-	CU_ASSERT_STRING_EQUAL(str, "TTT\'a\'qqq $ $ $");
+	str = expander_expand_var(sp, "TTTaqqq $ $ $");
+	CU_ASSERT_STRING_EQUAL(str, "TTTaqqq $ $ $");
 	free(str);
 	env_destroy(&(sp.envp));
 }
