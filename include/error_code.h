@@ -13,7 +13,6 @@
 #ifndef ERROR_CODE_H
 # define ERROR_CODE_H
 
-# include <readline/readline.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
