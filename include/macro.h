@@ -25,6 +25,7 @@
 # define COLON_CHAR			':'
 # define SLASH_CHAR			'/'
 # define SLASH_STR			"/"
+# define QUOTE_STR			"'"
 # define MAIN_PROMPT		"prompt> "
 # define DQUOTE_PROMPT		"dquote> "
 # define SQUOTE_PROMPT		"quote> "
