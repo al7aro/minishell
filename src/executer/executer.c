@@ -21,7 +21,10 @@ t_error_code	executer_run_cmd(t_cmd *c, char **env)
 
 	if (OK != c->stt)
 	{
-		printf("file not found / no acces\n");
+		if (CMD_NOT_FOUND == c->stt)
+			error_code_print(2, EXEC_CMD_NOT_FOUND_STR, c->argv[0]);
+		else
+			error_code_print(2, EXEC_PREM_ERR_STR, c->argv[0]);
 		return (SUCCESS);
 	}
 	pid = fork();
@@ -29,7 +32,7 @@ t_error_code	executer_run_cmd(t_cmd *c, char **env)
 	{
 		stt = execve(c->exec_path, c->argv, env);
 		if (ERROR == stt)
-			printf("minishell child proc err: %s\n", strerror(errno));
+			error_code_print(3, strerror(errno), ": ", c->argv[0]);
 		return (SUCCESS);
 	}
 	else if (ERROR == pid)
@@ -43,6 +46,8 @@ t_error_code	executer_run_builtin(t_shell_op *sp, t_cmd *c)
 	t_builtin	f;
 
 	f = builtin_get_func(cmd_get_cmd(c));
+	if (!f)
+		return (NO_BUILTIN_ERROR);
 	return (f(sp, c));
 }
 
