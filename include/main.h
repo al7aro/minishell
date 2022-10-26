@@ -23,6 +23,7 @@
 # include "parser.h"
 # include "laxer.h"
 # include "shell_op.h"
+# include "mini_signal.h"
 # include "reader.h"
 # include "cleaner.h"
 

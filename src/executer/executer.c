@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:19:47 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/20 16:10:19 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/24 10:26:09 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 // TODO do something with stt = execve() on err
 // TODO err print
-t_error_code	executer_run_cmd(t_cmd *c)
+t_error_code	executer_run_cmd(t_cmd *c, char **env)
 {
 	int		stt;
 	pid_t	pid;
 
 	if (OK != c->stt)
 	{
-		printf("file not found / no acces\n");
+		if (CMD_NOT_FOUND == c->stt)
+			error_code_print(2, EXEC_CMD_NOT_FOUND_STR, c->argv[0]);
+		else
+			error_code_print(2, EXEC_PREM_ERR_STR, c->argv[0]);
 		return (SUCCESS);
 	}
 	pid = fork();
 	if (NEW_PROC == pid)
 	{
-		stt = execve(c->exec_path, c->argv, c->env);
+		stt = execve(c->exec_path, c->argv, env);
 		if (ERROR == stt)
-			printf("minishell child proc err: %s\n", strerror(errno));
+			error_code_print(3, strerror(errno), ": ", c->argv[0]);
 		return (SUCCESS);
 	}
 	else if (ERROR == pid)
@@ -43,6 +46,8 @@ t_error_code	executer_run_builtin(t_shell_op *sp, t_cmd *c)
 	t_builtin	f;
 
 	f = builtin_get_func(cmd_get_cmd(c));
+	if (!f)
+		return (NO_BUILTIN_ERROR);
 	return (f(sp, c));
 }
 
@@ -79,7 +84,7 @@ t_error_code	executer_run_all_cmds(t_shell_op *sp)
 		if (is_builtin(cmd_get_cmd(n->value)))
 			err = executer_run_builtin(sp, n->value);
 		else
-			err = executer_run_cmd(n->value);
+			err = executer_run_cmd(n->value, sp->envp);
 		n = cmd_list_get_next_cmd(n);
 	}
 	wait_all_cmds(sp);
