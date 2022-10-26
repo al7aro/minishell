@@ -47,11 +47,6 @@ static	t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
 {
 	t_error_code	err;
 
-	err = shell_op_create(&sp, envp);
-	if (SUCCESS != err)
-		return (err);
-	sp->run = TRUE;
-	env_inc_shlvl(&(sp->envp));
 	while (sp->run && SUCCESS == err)
 	{
 		err = handle_input(sp, read_func);
@@ -83,6 +78,7 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 	if (SUCCESS != err)
 		return (err);
 	sp->run = TRUE;
+	env_inc_shlvl(&(sp->envp));
 	err = internal_loop(sp, read_func);
 	shell_op_destroy(&sp);
 	return (err);
