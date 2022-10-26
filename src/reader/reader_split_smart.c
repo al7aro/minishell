@@ -105,7 +105,7 @@ t_error_code	reader_split_by_token(char *str, char ***ret)
 	if (!*str)
 	{
 		err = tab_create(ret, 1);
-		if (ERROR == err)
+		if (SUCCESS != err)
 			return (err);
 		**ret = ft_strdup("");
 		return (err);
