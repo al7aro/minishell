@@ -17,7 +17,7 @@ static void	handler_int(int sig_code)
 	(void)sig_code;
 	printf(NEW_LINE_STR);
 	rl_on_new_line();
-	// rl_replace_line("", 0);
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
