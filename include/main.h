@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/13 11:42:47 by yoav             ###   ########.fr       */
+/*   Updated: 2022/10/23 12:51:40 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "parser.h"
 # include "laxer.h"
 # include "shell_op.h"
+# include "mini_signal.h"
 # include "reader.h"
 # include "cleaner.h"
 #include "expander.h"

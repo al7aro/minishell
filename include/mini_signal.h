@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_code.h                                       :+:      :+:    :+:   */
+/*   mini_signal.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 09:45:15 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/24 11:44:04 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/23 12:26:18 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/23 13:19:49 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_CODE_H
-# define ERROR_CODE_H
+#ifndef MINI_SIGNAL_H
+# define MINI_SIGNAL_H
 
+# include <stdio.h>
 # include <readline/readline.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+# include <signal.h>
 
 # include "macro.h"
-# include "libft.h"
+# include "error_code.h"
 
-typedef enum s_error_code
-{
-	ERROR = -1,
-	SUCCESS = 0,
-	NO_BUILTIN_ERROR,
-	ALLOCATION_ERROR,
-	SYNTAX_ERROR,
-	SYNTAX_PIPE_STILL_OPEN,
-	NEW_PROC_ERROR,
-	EOF_SUCCESS,
-	SIGNAL_ERROR,
-}	t_error_code;
-
-t_error_code	error_code_print_internal_err(t_error_code err);
-void			error_code_print(int size, ...);
+t_error_code	mini_signal_interactive_mode(void);
+t_error_code	mini_signal_disable(void);
 
 #endif

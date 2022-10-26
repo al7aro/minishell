@@ -96,13 +96,20 @@ int	main(int argc, char **argv, char **envp)
 	t_error_code	err;
 
 	(void)argv;
+	err = mini_signal_disable();
+	if (SUCCESS != err)
+		return (err);
 	if (1 > argc)
 	{
 		printf("Can't Handle files\n");
 		return (ERROR);
 	}
-	err = internal_flow(envp, reader_get_tab);
-	if (err != SUCCESS)
-		return (error_code_print_internal_err(err));
-	return (SUCCESS);
+	else
+	{
+		err = mini_signal_interactive_mode();
+		if (SUCCESS != err)
+			return (err);
+		err = internal_flow(envp, reader_get_tab);
+	}
+	return (err);
 }
