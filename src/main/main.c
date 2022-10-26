@@ -52,7 +52,6 @@ static	t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
 {
 	t_error_code	err;
 
-	printf("lol"); fflush(stdout);
 	err = SUCCESS;
 	while (sp->run && SUCCESS == err)
 	{
