@@ -25,6 +25,9 @@
 # include "builtin.h"
 # include "error_code.h"
 
+# define EXEC_CMD_NOT_FOUND_STR	"command not found: "
+# define EXEC_PREM_ERR_STR		"permission denied: "
+
 t_error_code	executer_run_cmd(t_cmd *c, char **env);
 t_error_code	executer_run_all_cmds(t_shell_op *sp);
 
