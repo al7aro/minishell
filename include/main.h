@@ -26,6 +26,6 @@
 # include "cleaner.h"
 #include "expander.h"
 
-typedef t_error_code	(*t_read_input)(t_shell_op sp, char ***tab);
+typedef t_error_code	(*t_read_input)(char **env, char ***tab);
 
 #endif

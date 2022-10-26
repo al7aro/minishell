@@ -22,11 +22,11 @@
 # include "macro.h"
 # include "env.h"
 
-char	*expander_remove_line_quotes(char *str);
+char			*expander_remove_line_quotes(char *str);
 t_error_code	expander_remove_all_quotes(t_shell_op *sp);
-char	*expander_expand_var(t_shell_op sp, char *str);
-char	*str_insert_char_after(char *str, char c, size_t pos);
-t_bool	is_end_of_var_name(char c);
-t_bool	is_valid_for_expansion(char *str);
+char			*expander_expand_var(char **env, char *str);
+char			*str_insert_char_after(char *str, char c, size_t pos);
+t_bool			is_end_of_var_name(char c);
+t_bool			is_valid_for_expansion(char *str);
 
 #endif

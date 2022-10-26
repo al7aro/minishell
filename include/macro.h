@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/22 23:40:45 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:45:55 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define RL_CHAR			'<'
 # define SEMICOLON_CHAR		';'
 # define NEW_LINE_CHAR		'\n'
+# define NEW_LINE_STR		"\n"
 # define SINGLE_QUOTE_CHAR	'\''
 # define DOUBLE_QUOTE_CHAR	'\"'
 # define SPACE_CHAR			' '
@@ -27,6 +28,7 @@
 # define COLON_CHAR			':'
 # define SLASH_CHAR			'/'
 # define SLASH_STR			"/"
+# define QUOTE_STR			"'"
 # define MAIN_PROMPT		"prompt> "
 # define DQUOTE_PROMPT		"dquote> "
 # define SQUOTE_PROMPT		"quote> "

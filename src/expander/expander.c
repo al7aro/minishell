@@ -11,22 +11,61 @@
 /* ************************************************************************** */
 
 #include "expander.h"
-#include <string.h>
+#include "reader.h"
 
-static t_bool	is_end_of_var_name(char c)
+// TODO CHECK HUGE AMMOUNT OF LEAKS
+// TODO EXPAND $?
+// TODO IMPLEMENT IT TO MAIN FLOW AND USE QUOTE REMOVAL
+
+// CALL EXPANDER JUST AFTER READLINE (INSIDE READER_GET_TAB)
+// EXPANDER SHOULD RETURN EVERYTHING AS A WORD (BETWEEN QUOTES -> "word")
+static void	str_append_char(char **str, char c, t_bool sufix)
 {
-	if (SPACE_CHAR == c
-		|| R_BRACKET == c
-		|| MINUS_CHAR == c
-		|| EQUAL_CHAR == c
-		|| SINGLE_QUOTE_CHAR == c
-		|| DOUBLE_QUOTE_CHAR == c
-		|| '\0' == c)
-		return (TRUE);
-	return (FALSE);
+	char	*ret;
+	char	*tmp;
+
+	ret = (char *)malloc(sizeof(char) + 1);
+	if (!ret)
+		return ;
+	*ret = c;
+	*(ret + 1) = 0;
+	tmp = *str;
+	if (sufix)
+		*str = ft_strjoin(*str, ret);
+	else
+		*str = ft_strjoin(ret, *str);
+	free(tmp);
+	free(ret);
 }
 
-static int	expander_get_var(t_shell_op sp, char *str, char **ret)
+static char	*word_encloser(char *str)
+{
+	char	*final_ret;
+	char	*tmp;
+	char	**ret;
+	size_t	i;
+
+	i = 0;
+	if (FALSE == is_valid_for_expansion(str))
+		return (str);
+	final_ret = ft_strdup("");
+	reader_split_by_token(str, &ret);
+	while (*(ret + i))
+	{
+ 			str_append_char((ret + i), '\"', FALSE);
+ 			str_append_char((ret + i), '\"', TRUE);
+ 			if (*(ret + i + 1))
+ 				str_append_char((ret + i), ' ', TRUE);
+ 			tmp = final_ret;
+ 			final_ret = ft_strjoin(final_ret, *(ret + i));
+ 			free(tmp);
+ 			i++;
+	}
+	free(ret);
+	return (final_ret);
+}
+
+static int	expander_get_var(char **env, char *str, char **ret)
 {
 	int		i;
 	int		start;
@@ -40,7 +79,7 @@ static int	expander_get_var(t_shell_op sp, char *str, char **ret)
 		if (is_end_of_var_name(*(str + i)))
 		{
 			str = ft_substr(str, start, i - 1);
-			*ret = env_getvar(sp.envp, str);
+			*ret = env_getvar(env, str);
 			free(str);
 			if (!*ret)
 				*ret = "";
@@ -52,19 +91,7 @@ static int	expander_get_var(t_shell_op sp, char *str, char **ret)
 	return (0);
 }
 
-static char	*str_append_char(char *ret, char c)
-{
-	char	*str;
-
-	str = (char *)malloc(sizeof(char) + 1);
-	*str = c;
-	*(str + 1) = 0;
-	ret = ft_strjoin(ret, str);
-	free(str);
-	return (ret);
-}
-
-char	*expander_expand_var(t_shell_op sp, char *str)
+char	*expander_expand_var(char **env, char *str)
 {
 	char	*ret;
 	char	*exp;
@@ -73,6 +100,8 @@ char	*expander_expand_var(t_shell_op sp, char *str)
 	int		var_len;
 
 	i = 0;
+	if (!env)
+		return (ft_strdup(str));
 	ret = ft_strdup("");
 	while (*(str + i))
 	{
@@ -80,13 +109,13 @@ char	*expander_expand_var(t_shell_op sp, char *str)
 		tmp = ret;
 		if (EXPANDER_CHAR == *(str + i))
 		{
-			var_len += expander_get_var(sp, str + i, &exp);
-			ret = ft_strjoin(tmp, exp);
+			var_len += expander_get_var(env, str + i, &exp);
+			ret = ft_strjoin(tmp, word_encloser(exp));
+			free(tmp);
 		}
 		else
-			ret = str_append_char(tmp, *(str + i));
-		free(tmp);
+			str_append_char(&ret, *(str + i), 1);
 		i += var_len;
 	}
-	return (expander_remove_quotes(ret));
+	return (ret);
 }

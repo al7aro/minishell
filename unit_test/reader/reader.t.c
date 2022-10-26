@@ -19,7 +19,7 @@ void	internal_reader_fake_stdin2(void)
 {
 	char	**tab;
 
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	CU_ASSERT_STRING_EQUAL(tab[0], "cat");
 	CU_ASSERT_STRING_EQUAL(tab[1], "other_file");
 	CU_ASSERT_STRING_EQUAL(tab[2], "|");
@@ -29,10 +29,10 @@ void	internal_reader_fake_stdin2(void)
 	CU_ASSERT_STRING_EQUAL(tab[6], "echo");
 	tab_deep_destroy(&tab);
 	printf("\n");
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	tab_deep_destroy(&tab);
 	printf("\n");
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	CU_ASSERT_STRING_EQUAL(tab[0], "opened");
 	CU_ASSERT_STRING_EQUAL(tab[1], "quote");
 	CU_ASSERT_STRING_EQUAL(tab[2], "\'textmore textpipes|red<>now \"close\'");
@@ -44,15 +44,15 @@ void	internal_reader_fake_stdin1(void)
 {
 	char	**tab;
 
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	tab_deep_destroy(&tab);
 	printf("\n");
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	CU_ASSERT_STRING_EQUAL(tab[0], "cat");
 	CU_ASSERT_STRING_EQUAL(tab[1], "file");
 	tab_deep_destroy(&tab);
 	printf("\n");
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	tab_deep_destroy(&tab);
 	printf("\n");
 }
@@ -61,7 +61,7 @@ void	internal_reader_fake_stdin0(void)
 {
 	char	**tab;
 
-	reader_get_tab(&tab);
+	reader_get_tab(NULL, &tab);
 	CU_ASSERT_STRING_EQUAL(tab[0], "echo");
 	CU_ASSERT_STRING_EQUAL(tab[1], "Hello");
 	CU_ASSERT_STRING_EQUAL(tab[2], "wasup");

@@ -51,7 +51,7 @@ static size_t	find_pair(char *pos)
 	return (0);
 }
 
-char	*expander_remove_quotes(char *str)
+char	*expander_remove_line_quotes(char *str)
 {
 	size_t	i;
 	size_t	p2;
@@ -75,4 +75,29 @@ char	*expander_remove_quotes(char *str)
 			i++;
 	}
 	return (str);
+}
+
+t_error_code	expander_remove_all_quotes(t_shell_op *sp)
+{
+	char	**input;
+	t_dll	*token_list;
+	size_t	i;
+	t_token	*t;
+
+	input = sp->input;
+	token_list = token_list_get_node(sp->token_list);
+	i = 0;
+	while (*(input + i))
+	{
+		*(input + i) = expander_remove_line_quotes(*(input + i));
+		i++;
+	}
+	i = 0;
+	while (token_list)
+	{
+		t = token_list_get_token(token_list);
+		t->value = *(input + i++);
+		token_list = token_list->next;
+	}
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/09/25 14:50:20 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/25 09:47:07 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,22 @@ static t_error_code	close_opened_quote(char **line)
 	return (SUCCESS);
 }
 
-t_error_code	reader_get_tab(char ***ret)
+t_error_code	reader_get_tab(char **env, char ***ret)
 {
 	t_error_code	err;
 	char			*line;
+	char			*tmp;
 
 	line = readline(MAIN_PROMPT);
 	if (!line)
 		return (ERROR);
+	add_history(line);
+	tmp = line;
+	line = expander_expand_var(env, line);
+	free(tmp);
 	close_opened_quote(&line);
 	if (!line)
 		return (ERROR);
-	add_history(line);
 	err = reader_split_by_token(line, ret);
 	free(line);
 	return (err);
