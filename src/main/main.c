@@ -23,7 +23,10 @@ static	t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 	if (NULL == sp->input)
 		return (EOF_SUCCESS);
 	if (!(**(sp->input)))
+	{
+		sp->last_cmd_stt = 0;
 		return (NO_INPUT);
+	}
 	err = laxer_create_token_list(sp);
 	if (SUCCESS != err)
 		return (err);
