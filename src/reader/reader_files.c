@@ -52,7 +52,10 @@ t_error_code	reader_get_tab_from_file(char ***ret)
 	if (!line)
 		return (ERROR);
 	if (!is_quote_valid(line))
+	{
+		printf("Unexpected EOF while looking for matching quote");
 		return (ERROR);
+	}
 	err = reader_split_by_token(line, ret);
 	free(line);
 	return (err);

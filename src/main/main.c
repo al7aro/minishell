@@ -26,6 +26,8 @@ static	t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 	if (SUCCESS != err)
 		return (err);
 	err = parser_check_tokens(sp);
+	if (0 == **(sp->input))
+		return (NO_INPUT);
 	return (err);
 }
 
@@ -33,8 +35,6 @@ static	t_error_code	handle_valid_input(t_shell_op *sp)
 {
 	t_error_code	err;
 
-	if (0 == **(sp->input))
-		return (SUCCESS);
 	err = commander_create_cmds(sp);
 	if (SUCCESS != err)
 		return (err);
@@ -60,7 +60,7 @@ static	t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
 			sp->open_pipe = TRUE;
 			continue ;
 		}
-		if (SYNTAX_ERROR == err)
+		if (SYNTAX_ERROR == err || NO_INPUT == err)
 		{
 			err = SUCCESS;
 			continue ;
@@ -95,20 +95,20 @@ int	main(int argc, char **argv, char **envp)
 	err = mini_signal_disable();
 	if (SUCCESS != err)
 		return (err);
+	if (!isatty(STDIN_FILENO))
+		return (internal_flow(envp, reader_get_tab_from_file));
 	if (1 < argc)
 	{
 		fd = open(*(argv + 1), O_RDONLY);
+		if (fd < 0)
+			return (fd);
 		dup2(fd, STDIN_FILENO);
 		err = internal_flow(envp, reader_get_tab_from_file);
 		close(fd);
 		return (err);
 	}
-	else
-	{
-		err = mini_signal_interactive_mode();
-		if (SUCCESS != err)
-			return (err);
-		err = internal_flow(envp, reader_get_tab);
-	}
-	return (err);
+	err = mini_signal_interactive_mode();
+	if (SUCCESS != err)
+		return (err);
+	return (internal_flow(envp, reader_get_tab));
 }
