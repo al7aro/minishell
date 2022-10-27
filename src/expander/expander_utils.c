@@ -24,16 +24,3 @@ t_bool	is_end_of_var_name(char c)
 		return (TRUE);
 	return (FALSE);
 }
-
-t_bool	is_valid_for_expansion(char *str)
-{
-	size_t	i;
-	t_bool	is_valid;
-
-	i = -1;
-	is_valid = FALSE;
-	while (*(str + ++i))
-		if (SPACE_CHAR == *(str + i))
-			is_valid = TRUE;
-	return (is_valid);
-}

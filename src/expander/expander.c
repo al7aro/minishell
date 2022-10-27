@@ -46,8 +46,6 @@ static char	*word_encloser(char *str)
 	size_t	i;
 
 	i = 0;
-	if (FALSE == is_valid_for_expansion(str))
-		return (str);
 	final_ret = ft_strdup("");
 	reader_split_by_token(str, &ret);
 	while (*(ret + i))
