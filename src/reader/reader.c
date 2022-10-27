@@ -55,18 +55,18 @@ static t_error_code	close_opened_quote(char **line)
 	return (SUCCESS);
 }
 
-t_error_code	reader_get_tab(char **env, char ***ret)
+t_error_code	reader_get_tab(t_shell_op *sp, char ***ret)
 {
 	t_error_code	err;
 	char			*line;
 	char			*tmp;
 
-	line = readline(MAIN_PROMPT);
+	line = readline(prompt_get_prompt(*sp));
 	if (!line)
 		return (ERROR);
 	add_history(line);
 	tmp = line;
-	line = expander_expand_var(env, line);
+	line = expander_expand_var(sp->envp, line);
 	free(tmp);
 	err = close_opened_quote(&line);
 	if (SUCCESS != err)

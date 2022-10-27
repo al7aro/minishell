@@ -24,10 +24,11 @@
 # include "tab.h"
 # include "macro.h"
 # include "expander.h"
+# include "prompt.h"
 
 t_error_code	reader_split_by_token(char *str, char ***ret);
-t_error_code	reader_get_tab(char **env, char ***ret);
-t_error_code	reader_get_tab_from_file(char **env, char ***ret);
+t_error_code	reader_get_tab(t_shell_op *sp, char ***ret);
+t_error_code	reader_get_tab_from_file(t_shell_op *sp, char ***ret);
 t_bool			reader_is_special(char *str);
 t_bool			reader_is_dquote(char c);
 t_bool			reader_is_squote(char c);

@@ -43,12 +43,13 @@ static t_bool	is_quote_valid(char *line)
 	return (TRUE);
 }
 
-t_error_code	reader_get_tab_from_file(char **env, char ***ret)
+t_error_code	reader_get_tab_from_file(t_shell_op *sp, char ***ret)
 {
 	t_error_code	err;
 	char			*line;
 	char			*tmp;
 
+	(void)sp;
 	line = readline(NULL);
 	if (!line)
 		return (ERROR);
@@ -58,7 +59,7 @@ t_error_code	reader_get_tab_from_file(char **env, char ***ret)
 		return (ERROR);
 	}
 	tmp = line;
-	line = expander_expand_var(env, line);
+	line = expander_expand_var(sp->envp, line);
 	free(tmp);
 	err = reader_split_by_token(line, ret);
 	free(line);

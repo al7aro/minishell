@@ -29,7 +29,8 @@
 # define SLASH_CHAR			'/'
 # define SLASH_STR			"/"
 # define QUOTE_STR			"'"
-# define MAIN_PROMPT		"prompt> "
+# define MAIN_PROMPT		"\e[0;32m➜ \e[0mmsh$ "
+# define ERROR_MAIN_PROMPT		"\e[0;31m➜ \e[0mmsh$ "
 # define DQUOTE_PROMPT		"dquote> "
 # define SQUOTE_PROMPT		"quote> "
 # define EMPTY_STRING		""

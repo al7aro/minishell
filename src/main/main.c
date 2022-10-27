@@ -17,7 +17,7 @@ static	t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 {
 	t_error_code	err;
 
-	err = read_func(sp->envp, &(sp->input));
+	err = read_func(sp, &(sp->input));
 	if (SUCCESS != err)
 		return (err);
 	if (NULL == sp->input)
