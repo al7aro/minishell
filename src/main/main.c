@@ -22,12 +22,12 @@ static	t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 		return (err);
 	if (NULL == sp->input)
 		return (EOF_SUCCESS);
+	if (!(**(sp->input)))
+		return (NO_INPUT);
 	err = laxer_create_token_list(sp);
 	if (SUCCESS != err)
 		return (err);
 	err = parser_check_tokens(sp);
-	if (0 == **(sp->input))
-		return (NO_INPUT);
 	return (err);
 }
 
@@ -95,8 +95,6 @@ int	main(int argc, char **argv, char **envp)
 	err = mini_signal_disable();
 	if (SUCCESS != err)
 		return (err);
-	if (!isatty(STDIN_FILENO))
-		return (internal_flow(envp, reader_get_tab_from_file));
 	if (1 < argc)
 	{
 		fd = open(*(argv + 1), O_RDONLY);
@@ -107,6 +105,8 @@ int	main(int argc, char **argv, char **envp)
 		close(fd);
 		return (err);
 	}
+	if (!isatty(STDIN_FILENO))
+		return (internal_flow(envp, reader_get_tab_from_file));
 	err = mini_signal_interactive_mode();
 	if (SUCCESS != err)
 		return (err);
