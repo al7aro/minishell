@@ -68,7 +68,9 @@ t_error_code	reader_get_tab(char **env, char ***ret)
 	tmp = line;
 	line = expander_expand_var(env, line);
 	free(tmp);
-	close_opened_quote(&line);
+	err = close_opened_quote(&line);
+	if (SUCCESS != err)
+		return (err);
 	if (!line)
 		return (ERROR);
 	err = reader_split_by_token(line, ret);

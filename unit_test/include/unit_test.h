@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:56:02 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/22 23:40:25 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/10/26 12:24:16 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ int		clean_suite(void);
 
 // parser
 void	test_parser_open_pipe(void);
-void	test_parser_semi_redirect_error(void);
+void	test_parser_redirect_error(void);
 void	test_parser_token_check(void);
 void	test_parser_bad_first_tok(void);
 
 // commander
 void	test_commander(void);
 void	test_path_var_search(void);
+void	test_commander_redirect(void);
 
 // cmd_list
 void	test_cmd_list_create_destroy(void);
