@@ -5,4 +5,4 @@ minishell
 *.out
 *.out.*
 *.txt
-compile_commands.json
+*.json
