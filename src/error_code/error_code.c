@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:42:34 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/24 11:44:37 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/02 12:09:13 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ t_error_code	error_code_print_internal_err(t_error_code err)
 		error_code_print_msg("NO_BUILTIN_ERROR");
 	else if (NEW_PROC_ERROR == err)
 		error_code_print_msg("NEW_PROC_ERROR");
+	else if (CLOSE_ERROR == err)
+		error_code_print_msg("CLOSE_ERROR");
+	else if (OPEN_ERROR == err)
+		error_code_print_msg("OPEN_ERROR");
 	else
 		error_code_print_msg("UNKNOWN_ERROR");
 	return (err);
