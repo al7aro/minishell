@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/11/01 22:21:15 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:55:05 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	test_expander(void)
 	env_setvar(&sp.envp, "PWD", "~/");
 	env_setvar(&sp.envp, "OLD_PWD", "~/Documents/");
 	env_setvar(&sp.envp, "K", "ALVARO LOPEZ");
-	str = expander_expand_var(sp.envp, "Name is $USER :D\n");
+	str = expander_expand_var(&sp, "Name is $USER :D\n");
 	CU_ASSERT_STRING_EQUAL(str, "Name is \"al7arolopez\" :D\n");
 	free(str);
-	str = expander_expand_var(sp.envp, "Your is $PATH :D $PWD $K o$Lo");
+	str = expander_expand_var(&sp, "Your is $PATH :D $PWD $K o$Lo");
 	str = expander_remove_line_quotes(str);
 	CU_ASSERT_STRING_EQUAL(str, "Your is  :D ~/ ALVARO LOPEZ o");
 	free(str);
-	str = expander_expand_var(sp.envp, "$PWD");
+	str = expander_expand_var(&sp, "$PWD");
 	str = expander_remove_line_quotes(str);
 	CU_ASSERT_STRING_EQUAL(str, "~/");
 	free(str);
-	str = expander_expand_var(sp.envp, "TTTaqqq $ $ $");
+	str = expander_expand_var(&sp, "TTTaqqq $ $ $");
 	str = expander_remove_line_quotes(str);
 	CU_ASSERT_STRING_EQUAL(str, "TTTaqqq $ $ $");
 	free(str);

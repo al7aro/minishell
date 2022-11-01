@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/01 22:21:28 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:35:24 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@
 # include "cleaner.h"
 # include "expander.h"
 
-typedef t_error_code	(*t_read_input)(char **env, char ***tab);
+typedef t_error_code	(*t_read_input)(t_shell_op *sp, char ***tab);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:21:18 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/22 23:28:15 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:34:02 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # include "macro.h"
 # include "expander.h"
 
+t_error_code	reader_get_tab(t_shell_op *sp, char ***ret);
+t_error_code	reader_get_tab_from_file(t_shell_op *sp, char ***ret);
 t_error_code	reader_split_by_token(char *str, char ***ret);
-t_error_code	reader_get_tab(char **env, char ***ret);
-t_error_code	reader_get_tab_from_file(char **env, char ***ret);
 t_bool			reader_is_special(char *str);
 t_bool			reader_is_dquote(char c);
 t_bool			reader_is_squote(char c);

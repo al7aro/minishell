@@ -6,18 +6,19 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/23 15:37:18 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/01 23:03:24 by r3dc4t           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include "token_list.h"
 
 // TODO SYNTAX_ERROR create error_code handler -- NO printf
 static	t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 {
 	t_error_code	err;
 
-	err = read_func(sp->envp, &(sp->input));
+	err = read_func(sp, &(sp->input));
 	if (SUCCESS != err)
 		return (err);
 	if (NULL == sp->input)

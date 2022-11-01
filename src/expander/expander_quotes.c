@@ -6,11 +6,12 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 22:07:07 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/01 22:20:43 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:09:16 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+#include "token_list.h"
 #include <stddef.h>
 
 static char	*remove_pair_from_str(char *str, char *c1, char *c2)
@@ -80,42 +81,27 @@ char	*expander_remove_line_quotes(char *str)
 	return (str);
 }
 
-static void	modify_token_list(t_shell_op *sp)
-{
-	char	**input;
-	t_dll	*token_list;
-	size_t	i;
-	t_token	*t;
-	char	*tmp;
-
-	input = sp->input;
-	token_list = token_list_get_node(sp->token_list);
-	i = 0;
-	while (token_list)
-	{
-		t = token_list_get_token(token_list);
-		tmp = t->value;
-		t->value = *(input + i++);
-		free(tmp);
-		token_list = token_list->next;
-	}
-}
-
 t_error_code	expander_remove_all_quotes(t_shell_op *sp)
 {
 	char	**input;
 	size_t	i;
-	char	*tmp;
+	// char	*tmp;
+	t_dll	*token_list;
+	t_token	*t;
 
 	input = sp->input;
+	token_list = token_list_get_node(sp->token_list);
 	i = 0;
-	while (*(input + i))
+	while (*(input + i) && token_list)
 	{
-		tmp = *(input + i);
+		// tmp = *(input + i);
 		*(input + i) = expander_remove_line_quotes(*(input + i));
-		free(tmp);
+		t = token_list_get_token(token_list);
+		t->value = *(input + i);
+		// free(tmp);
 		i++;
+		token_list = token_list->next;
 	}
-	modify_token_list(sp);
+	// modify_token_list(sp);
 	return (SUCCESS);
 }

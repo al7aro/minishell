@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/11/01 22:20:23 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:09:59 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,13 @@ static char	*word_encloser(char *str)
 	return (final_ret);
 }
 
-static int	expander_get_var(char **env, char *str, char **ret)
+static int	get_error_var(t_shell_op sp, char **ret)
+{
+	*ret = ft_itoa(sp.last_cmd_stt);
+	return (1);
+}
+
+static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 {
 	int		i;
 	int		start;
@@ -71,12 +77,14 @@ static int	expander_get_var(char **env, char *str, char **ret)
 	i = -1;
 	str_len = ft_strlen(str);
 	start = 1 + (L_BRACKET == *(str + 1));
+	if ('?' == *(str + start))
+		return (get_error_var(*sp, ret));
 	while (++i <= str_len)
 	{
 		if (is_end_of_var_name(*(str + i)))
 		{
 			str = ft_substr(str, start, i - 1);
-			*ret = env_getvar(env, str);
+			*ret = env_getvar(sp->envp, str);
 			free(str);
 			if (!*ret)
 				*ret = "";
@@ -88,7 +96,7 @@ static int	expander_get_var(char **env, char *str, char **ret)
 	return (0);
 }
 
-char	*expander_expand_var(char **env, char *str)
+char	*expander_expand_var(t_shell_op *sp, char *str)
 {
 	char	*ret;
 	char	*exp;
@@ -98,7 +106,7 @@ char	*expander_expand_var(char **env, char *str)
 	char	*tmp2;
 
 	i = 0;
-	if (!env)
+	if (!(sp->envp))
 		return (ft_strdup(str));
 	ret = ft_strdup("");
 	while (*(str + i))
@@ -107,7 +115,7 @@ char	*expander_expand_var(char **env, char *str)
 		tmp = ret;
 		if (EXPANDER_CHAR == *(str + i))
 		{
-			var_len += expander_get_var(env, str + i, &exp);
+			var_len += expander_get_var(sp, str + i, &exp);
 			tmp2 = word_encloser(exp);
 			ret = ft_strjoin(tmp, tmp2);
 			free(tmp2);
