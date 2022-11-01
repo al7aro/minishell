@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/10/25 09:47:07 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:56:11 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_error_code	close_opened_quote(char **line)
 	return (SUCCESS);
 }
 
-t_error_code	reader_get_tab(char **env, char ***ret)
+t_error_code	reader_get_tab(t_shell_op *sp, char ***ret)
 {
 	t_error_code	err;
 	char			*line;
@@ -65,10 +65,14 @@ t_error_code	reader_get_tab(char **env, char ***ret)
 	if (!line)
 		return (ERROR);
 	add_history(line);
-	tmp = line;
-	line = expander_expand_var(env, line);
-	free(tmp);
 	err = close_opened_quote(&line);
+	tmp = line;
+	if (sp)
+	{
+		tmp = line;
+		line = expander_expand_var(sp, line);
+		free(tmp);
+	}
 	if (SUCCESS != err)
 		return (err);
 	if (!line)
