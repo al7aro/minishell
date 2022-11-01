@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 22:07:07 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/01 23:09:16 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:22:55 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ t_error_code	expander_remove_all_quotes(t_shell_op *sp)
 {
 	char	**input;
 	size_t	i;
-	// char	*tmp;
 	t_dll	*token_list;
 	t_token	*t;
 
@@ -94,14 +93,11 @@ t_error_code	expander_remove_all_quotes(t_shell_op *sp)
 	i = 0;
 	while (*(input + i) && token_list)
 	{
-		// tmp = *(input + i);
 		*(input + i) = expander_remove_line_quotes(*(input + i));
 		t = token_list_get_token(token_list);
 		t->value = *(input + i);
-		// free(tmp);
 		i++;
 		token_list = token_list->next;
 	}
-	// modify_token_list(sp);
 	return (SUCCESS);
 }
