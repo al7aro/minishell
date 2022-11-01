@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 00:12:34 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:21:28 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "mini_signal.h"
 # include "reader.h"
 # include "cleaner.h"
-#include "expander.h"
+# include "expander.h"
 
 typedef t_error_code	(*t_read_input)(char **env, char ***tab);
 

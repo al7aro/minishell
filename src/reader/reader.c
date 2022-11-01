@@ -65,10 +65,10 @@ t_error_code	reader_get_tab(char **env, char ***ret)
 	if (!line)
 		return (ERROR);
 	add_history(line);
+	err = close_opened_quote(&line);
 	tmp = line;
 	line = expander_expand_var(env, line);
 	free(tmp);
-	err = close_opened_quote(&line);
 	if (SUCCESS != err)
 		return (err);
 	if (!line)

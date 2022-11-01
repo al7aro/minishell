@@ -6,12 +6,13 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/22 23:59:32 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:20:23 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 #include "reader.h"
+#include "tab.h"
 
 // TODO CHECK HUGE AMMOUNT OF LEAKS
 // TODO EXPAND $?
@@ -19,23 +20,21 @@
 
 // CALL EXPANDER JUST AFTER READLINE (INSIDE READER_GET_TAB)
 // EXPANDER SHOULD RETURN EVERYTHING AS A WORD (BETWEEN QUOTES -> "word")
-static void	str_append_char(char **str, char c, t_bool sufix)
+static char	*str_append_char(char **str, char c, t_bool sufix)
 {
 	char	*ret;
-	char	*tmp;
+	char	*app;
 
-	ret = (char *)malloc(sizeof(char) + 1);
-	if (!ret)
-		return ;
-	*ret = c;
-	*(ret + 1) = 0;
-	tmp = *str;
+	app = (char *)malloc(sizeof(char) * 2);
+	*app = c;
+	*(app + 1) = 0;
 	if (sufix)
-		*str = ft_strjoin(*str, ret);
+		ret = ft_strjoin(*str, app);
 	else
-		*str = ft_strjoin(ret, *str);
-	free(tmp);
-	free(ret);
+		ret = ft_strjoin(app, *str);
+	free(*str);
+	free(app);
+	return (ret);
 }
 
 static char	*word_encloser(char *str)
@@ -50,16 +49,16 @@ static char	*word_encloser(char *str)
 	reader_split_by_token(str, &ret);
 	while (*(ret + i))
 	{
- 			str_append_char((ret + i), '\"', FALSE);
- 			str_append_char((ret + i), '\"', TRUE);
- 			if (*(ret + i + 1))
- 				str_append_char((ret + i), ' ', TRUE);
- 			tmp = final_ret;
- 			final_ret = ft_strjoin(final_ret, *(ret + i));
- 			free(tmp);
- 			i++;
+		*(ret + i) = str_append_char((ret + i), '\"', FALSE);
+		*(ret + i) = str_append_char((ret + i), '\"', TRUE);
+		if (*(ret + i + 1))
+			*(ret + i) = str_append_char((ret + i), ' ', TRUE);
+		tmp = final_ret;
+		final_ret = ft_strjoin(final_ret, *(ret + i));
+		free(tmp);
+		i++;
 	}
-	free(ret);
+	tab_deep_destroy(&ret);
 	return (final_ret);
 }
 
@@ -96,6 +95,7 @@ char	*expander_expand_var(char **env, char *str)
 	char	*tmp;
 	int		i;
 	int		var_len;
+	char	*tmp2;
 
 	i = 0;
 	if (!env)
@@ -108,11 +108,13 @@ char	*expander_expand_var(char **env, char *str)
 		if (EXPANDER_CHAR == *(str + i))
 		{
 			var_len += expander_get_var(env, str + i, &exp);
-			ret = ft_strjoin(tmp, word_encloser(exp));
+			tmp2 = word_encloser(exp);
+			ret = ft_strjoin(tmp, tmp2);
+			free(tmp2);
 			free(tmp);
 		}
 		else
-			str_append_char(&ret, *(str + i), 1);
+			ret = str_append_char(&ret, *(str + i), 1);
 		i += var_len;
 	}
 	return (ret);
