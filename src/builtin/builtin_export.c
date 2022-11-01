@@ -6,7 +6,7 @@
 /*   By: r3dc4t <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:01:18 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/11/02 00:25:50 by r3dc4t           ###   ########.fr       */
+/*   Updated: 2022/11/02 00:41:52 by r3dc4t           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_bool	str_is_valid(char *str)
 
 static char	*get_expanded_var(char *str)
 {
-	return (ft_strdup(str));
+	return (str);
 }
 
 t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
