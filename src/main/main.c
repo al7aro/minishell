@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/01 23:03:24 by r3dc4t           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:26:17 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static	t_error_code	handle_valid_input(t_shell_op *sp)
 	t_error_code	err;
 
 	err = commander_create_cmds(sp);
+	if (SUCCESS != err)
+		return (err);
+	err = redirecter_setup_files(sp);
 	if (SUCCESS != err)
 		return (err);
 	err = executer_run_all_cmds(sp);
