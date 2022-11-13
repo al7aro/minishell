@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/11/01 23:32:10 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/13 19:54:52 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 	start = 1 + (L_BRACKET == *(str + 1));
 	i += (start > 1);
 	if ('?' == *(str + start))
-		return (get_error_var(*sp, ret));
+		return (get_error_var(*sp, ret) + (2 * !!start));
 	while (++i <= str_len)
 	{
 		if (is_end_of_var_name(*(str + i)))
@@ -87,11 +87,9 @@ static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 			str = ft_substr(str, start, i - start);
 			*ret = env_getvar(sp->envp, str);
 			free(str);
-			if (!*ret)
-				*ret = "";
-			if (i == 1)
+			if (!*ret || i == 1)
 				*ret = "$";
-			return (i - start);
+			return (i * !(**ret == '$' || i == 1));
 		}
 	}
 	return (0);
@@ -104,11 +102,11 @@ char	*expander_expand_var(t_shell_op *sp, char *str)
 	char	*tmp;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (!(sp->envp))
 		return (ft_strdup(str));
 	ret = ft_strdup("");
-	while (*(str + i))
+	while (*(str + ++i))
 	{
 		tmp = ret;
 		if (EXPANDER_CHAR == *(str + i))
@@ -121,7 +119,6 @@ char	*expander_expand_var(t_shell_op *sp, char *str)
 		}
 		else
 			ret = str_append_char(&ret, *(str + i), 1);
-		i++;
 	}
 	return (ret);
 }
