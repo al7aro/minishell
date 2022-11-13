@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/24 11:45:55 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/13 18:26:11 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@
 # define SLASH_CHAR			'/'
 # define SLASH_STR			"/"
 # define QUOTE_STR			"'"
-# define MAIN_PROMPT		"prompt> "
-# define DQUOTE_PROMPT		"dquote> "
-# define SQUOTE_PROMPT		"quote> "
+# define MAIN_PROMPT		"\e[0mprompt> "
+# define DQUOTE_PROMPT		"\e[0mdquote> "
+# define SQUOTE_PROMPT		"\e[0mquote> "
 # define EMPTY_STRING		""
 # define NEW_PROC			0
 # define EXPANDER_CHAR		'$'
 # define R_BRACKET			')'
 # define L_BRACKET			'('
-# define MINISHELL_STR		"minishell"
+# define MINISHELL_STR		"\e[0mminishell"
 
 typedef enum e_bool
 {
