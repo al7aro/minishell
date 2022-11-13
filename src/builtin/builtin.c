@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:17:05 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/02 00:37:25 by r3dc4t           ###   ########.fr       */
+/*   Updated: 2022/11/13 12:54:47 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	is_builtin(char *word)
 t_builtin	builtin_get_func(char *word)
 {
 	if (!ft_strcmp(word, BUILTIN_ECHO_STR))
-		return (builtin_cd);
+		return (builtin_echo);
 	if (!ft_strcmp(word, BUILTIN_CD_STR))
 		return (builtin_cd);
 	if (!ft_strcmp(word, BUILTIN_PWD_STR))
@@ -42,9 +42,9 @@ t_builtin	builtin_get_func(char *word)
 	if (!ft_strcmp(word, BUILTIN_EXPORT_STR))
 		return (builtin_export);
 	if (!ft_strcmp(word, BUILTIN_UNSET_STR))
-		return (builtin_export);
+		return (builtin_unset);
 	if (!ft_strcmp(word, BUILTIN_ENV_STR))
-		return (builtin_export);
+		return (builtin_env);
 	if (!ft_strcmp(word, BUILTIN_EXIT_STR))
 		return (builtin_exit);
 	return (NULL);
