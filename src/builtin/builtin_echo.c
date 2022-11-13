@@ -6,7 +6,7 @@
 /*   By: r3dc4t <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:39:25 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/11/13 13:05:16 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/13 19:17:39 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	print_string(char **tab, t_bool nl)
 {
 	int	i;
-	
+
 	i = 0;
 	while (*(tab + i))
 		printf("%s", *(tab + i++));
@@ -27,7 +27,6 @@ static void	print_string(char **tab, t_bool nl)
 t_error_code	builtin_echo(t_shell_op *sp, t_cmd *c)
 {
 	(void)sp;
-	(void)c;
 	if (!*(c->argv + 1))
 	{
 		printf("\n");
