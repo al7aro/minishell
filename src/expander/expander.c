@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/11/13 20:07:30 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:13:36 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,36 +62,30 @@ static char	*word_encloser(char *str)
 	return (final_ret);
 }
 
-static int	get_error_var(t_shell_op sp, char **ret)
-{
-	*ret = ft_itoa(sp.last_cmd_stt);
-	return (1);
-}
-
 static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 {
 	int		i;
-	int		start;
 	int		str_len;
 
 	i = -1;
 	str_len = ft_strlen(str);
-	start = 1 + (L_BRACKET == *(str + 1));
-	i += (start > 1);
-	if ('?' == *(str + start))
-		return (get_error_var(*sp, ret) + (start * (start == 2)));
+	if ('?' == *(str + 1))
+	{
+		*ret = ft_itoa(sp->last_cmd_stt);
+		return (1);
+	}
 	while (++i <= str_len)
 	{
 		if (is_end_of_var_name(*(str + i)))
 		{
-			str = ft_substr(str, start, i - start);
+			str = ft_substr(str, 1, i - 1);
 			*ret = env_getvar(sp->envp, str);
 			free(str);
 			if (!*ret)
 				*ret = "";
 			if (i == 1)
 				*ret = "$";
-			return (i - (start * (start != 2)));
+			return (i - 1);
 		}
 	}
 	return (0);
