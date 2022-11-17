@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_minishell_no_env.c                             :+:      :+:    :+:   */
+/*   init_pipe_tests.t.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 15:11:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 15:39:27 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/12 16:22:13 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/31 10:07:35 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "unit_test.h"
 
-int	main(void)
+CU_TestInfo	g_pipe_tests[] = {
 {
-	static char	*args[2];
-
-	args[0] = "./minishell";
-	args[1] = 0;
-	execve(args[0], args, NULL);
-}
+	"test_pipe_create_destroy",
+	test_pipe_create_destroy,
+},
+{
+	"test_pipe_open_close",
+	test_pipe_open_close,
+},
+	CU_TEST_INFO_NULL,
+};

@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/14 13:21:32 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:51:45 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define R_BRACKET			')'
 # define L_BRACKET			'('
 # define MINISHELL_STR		"\e[0mminishell"
+# define EXEC_CMD_NOT_FOUND_STR	"command not found: "
+# define EXEC_PREM_ERR_STR		"permission denied: "
+# define PIPE_READ				0
+# define PIPE_WRITE				1
 
 typedef enum e_bool
 {

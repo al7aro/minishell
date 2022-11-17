@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirecter.h                                       :+:      :+:    :+:   */
+/*   piper.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 12:30:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/31 16:01:28 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/30 15:32:26 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/01 11:31:19 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTER_H
-# define REDIRECTER_H
+#ifndef PIPER_H
+# define PIPER_H
 
-# include <errno.h>
 # include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <string.h>
-# include <fcntl.h>
 
+# include "pipe_list.h"
 # include "dup_wrapper.h"
-# include "open_wrapper.h"
+# include "pipe_pair.h"
 # include "shell_op.h"
-# include "redirect_util.h"
+# include "cmd_list.h"
 # include "cmd.h"
+# include "error_code.h"
+# include "macro.h"
 
-void			redirecter_init_redirect(t_cmd *c, char *symbol, char *path);
-t_error_code	redirecter_setup_files(t_shell_op *sp);
-t_error_code	redirecter_child_dup_if_needed(t_cmd *c);
+t_error_code	piper_init_pipes(t_shell_op *sp);
+t_error_code	piper_close_pipes(t_shell_op *sp);
+t_error_code	piper_child_dup_if_needed(t_cmd *c);
+
+// is
+t_bool			is_one_cmd(t_dll *n);
+t_bool			is_first_cmd(t_dll *n);
 
 #endif

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_minishell_no_env.c                             :+:      :+:    :+:   */
+/*   piper_is.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 15:11:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 15:39:27 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/30 15:34:51 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/30 16:06:31 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "piper.h"
 
-int	main(void)
+t_bool	is_one_cmd(t_dll *n)
 {
-	static char	*args[2];
+	return (!n->prev && !n->next);
+}
 
-	args[0] = "./minishell";
-	args[1] = 0;
-	execve(args[0], args, NULL);
+t_bool	is_first_cmd(t_dll *n)
+{
+	return (!n->prev && n->next);
 }

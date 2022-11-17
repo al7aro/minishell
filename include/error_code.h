@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:45:15 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/02 14:28:45 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:48:02 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum s_error_code
 	NO_INPUT,
 	SIGNAL_ERROR,
 	OPEN_ERROR,
+	CLOSE_ERROR,
 }	t_error_code;
 
 t_error_code	error_code_print_internal_err(t_error_code err);

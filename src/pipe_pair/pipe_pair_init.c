@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_minishell_no_env.c                             :+:      :+:    :+:   */
+/*   pipe_pair_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 15:11:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 15:39:27 by yoav             ###   ########.fr       */
+/*   Created: 2022/11/02 12:19:20 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 12:19:25 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "pipe_pair.h"
 
-int	main(void)
+void	pipe_pair_init_in(t_pipe_pair *pp, int fd)
 {
-	static char	*args[2];
+	t_pipe	*p;
 
-	args[0] = "./minishell";
-	args[1] = 0;
-	execve(args[0], args, NULL);
+	p = pp->in;
+	pipe_init(p, PIPE_IN, fd);
+}
+
+void	pipe_pair_init_out(t_pipe_pair *pp, int fd)
+{
+	t_pipe	*p;
+
+	p = pp->out;
+	pipe_init(p, PIPE_OUT, fd);
 }
