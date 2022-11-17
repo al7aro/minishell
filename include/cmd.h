@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:46:10 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 04:15:16 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 06:14:35 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "pipe_pair.h"
 # include "tab.h"
 # include "macro.h"
-# include "heredoc.h"
+# include "heredoc_utils.h"
 
 typedef enum e_cmd_stt
 {
