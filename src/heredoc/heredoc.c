@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 07:03:32 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:06:53 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,18 @@ t_error_code	heredoc_handle_heredoc(t_shell_op sp, t_cmd *c)
 	size_t	i;
 
 	pipe(pipe_ends);
-	if (fork() == 0)
+	close(pipe_ends[0]);
+	i = -1;
+	final_line = ft_strdup("");
+	while (*(c->heredoc + ++i) && heredoc_line(&l, *(c->heredoc + i), sp))
 	{
-		close(pipe_ends[0]);
-		i = -1;
-		final_line = ft_strdup("");
-		while (*(c->heredoc + ++i) && heredoc_line(&l, *(c->heredoc + i), sp))
-		{
-			tmp = final_line;
-			final_line = ft_strjoin(final_line, l);
-			free(tmp);
-			free(l);
-		}
-		write(pipe_ends[1], final_line, ft_strlen(final_line));
-		free(final_line);
-		exit(0);
+		tmp = final_line;
+		final_line = ft_strjoin(final_line, l);
+		free(tmp);
+		free(l);
 	}
+	write(pipe_ends[1], final_line, ft_strlen(final_line));
+	free(final_line);
 	close(pipe_ends[1]);
 	dup_wrapper(pipe_ends[0], STDIN_FILENO);
 	wait(NULL);

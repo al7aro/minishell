@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:26:18 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 14:56:43 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:06:15 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # include "macro.h"
 # include "error_code.h"
-# include "shell_op.h"
 
 t_error_code	mini_signal_interactive_mode(void);
 t_error_code	mini_signal_disable(void);
