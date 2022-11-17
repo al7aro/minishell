@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 06:54:43 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:27:04 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@
 # define MAIN_PROMPT		"\e[0mprompt> "
 # define DQUOTE_PROMPT		"\e[0mdquote> "
 # define SQUOTE_PROMPT		"\e[0mquote> "
-# define HEREDOC_PROMPT		"\e[0mheredoc> "
-# define PIPE_HEREDOC_PROMPT	"\e[0mpipe heredoc> "
+# define HEREDOC_PROMPT		"\e[0m> "
 # define EMPTY_STRING		""
 # define NEW_PROC			0
 # define EXPANDER_CHAR		'$'
