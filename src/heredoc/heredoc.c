@@ -6,20 +6,24 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 06:27:26 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 06:56:23 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
 
-t_bool	heredoc_line(char **line, char *eol)
+t_bool	heredoc_line(char **line, char *eol, t_shell_op sp)
 {
 	char	*str;
 	char	*tmp;
+	char	*prompt;
 
+	prompt = HEREDOC_PROMPT;
+	if (!sp.pipe_list)
+		prompt = PIPE_HEREDOC_PROMPT;
 	if (!eol)
 		return (FALSE);
-	str = readline(HEREDOC_PROMPT);
+	str = readline(prompt);
 	*line = ft_strdup("");
 	while (ft_strcmp(str, eol))
 	{
@@ -30,7 +34,7 @@ t_bool	heredoc_line(char **line, char *eol)
 		tmp = *line;
 		*line = ft_strjoin(*line, "\n");
 		free(tmp);
-		str = readline(HEREDOC_PROMPT);
+		str = readline(prompt);
 	}
 	return (TRUE);
 }
@@ -47,12 +51,12 @@ void	heredoc_tab_destroy(char ***heredoc_tab)
 	tab_shallow_destroy(heredoc_tab);
 }
 
-t_error_code	heredoc_handle_heredoc(t_cmd *c)
+t_error_code	heredoc_handle_heredoc(t_shell_op sp, t_cmd *c)
 {
 	int		pipe_ends[2];
 	char	*final_line;
 	char	*tmp;
-	char	*line;
+	char	*l;
 	size_t	i;
 
 	pipe(pipe_ends);
@@ -61,12 +65,12 @@ t_error_code	heredoc_handle_heredoc(t_cmd *c)
 		close(pipe_ends[0]);
 		i = -1;
 		final_line = ft_strdup("");
-		while (*(c->heredoc + ++i) && heredoc_line(&line, *(c->heredoc + i)))
+		while (*(c->heredoc + ++i) && heredoc_line(&l, *(c->heredoc + i), sp))
 		{
 			tmp = final_line;
-			final_line = ft_strjoin(final_line, line);
+			final_line = ft_strjoin(final_line, l);
 			free(tmp);
-			free(line);
+			free(l);
 		}
 		write(pipe_ends[1], final_line, ft_strlen(final_line));
 		exit(0);

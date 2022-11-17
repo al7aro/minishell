@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:19:47 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 06:20:54 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 06:49:59 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_error_code	executer_child_logic(t_shell_op *sp, t_cmd *c)
 		return (error_code_print_internal_err(err));
 	if (c->heredoc)
 	{
-		err = heredoc_handle_heredoc(c);
+		err = heredoc_handle_heredoc(*sp, c);
 		if (SUCCESS != err)
 			return (error_code_print_internal_err(err));
 	}

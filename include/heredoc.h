@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:23:44 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 06:27:44 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 06:49:27 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include "cmd.h"
 # include "dup_wrapper.h"
 
-t_bool			heredoc_line(char **line, char *eol);
-t_error_code	heredoc_handle_heredoc(t_cmd *c);
+t_error_code	heredoc_handle_heredoc(t_shell_op sp, t_cmd *c);
 
 #endif
