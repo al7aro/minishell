@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 06:56:23 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 07:03:32 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_error_code	heredoc_handle_heredoc(t_shell_op sp, t_cmd *c)
 			free(l);
 		}
 		write(pipe_ends[1], final_line, ft_strlen(final_line));
+		free(final_line);
 		exit(0);
 	}
 	close(pipe_ends[1]);
