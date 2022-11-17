@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/02 12:20:47 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:43:44 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static	t_error_code	handle_valid_input(t_shell_op *sp)
 	err = redirecter_setup_files(sp);
 	if (SUCCESS != err)
 		return (err);
+	err = piper_init_pipes(sp);
+	if (SUCCESS != err)
+		return (err);
 	err = executer_run_all_cmds(sp);
 	if (SUCCESS != err)
 		return (err);
@@ -77,7 +80,7 @@ static	t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
 		if (SUCCESS == err)
 			err = handle_valid_input(sp);
 	}
-	return (SUCCESS);
+	return (err);
 }
 
 // TODO reader should handle open pipe then FALSE it
@@ -96,6 +99,7 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 	return (err);
 }
 
+// TODO error class
 int	main(int argc, char **argv, char **envp)
 {
 	t_error_code	err;
@@ -109,7 +113,9 @@ int	main(int argc, char **argv, char **envp)
 		fd = open(*(argv + 1), O_RDONLY);
 		if (fd < 0)
 			return (fd);
-		dup2(fd, STDIN_FILENO);
+		err = dup_wrapper(fd, STDIN_FILENO);
+		if (SUCCESS != err)
+			return (err);
 		err = internal_flow(envp, reader_get_tab_from_file);
 		close(fd);
 		return (err);

@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirecter_tests.t.c                          :+:      :+:    :+:   */
+/*   init_pipe_pair_tests.t.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/11/02 12:21:24 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 12:21:25 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_test.h"
 
-CU_TestInfo	g_redirecter_tests[] = {
+CU_TestInfo	g_pipe_pair_tests[] = {
 {
-	"test_redirecter_in",
-	test_redirecter_in,
+	"test_pipe_pair_create_destroy",
+	test_pipe_pair_create_destroy,
 },
 {
-	"test_redirecter_append",
-	test_redirecter_append,
-},
-{
-	"test_redirecter_no_cmd",
-	test_redirecter_no_cmd,
-},
-{
-	"test_redirecter_multi",
-	test_redirecter_multi,
-},
-{
-	"test_redirecter_out",
-	test_redirecter_out,
+	"test_pipe_pair_open_close",
+	test_pipe_pair_open_close,
 },
 	CU_TEST_INFO_NULL,
 };

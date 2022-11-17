@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/04 15:19:46 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 01:43:29 by alopez-g         ###   ########.fr       */
+/*   Created: 2022/10/30 15:10:10 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 11:54:10 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-
-# include <stdio.h>
-# include <fcntl.h>
+#ifndef PIPE_H
+# define PIPE_H
 
 # include "error_code.h"
 # include "macro.h"
-# include "executer.h"
-# include "commander.h"
-# include "parser.h"
-# include "laxer.h"
-# include "shell_op.h"
-# include "mini_signal.h"
-# include "reader.h"
-# include "piper.h"
-# include "cleaner.h"
-# include "expander.h"
 
-typedef t_error_code	(*t_read_input)(t_shell_op *sp, char ***tab);
+typedef enum e_pipe_type
+{
+	PIPE_ERROR = 0,
+	PIPE_IN = 1,
+	PIPE_OUT = 2,
+}	t_pipe_type;
+
+typedef struct s_pipe
+{
+	t_bool		on;
+	t_pipe_type	type;
+	int			fd;
+}	t_pipe;
+
+t_error_code	pipe_create(t_pipe **ret);
+void			pipe_destroy(t_pipe **obj);
+void			pipe_init(t_pipe *p, t_pipe_type t, int fd);
+t_error_code	pipe_close(t_pipe *p);
 
 #endif

@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirecter_tests.t.c                          :+:      :+:    :+:   */
+/*   pipe_pair_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/11/02 12:19:20 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 12:19:25 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#include "pipe_pair.h"
 
-CU_TestInfo	g_redirecter_tests[] = {
+void	pipe_pair_init_in(t_pipe_pair *pp, int fd)
 {
-	"test_redirecter_in",
-	test_redirecter_in,
-},
+	t_pipe	*p;
+
+	p = pp->in;
+	pipe_init(p, PIPE_IN, fd);
+}
+
+void	pipe_pair_init_out(t_pipe_pair *pp, int fd)
 {
-	"test_redirecter_append",
-	test_redirecter_append,
-},
-{
-	"test_redirecter_no_cmd",
-	test_redirecter_no_cmd,
-},
-{
-	"test_redirecter_multi",
-	test_redirecter_multi,
-},
-{
-	"test_redirecter_out",
-	test_redirecter_out,
-},
-	CU_TEST_INFO_NULL,
-};
+	t_pipe	*p;
+
+	p = pp->out;
+	pipe_init(p, PIPE_OUT, fd);
+}
