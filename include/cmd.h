@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:46:10 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 01:41:57 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 04:15:16 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "pipe_pair.h"
 # include "tab.h"
 # include "macro.h"
+# include "heredoc.h"
 
 typedef enum e_cmd_stt
 {
@@ -44,6 +45,7 @@ typedef struct s_cmd
 	pid_t			pid;
 	int				builtin_ret_val;
 	t_redirect_list	*redirect;
+	char			**heredoc;
 	t_pipe_pair		*pp;
 }	t_cmd;
 

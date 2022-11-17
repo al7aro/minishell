@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:30:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/31 16:01:28 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/17 04:08:58 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "shell_op.h"
 # include "redirect_util.h"
 # include "cmd.h"
+# include "heredoc.h"
 
 void			redirecter_init_redirect(t_cmd *c, char *symbol, char *path);
 t_error_code	redirecter_setup_files(t_shell_op *sp);
