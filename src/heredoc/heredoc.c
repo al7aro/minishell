@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 15:28:21 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:58:57 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_error_code	heredoc_handle_heredoc(t_cmd *c)
 	size_t	i;
 
 	pipe(pipe_ends);
-	close(pipe_ends[0]);
 	i = -1;
 	final_line = ft_strdup("");
 	while (*(c->heredoc + ++i) && heredoc_line(&l, *(c->heredoc + i)))
