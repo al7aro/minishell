@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 15:27:04 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:31:13 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SLASH_CHAR			'/'
 # define SLASH_STR			"/"
 # define QUOTE_STR			"'"
-# define MAIN_PROMPT		"\e[0mprompt> "
+# define MAIN_PROMPT		"\e[0mmsh$ "
 # define DQUOTE_PROMPT		"\e[0mdquote> "
 # define SQUOTE_PROMPT		"\e[0mquote> "
 # define HEREDOC_PROMPT		"\e[0m> "
