@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_minishell_no_env.c                             :+:      :+:    :+:   */
+/*   dup_wrapper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 15:11:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 15:39:27 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/31 15:57:09 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 12:18:45 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "dup_wrapper.h"
 
-int	main(void)
+t_error_code	dup_wrapper(int oldfd, int newfd)
 {
-	static char	*args[2];
-
-	args[0] = "./minishell";
-	args[1] = 0;
-	execve(args[0], args, NULL);
+	if (ERROR == dup2(oldfd, newfd))
+		return (ERROR);
+	return (SUCCESS);
 }

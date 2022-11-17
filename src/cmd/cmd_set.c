@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_minishell_no_env.c                             :+:      :+:    :+:   */
+/*   cmd_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 15:11:20 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 15:39:27 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/18 15:45:35 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 11:54:48 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "cmd.h"
 
-int	main(void)
+void	cmd_set_pipe_in(t_cmd *c, int fd)
 {
-	static char	*args[2];
+	pipe_pair_init_in(c->pp, fd);
+}
 
-	args[0] = "./minishell";
-	args[1] = 0;
-	execve(args[0], args, NULL);
+void	cmd_set_pipe_out(t_cmd *c, int fd)
+{
+	pipe_pair_init_out(c->pp, fd);
 }

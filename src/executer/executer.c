@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:19:47 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/26 18:54:31 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/02 17:21:14 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,15 @@
 
 // TODO do something with stt = execve() on err
 // TODO err print
-t_error_code	executer_run_cmd(t_cmd *c, char **env)
+t_error_code	executer_run_cmd(t_shell_op *sp, t_cmd *c)
 {
-	int		stt;
 	pid_t	pid;
 
 	if (OK != c->stt)
-	{
-		if (CMD_NOT_FOUND == c->stt)
-			error_code_print(2, EXEC_CMD_NOT_FOUND_STR, c->argv[0]);
-		else
-			error_code_print(2, EXEC_PREM_ERR_STR, c->argv[0]);
 		return (SUCCESS);
-	}
 	pid = fork();
 	if (NEW_PROC == pid)
-	{
-		redirecter_child_dup_if_needed(c);
-		stt = execve(c->exec_path, c->argv, env);
-		if (ERROR == stt)
-			error_code_print(3, strerror(errno), ": ", c->argv[0]);
-		return (SUCCESS);
-	}
+		return (executer_child_logic(sp, c));
 	else if (ERROR == pid)
 		return (NEW_PROC_ERROR);
 	c->pid = pid;
@@ -46,6 +33,8 @@ t_error_code	executer_run_builtin(t_shell_op *sp, t_cmd *c)
 {
 	t_builtin	f;
 
+	if (OK != c->stt)
+		return (SUCCESS);
 	f = builtin_get_func(cmd_get_cmd(c));
 	if (!f)
 		return (NO_BUILTIN_ERROR);
@@ -85,9 +74,12 @@ t_error_code	executer_run_all_cmds(t_shell_op *sp)
 		if (is_builtin(cmd_get_cmd(n->value)))
 			err = executer_run_builtin(sp, n->value);
 		else
-			err = executer_run_cmd(n->value, sp->envp);
+			err = executer_run_cmd(sp, n->value);
 		n = cmd_list_get_next_cmd(n);
 	}
+	if (SUCCESS != err)
+		return (err);
+	piper_close_pipes(sp);
 	wait_all_cmds(sp);
 	return (err);
 }

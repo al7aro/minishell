@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:17:05 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/13 12:54:47 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:50:09 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_bool	is_builtin(char *word)
 {
 	int	ret;
 
+	if (!word)
+		return (FALSE);
 	ret = TRUE;
 	ret *= ft_strcmp(word, BUILTIN_ECHO_STR);
 	ret *= ft_strcmp(word, BUILTIN_CD_STR);
@@ -33,6 +35,8 @@ t_bool	is_builtin(char *word)
 
 t_builtin	builtin_get_func(char *word)
 {
+	if (!word)
+		return (NULL);
 	if (!ft_strcmp(word, BUILTIN_ECHO_STR))
 		return (builtin_echo);
 	if (!ft_strcmp(word, BUILTIN_CD_STR))
