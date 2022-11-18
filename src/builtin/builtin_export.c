@@ -6,7 +6,7 @@
 /*   By: r3dc4t <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:01:18 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/11/02 00:41:52 by r3dc4t           ###   ########.fr       */
+/*   Updated: 2022/11/18 23:38:36 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static t_bool	key_is_valid(char *str)
 {
 	while (*str)
 	{
-		if (*str == SPACE_CHAR
-			|| *str == SINGLE_QUOTE_CHAR
+		if (*str == SINGLE_QUOTE_CHAR
 			|| *str == DOUBLE_QUOTE_CHAR)
 			return (FALSE);
 		str++;

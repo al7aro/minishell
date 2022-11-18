@@ -6,7 +6,7 @@
 /*   By: r3dc4t <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:39:25 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/11/13 19:17:39 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/18 23:48:59 by alopez-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	print_string(char **tab, t_bool nl)
 
 	i = 0;
 	while (*(tab + i))
-		printf("%s", *(tab + i++));
+		printf("%s ", *(tab + i++));
+	printf("\b");
 	if (nl)
 		printf("\n");
 }
