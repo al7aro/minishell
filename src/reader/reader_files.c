@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:28:27 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/22 23:28:37 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 13:09:17 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,18 @@ t_error_code	reader_get_tab_from_file(char ***ret)
 	}
 	err = reader_split_by_token(line, ret);
 	free(line);
+	return (err);
+}
+
+t_error_code	reader_get_tab_from_cli(char ***ret, char *line)
+{
+	t_error_code	err;
+
+	if (!is_quote_valid(line))
+	{
+		printf("Unexpected EOF while looking for matching quote");
+		return (ERROR);
+	}
+	err = reader_split_by_token(line, ret);
 	return (err);
 }

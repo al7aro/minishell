@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/02 17:21:18 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/20 13:10:08 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,15 @@ static	t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 {
 	t_error_code	err;
 
-	err = read_func(&(sp->input));
+	if (!read_func)
+	{
+		if (!sp->cli)
+			return (EOF_SUCCESS);
+		err = reader_get_tab_from_cli(&(sp->input), sp->cli);
+		sp->cli = NULL;
+	}
+	else
+		err = read_func(&(sp->input));
 	if (SUCCESS != err)
 		return (err);
 	if (NULL == sp->input)
@@ -78,7 +86,7 @@ static	t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
 }
 
 // TODO reader should handle open pipe then FALSE it
-static t_error_code	internal_flow(char **envp, t_read_input read_func)
+static t_error_code	internal_flow(char **argv, char **envp, t_read_input read_func)
 {
 	t_error_code	err;
 	t_shell_op		*sp;
@@ -88,10 +96,13 @@ static t_error_code	internal_flow(char **envp, t_read_input read_func)
 		return (err);
 	sp->run = TRUE;
 	env_inc_shlvl(&(sp->envp));
+	if (argv)
+		sp->cli = argv[2];
 	err = internal_loop(sp, read_func);
 	shell_op_destroy(&sp);
 	return (err);
 }
+
 
 // TODO error class
 int	main(int argc, char **argv, char **envp)
@@ -102,6 +113,11 @@ int	main(int argc, char **argv, char **envp)
 	err = mini_signal_disable();
 	if (SUCCESS != err)
 		return (err);
+	if (argc >= 3 && !ft_strcmp(argv[1], "-c"))
+	{
+		err = internal_flow(argv, envp, NULL);
+		exit (err);
+	}
 	if (1 < argc)
 	{
 		fd = open(*(argv + 1), O_RDONLY);
@@ -110,14 +126,14 @@ int	main(int argc, char **argv, char **envp)
 		err = dup_wrapper(fd, STDIN_FILENO);
 		if (SUCCESS != err)
 			return (err);
-		err = internal_flow(envp, reader_get_tab_from_file);
+		err = internal_flow(NULL, envp, reader_get_tab_from_file);
 		close(fd);
 		return (err);
 	}
 	if (!isatty(STDIN_FILENO))
-		return (internal_flow(envp, reader_get_tab_from_file));
+		return (internal_flow(NULL, envp, reader_get_tab_from_file));
 	err = mini_signal_interactive_mode();
 	if (SUCCESS != err)
 		return (err);
-	return (internal_flow(envp, reader_get_tab));
+	return (internal_flow(NULL, envp, reader_get_tab));
 }
