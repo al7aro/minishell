@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 01:48:18 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:29:48 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # define EXEC_PREM_ERR_STR		"permission denied: "
 # define PIPE_READ				0
 # define PIPE_WRITE				1
+# define PWD_VAR			"PWD"
+# define OLDPWD_VAR			"OLDPWD"
+# define HOME_VAR			"HOME"
 
 typedef enum e_bool
 {
