@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 01:46:32 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:53:35 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define EMPTY_STRING		""
 # define NEW_PROC			0
 # define EXPANDER_CHAR		'$'
+# define EXPANDER_STRING	"$"
+# define QUESTION_MARK_CHAR	'?'
 # define R_BRACKET			')'
 # define L_BRACKET			'('
 # define MINISHELL_STR		"minishell"

@@ -6,7 +6,7 @@
 /*   By: alopez-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/11/20 17:16:30 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:55:06 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 #include "reader.h"
 #include "tab.h"
 
-// TODO CHECK HUGE AMMOUNT OF LEAKS
-// TODO EXPAND $?
-// TODO IMPLEMENT IT TO MAIN FLOW AND USE QUOTE REMOVAL
-
-// CALL EXPANDER JUST AFTER READLINE (INSIDE READER_GET_TAB)
-// EXPANDER SHOULD RETURN EVERYTHING AS A WORD (BETWEEN QUOTES -> "word")
 static char	*str_append_char(char **str, char c, t_bool sufix)
 {
 	char	*ret;
@@ -46,14 +40,14 @@ static char	*word_encloser(char *str)
 	size_t	i;
 
 	i = 0;
-	final_ret = ft_strdup("");
+	final_ret = ft_strdup(EMPTY_STRING);
 	reader_split_by_token(str, &ret);
 	while (*(ret + i))
 	{
-		*(ret + i) = str_append_char((ret + i), '\"', FALSE);
-		*(ret + i) = str_append_char((ret + i), '\"', TRUE);
+		*(ret + i) = str_append_char((ret + i), DOUBLE_QUOTE_CHAR, FALSE);
+		*(ret + i) = str_append_char((ret + i), DOUBLE_QUOTE_CHAR, TRUE);
 		if (*(ret + i + 1))
-			*(ret + i) = str_append_char((ret + i), ' ', TRUE);
+			*(ret + i) = str_append_char((ret + i), SPACE_CHAR, TRUE);
 		tmp = final_ret;
 		final_ret = ft_strjoin(final_ret, *(ret + i));
 		free(tmp);
@@ -70,7 +64,7 @@ static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 
 	i = -1;
 	str_len = ft_strlen(str);
-	if ('?' == *(str + 1))
+	if (QUESTION_MARK_CHAR == *(str + 1))
 	{
 		*ret = ft_itoa(sp->last_cmd_stt);
 		return (1);
@@ -83,9 +77,9 @@ static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 			*ret = env_getvar(sp->envp, str);
 			free(str);
 			if (!*ret)
-				*ret = "";
+				*ret = EMPTY_STRING;
 			if (i == 1)
-				*ret = "$";
+				*ret = EXPANDER_STRING;
 			return (i - 1);
 		}
 	}
@@ -94,7 +88,7 @@ static int	expander_get_var(t_shell_op *sp, char *str, char **ret)
 
 static	t_bool	inside_quote(t_bool flag, char c)
 {
-	if (c == '\"')
+	if (c == DOUBLE_QUOTE_CHAR)
 		return (!flag);
 	return (flag);
 }
@@ -109,7 +103,7 @@ char	*expander_expand_var(t_shell_op *sp, char *str)
 
 	expand = TRUE;
 	i = -1;
-	ret = ft_strdup("");
+	ret = ft_strdup(EMPTY_STRING);
 	while (*(str + ++i) && (sp->envp))
 	{
 		expand = inside_quote(expand, *(str + i));
