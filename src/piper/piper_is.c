@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirecter_tests.t.c                          :+:      :+:    :+:   */
+/*   piper_is.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/30 15:34:51 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/30 16:06:31 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#include "piper.h"
 
-CU_TestInfo	g_redirecter_tests[] = {
+t_bool	is_one_cmd(t_dll *n)
 {
-	"test_redirecter_in",
-	test_redirecter_in,
-},
+	return (!n->prev && !n->next);
+}
+
+t_bool	is_first_cmd(t_dll *n)
 {
-	"test_redirecter_append",
-	test_redirecter_append,
-},
-{
-	"test_redirecter_no_cmd",
-	test_redirecter_no_cmd,
-},
-{
-	"test_redirecter_multi",
-	test_redirecter_multi,
-},
-{
-	"test_redirecter_out",
-	test_redirecter_out,
-},
-	CU_TEST_INFO_NULL,
-};
+	return (!n->prev && n->next);
+}

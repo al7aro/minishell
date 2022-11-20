@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirecter_tests.t.c                          :+:      :+:    :+:   */
+/*   dup_wrapper.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/31 15:58:41 by yoav              #+#    #+#             */
+/*   Updated: 2022/10/31 15:59:13 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#ifndef DUP_WRAPPER_H
+# define DUP_WRAPPER_H
 
-CU_TestInfo	g_redirecter_tests[] = {
-{
-	"test_redirecter_in",
-	test_redirecter_in,
-},
-{
-	"test_redirecter_append",
-	test_redirecter_append,
-},
-{
-	"test_redirecter_no_cmd",
-	test_redirecter_no_cmd,
-},
-{
-	"test_redirecter_multi",
-	test_redirecter_multi,
-},
-{
-	"test_redirecter_out",
-	test_redirecter_out,
-},
-	CU_TEST_INFO_NULL,
-};
+# include <unistd.h>
+
+# include "error_code.h"
+
+t_error_code	dup_wrapper(int oldfd, int newfd);
+
+#endif

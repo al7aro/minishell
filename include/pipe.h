@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirecter_tests.t.c                          :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/30 15:10:10 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 11:54:10 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#ifndef PIPE_H
+# define PIPE_H
 
-CU_TestInfo	g_redirecter_tests[] = {
+# include "error_code.h"
+# include "macro.h"
+
+typedef enum e_pipe_type
 {
-	"test_redirecter_in",
-	test_redirecter_in,
-},
+	PIPE_ERROR = 0,
+	PIPE_IN = 1,
+	PIPE_OUT = 2,
+}	t_pipe_type;
+
+typedef struct s_pipe
 {
-	"test_redirecter_append",
-	test_redirecter_append,
-},
-{
-	"test_redirecter_no_cmd",
-	test_redirecter_no_cmd,
-},
-{
-	"test_redirecter_multi",
-	test_redirecter_multi,
-},
-{
-	"test_redirecter_out",
-	test_redirecter_out,
-},
-	CU_TEST_INFO_NULL,
-};
+	t_bool		on;
+	t_pipe_type	type;
+	int			fd;
+}	t_pipe;
+
+t_error_code	pipe_create(t_pipe **ret);
+void			pipe_destroy(t_pipe **obj);
+void			pipe_init(t_pipe *p, t_pipe_type t, int fd);
+t_error_code	pipe_close(t_pipe *p);
+
+#endif

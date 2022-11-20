@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirecter_tests.t.c                          :+:      :+:    :+:   */
+/*   dup_wrapper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 16:25:13 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/31 15:57:09 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/02 12:18:45 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_test.h"
+#include "dup_wrapper.h"
 
-CU_TestInfo	g_redirecter_tests[] = {
+t_error_code	dup_wrapper(int oldfd, int newfd)
 {
-	"test_redirecter_in",
-	test_redirecter_in,
-},
-{
-	"test_redirecter_append",
-	test_redirecter_append,
-},
-{
-	"test_redirecter_no_cmd",
-	test_redirecter_no_cmd,
-},
-{
-	"test_redirecter_multi",
-	test_redirecter_multi,
-},
-{
-	"test_redirecter_out",
-	test_redirecter_out,
-},
-	CU_TEST_INFO_NULL,
-};
+	if (ERROR == dup2(oldfd, newfd))
+		return (ERROR);
+	return (SUCCESS);
+}
