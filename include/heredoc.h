@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:23:44 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 15:28:33 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:22:11 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEREDOC_H
 # define HEREDOC_H
 
+#include <sys/types.h>
+#include <sys/wait.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
