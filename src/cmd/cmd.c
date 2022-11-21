@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:45:35 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 04:14:37 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:53:38 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	cmd_destroy(t_cmd **cmd)
 	}
 	if (c->redirect)
 		redirect_list_destroy(&(c->redirect));
-	if (c->heredoc)
-		heredoc_tab_destroy(&(c->heredoc));
 	if (c->pp)
 		pipe_pair_destroy(&(c->pp));
 	ft_bzero(c, sizeof(t_cmd));
