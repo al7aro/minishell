@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 12:25:24 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/20 12:34:01 by yoav             ###   ########.fr       */
+/*   Updated: 2022/11/21 18:02:54 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_error_code	parser_check_tokens(t_shell_op *sp)
 	while (SUCCESS == err && node)
 	{
 		err = is_token_valid(node, &i);
-		if (SUCCESS	== err)
+		if (SUCCESS == err)
 			node = get_next_node(node, i);
 	}
 	if (SYNTAX_ERROR == err)

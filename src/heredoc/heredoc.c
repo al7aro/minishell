@@ -6,19 +6,20 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/21 13:51:45 by al7aro-g         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:03:57 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
+#include "libft.h"
 
-t_bool	heredoc_line(char **line, char *eol)
+void	heredoc_line(char **line, char *eol)
 {
 	char	*str;
 	char	*tmp;
 
 	if (!eol)
-		return (FALSE);
+		return ;
 	str = readline(HEREDOC_PROMPT);
 	*line = ft_strdup("");
 	while (ft_strcmp(str, eol))
@@ -32,7 +33,6 @@ t_bool	heredoc_line(char **line, char *eol)
 		free(tmp);
 		str = readline(HEREDOC_PROMPT);
 	}
-	return (TRUE);
 }
 
 void	heredoc_tab_destroy(char ***heredoc_tab)
@@ -40,22 +40,34 @@ void	heredoc_tab_destroy(char ***heredoc_tab)
 	tab_shallow_destroy(heredoc_tab);
 }
 
-t_error_code	heredoc_handle_heredoc(t_cmd *c)
+#include <time.h>
+char	*heredoc_get_temp_path(char *eol)
 {
-	char	*final_line;
-	char	*tmp;
-	char	*l;
-	size_t	i;
+	char	*path;
+	char	*aux;
+	int		n;
 
-	i = -1;
-	final_line = ft_strdup("");
-	while (*(c->heredoc + ++i) && heredoc_line(&l, *(c->heredoc + i)))
-	{
-		tmp = final_line;
-		final_line = ft_strjoin(final_line, l);
-		free(tmp);
-		free(l);
-	}
-	free(final_line);
-	return (SUCCESS);
+	(void)eol;
+	srand(time(NULL));
+	n = rand();
+	aux = ft_itoa(n);
+	path = ft_strjoin("/tmp/hd_file", aux);
+	free(aux);
+	return (path);
+}
+
+char	*heredoc_handle_heredoc(char *eol)
+{
+	char	*line;
+	char	*tmp_path;
+	int		fd;
+
+	tmp_path = heredoc_get_temp_path(eol);
+	line = ft_strdup("");
+	heredoc_line(&line, eol);
+	fd = open(tmp_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	write(fd, line, ft_strlen(line));
+	close(fd);
+	free(line);
+	return (tmp_path);
 }
