@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:29:37 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 04:31:21 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:51:23 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,4 @@ void	redirecter_init_redirect(t_cmd *c, char *symbol, char *path)
 		redirect_list_add(c->redirect, path, IN);
 	else if (is_drr(symbol))
 		redirect_list_add(c->redirect, path, APPEND);
-	else if (is_drl(symbol))
-		heredoc_tab_add_heredoc(&c->heredoc, path);
 }

@@ -6,7 +6,7 @@
 /*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/17 15:58:57 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:51:45 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ t_bool	heredoc_line(char **line, char *eol)
 	return (TRUE);
 }
 
-void	heredoc_tab_add_heredoc(char ***heredoc_tab, char *value)
-{
-	if (!*heredoc_tab)
-		tab_create(heredoc_tab, 1);
-	tab_add(heredoc_tab, value);
-}
-
 void	heredoc_tab_destroy(char ***heredoc_tab)
 {
 	tab_shallow_destroy(heredoc_tab);
@@ -49,13 +42,11 @@ void	heredoc_tab_destroy(char ***heredoc_tab)
 
 t_error_code	heredoc_handle_heredoc(t_cmd *c)
 {
-	int		pipe_ends[2];
 	char	*final_line;
 	char	*tmp;
 	char	*l;
 	size_t	i;
 
-	pipe(pipe_ends);
 	i = -1;
 	final_line = ft_strdup("");
 	while (*(c->heredoc + ++i) && heredoc_line(&l, *(c->heredoc + i)))
@@ -65,10 +56,6 @@ t_error_code	heredoc_handle_heredoc(t_cmd *c)
 		free(tmp);
 		free(l);
 	}
-	write(pipe_ends[1], final_line, ft_strlen(final_line));
 	free(final_line);
-	close(pipe_ends[1]);
-	dup_wrapper(pipe_ends[0], STDIN_FILENO);
-	wait(NULL);
 	return (SUCCESS);
 }

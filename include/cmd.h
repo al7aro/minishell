@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:46:10 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 06:14:35 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:51:57 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_cmd
 	pid_t			pid;
 	int				builtin_ret_val;
 	t_redirect_list	*redirect;
-	char			**heredoc;
 	t_pipe_pair		*pp;
 }	t_cmd;
 

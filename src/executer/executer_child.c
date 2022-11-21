@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 12:19:47 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 15:28:45 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:49:09 by al7aro-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ t_error_code	executer_child_logic(t_shell_op *sp, t_cmd *c)
 	err = redirecter_child_dup_if_needed(c);
 	if (SUCCESS != err)
 		return (error_code_print_internal_err(err));
-	if (c->heredoc)
-	{
-		err = heredoc_handle_heredoc(c);
-		if (SUCCESS != err)
-			return (error_code_print_internal_err(err));
-	}
 	stt = execve(c->exec_path, c->argv, sp->envp);
 	if (ERROR == stt)
 		error_code_print(3, strerror(errno), ": ", cmd_get_cmd(c));
