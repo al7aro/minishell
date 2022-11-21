@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:46:29 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/21 18:00:11 by al7aro           ###   ########.fr       */
+/*   Updated: 2022/11/21 18:06:46 by al7aro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	redirect_init(t_redirect *r, char *path, t_redirect_type t)
 void	redirect_destroy(t_redirect **r)
 {
 	if (HEREDOC == (*r)->type)
+	{
+		unlink((*r)->path);
 		free((*r)->path);
+	}
 	if (ERROR != (*r)->fd)
 		close((*r)->fd);
 	ft_bzero(*r, sizeof(t_redirect));
