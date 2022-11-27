@@ -26,6 +26,7 @@ typedef enum e_cmd_stt
 {
 	OK = 0,
 	CMD_NOT_FOUND,
+	CMD_IS_DIR,
 	PREM_DENIED,
 	CMD_EMPTY,
 	REDIRECT_ERROR,

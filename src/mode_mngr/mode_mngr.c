@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_get.c                                          :+:      :+:    :+:   */
+/*   mode_mngr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 13:54:54 by yrabby            #+#    #+#             */
-/*   Updated: 2022/11/21 11:38:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/24 12:19:47 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/20 17:09:59 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
+#include "mode_mngr.h"
 
-t_dll	*dll_get_last_elem(t_dll *lst)
+t_bool	mode_mngr_is_cli(int argc, char **argv)
 {
-	register t_dll	*next;
-
-	if (!lst)
-		return (NULL);
-	next = lst->next;
-	while (next)
-	{
-		lst = next;
-		next = lst->next;
-	}
-	return (lst);
+	return (argc >= 3 && !ft_strcmp(argv[1], C_FLAG_STR));
 }
 
-int	dll_is_first_elem(t_dll *lst)
+t_bool	mode_mngr_is_file(int argc)
 {
-	if (!lst)
-		return (FALSE);
-	return (NULL == lst->prev);
+	return (1 < argc);
+}
+
+t_bool	mode_mngr_is_stdin(void)
+{
+	return (!isatty(STDIN_FILENO));
 }

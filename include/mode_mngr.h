@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_get.c                                          :+:      :+:    :+:   */
+/*   mode_mngr.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 13:54:54 by yrabby            #+#    #+#             */
-/*   Updated: 2022/11/21 11:38:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/11/20 16:46:11 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/20 17:10:02 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
+#ifndef MODE_MNGR_H
+# define MODE_MNGR_H
 
-t_dll	*dll_get_last_elem(t_dll *lst)
-{
-	register t_dll	*next;
+# include <unistd.h>
 
-	if (!lst)
-		return (NULL);
-	next = lst->next;
-	while (next)
-	{
-		lst = next;
-		next = lst->next;
-	}
-	return (lst);
-}
+# include "libft.h"
+# include "macro.h"
 
-int	dll_is_first_elem(t_dll *lst)
-{
-	if (!lst)
-		return (FALSE);
-	return (NULL == lst->prev);
-}
+t_bool	mode_mngr_is_cli(int argc, char **argv);
+t_bool	mode_mngr_is_file(int argc);
+t_bool	mode_mngr_is_stdin(void);
+
+#endif

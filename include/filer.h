@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll_get.c                                          :+:      :+:    :+:   */
+/*   filer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 13:54:54 by yrabby            #+#    #+#             */
-/*   Updated: 2022/11/21 11:38:34 by yoav             ###   ########.fr       */
+/*   Created: 2022/11/03 09:35:56 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/03 10:50:31 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
+#ifndef FILER_H
+# define FILER_H
 
-t_dll	*dll_get_last_elem(t_dll *lst)
-{
-	register t_dll	*next;
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <unistd.h>
 
-	if (!lst)
-		return (NULL);
-	next = lst->next;
-	while (next)
-	{
-		lst = next;
-		next = lst->next;
-	}
-	return (lst);
-}
+# include "error_code.h"
+# include "macro.h"
 
-int	dll_is_first_elem(t_dll *lst)
-{
-	if (!lst)
-		return (FALSE);
-	return (NULL == lst->prev);
-}
+t_bool	filer_is_executable(char *path);
+t_bool	filer_is_dir(char *path);
+t_bool	filer_is_file(char *path);
+t_bool	filer_is_exec_prem(char *path);
+
+#endif
