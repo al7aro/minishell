@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/01 22:56:11 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:35:50 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_error_code	close_opened_quote(char **line)
 	return (SUCCESS);
 }
 
-t_error_code	reader_get_tab(t_shell_op *sp, char ***ret)
+t_error_code	reader_get_tab(t_shell_op *sp)
 {
 	t_error_code	err;
 	char			*line;
@@ -77,7 +77,8 @@ t_error_code	reader_get_tab(t_shell_op *sp, char ***ret)
 		return (err);
 	if (!line)
 		return (ERROR);
-	err = reader_split_by_token(line, ret);
+	add_history(line);
+	err = reader_split_by_token(line, &(sp->input));
 	free(line);
 	return (err);
 }

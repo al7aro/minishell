@@ -19,14 +19,16 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# include "shell_op.h"
 # include "error_code.h"
 # include "libft.h"
 # include "tab.h"
 # include "macro.h"
 # include "expander.h"
 
-t_error_code	reader_get_tab(t_shell_op *sp, char ***ret);
-t_error_code	reader_get_tab_from_file(t_shell_op *sp, char ***ret);
+t_error_code	reader_get_tab(t_shell_op *sp);
+t_error_code	reader_get_tab_from_file(t_shell_op *sp);
+t_error_code	reader_get_tab_from_cli(t_shell_op *sp);
 t_error_code	reader_split_by_token(char *str, char ***ret);
 t_bool			reader_is_special(char *str);
 t_bool			reader_is_dquote(char c);
