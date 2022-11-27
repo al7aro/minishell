@@ -34,6 +34,7 @@
 # define SQUOTE_PROMPT		"quote> "
 # define EMPTY_STRING		""
 # define NEW_PROC			0
+# define C_FLAG_STR				"-c"
 # define EXPANDER_CHAR		'$'
 # define EXPANDER_STRING	"$"
 # define QUESTION_MARK_CHAR	'?'
@@ -42,6 +43,7 @@
 # define MINISHELL_STR		"minishell"
 # define EXEC_CMD_NOT_FOUND_STR	"command not found: "
 # define EXEC_PREM_ERR_STR		"permission denied: "
+# define EXEC_DIR_ERR_STR		": Is a directory"
 # define PIPE_READ				0
 # define PIPE_WRITE				1
 

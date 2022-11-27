@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_test_util.h                                   :+:      :+:    :+:   */
+/*   mode_mngr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 10:20:37 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/22 11:06:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/09/24 12:19:47 by yoav              #+#    #+#             */
+/*   Updated: 2022/11/20 17:09:59 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UNIT_TEST_UTIL_H
-# define UNIT_TEST_UTIL_H
+#include "mode_mngr.h"
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+t_bool	mode_mngr_is_cli(int argc, char **argv)
+{
+	return (argc >= 3 && !ft_strcmp(argv[1], C_FLAG_STR));
+}
 
-# include "libft.h"
-# include "tab.h"
-# include "error_code.h"
-# include "unit_test.h"
+t_bool	mode_mngr_is_file(int argc)
+{
+	return (1 < argc);
+}
 
-char	**util_create_tab(int size, ...);
-void	util_check_file_and_remove(char *filename);
-void	util_read_msg_from_read(char *file, char *msg);
-
-#endif
+t_bool	mode_mngr_is_stdin(void)
+{
+	return (!isatty(STDIN_FILENO));
+}
