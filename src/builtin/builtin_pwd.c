@@ -23,6 +23,7 @@ t_error_code	builtin_pwd(t_shell_op *sp, t_cmd *c)
 		return (SUCCESS);
 	}
 	c->builtin_ret_val = 0;
-	printf("%s\n", env_getvar(sp->envp, "PWD"));
+	ft_putstr_fd(env_getvar(sp->envp, "PWD"), c->out_stream);
+	ft_putstr_fd("\n", c->out_stream);
 	return (SUCCESS);
 }

@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include "libft.h"
 
 t_error_code	builtin_exit(t_shell_op *sp, t_cmd *c)
 {
-	(void)c;
 	sp->run = FALSE;
 	c->builtin_ret_val = SUCCESS;
+	ft_putstr_fd("exit\n", c->out_stream);
 	return (SUCCESS);
 }

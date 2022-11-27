@@ -11,17 +11,16 @@
 /* ************************************************************************** */
 
 #include "builtin.h"
-#include <stdio.h>
 
-static void	print_string(char **tab, t_bool nl)
+static void	print_string(char **tab, t_bool nl, int fd)
 {
 	int	i;
 
 	i = 0;
 	while (*(tab + i))
-		printf("%s", *(tab + i++));
+		ft_putstr_fd(*(tab + i++), fd);
 	if (nl)
-		printf("\n");
+		ft_putstr_fd("\n", fd);
 }
 
 t_error_code	builtin_echo(t_shell_op *sp, t_cmd *c)
@@ -29,13 +28,13 @@ t_error_code	builtin_echo(t_shell_op *sp, t_cmd *c)
 	(void)sp;
 	if (!*(c->argv + 1))
 	{
-		printf("\n");
+		ft_putstr_fd("\n", c->out_stream);
 		return (SUCCESS);
 	}
 	if (!ft_strcmp(*(c->argv + 1), "-n"))
-		print_string(c->argv + 2, 0);
+		print_string(c->argv + 2, 0, c->out_stream);
 	else
-		print_string(c->argv + 1, 1);
+		print_string(c->argv + 1, 1, c->out_stream);
 	c->builtin_ret_val = 0;
 	return (SUCCESS);
 }
