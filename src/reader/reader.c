@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "reader.h"
+#include "expander.h"
 
 static t_bool	is_quote_closed(char *str)
 {
@@ -59,25 +60,16 @@ t_error_code	reader_get_tab(t_shell_op *sp)
 {
 	t_error_code	err;
 	char			*line;
-	char			*tmp;
 
 	line = readline(MAIN_PROMPT);
 	if (!line)
 		return (ERROR);
 	add_history(line);
 	err = close_opened_quote(&line);
-	tmp = line;
-	if (sp)
-	{
-		tmp = line;
-		line = expander_expand_var(sp, line);
-		free(tmp);
-	}
 	if (SUCCESS != err)
 		return (err);
 	if (!line)
 		return (ERROR);
-	add_history(line);
 	err = reader_split_by_token(line, &(sp->input));
 	free(line);
 	return (err);

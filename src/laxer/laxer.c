@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "laxer.h"
+#include "expander.h"
 
 t_error_code	laxer_create_token(t_token_list *tok_lst, char *s)
 {
@@ -43,6 +44,7 @@ t_error_code	laxer_create_token_list(t_shell_op *sp)
 	while (sp->input[i])
 	{
 		err = laxer_create_token(sp->token_list, sp->input[i]);
+		sp->input[i] = expander_expand_var(sp, sp->input[i]);
 		if (SUCCESS != err)
 		{
 			token_list_destroy(&(sp->token_list));
