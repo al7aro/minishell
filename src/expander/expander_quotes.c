@@ -95,7 +95,6 @@ t_error_code	expander_remove_all_quotes(t_shell_op *sp)
 	{
 		*(input + i) = expander_remove_line_quotes(*(input + i));
 		t = token_list_get_token(token_list);
-		free(t->value);
 		t->value = *(input + i);
 		i++;
 		token_list = token_list->next;
