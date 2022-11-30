@@ -11,15 +11,37 @@
 /* ************************************************************************** */
 
 #include "laxer.h"
+#include "expander.h"
 
-t_error_code	laxer_create_token(t_token_list *tok_lst, char *s)
+static	t_bool	able_to_expand(t_token_list *tok_lst)
 {
+	t_token	*tok;
+
+	tok = token_list_get_token(dll_get_last_elem(token_list_get_node(tok_lst)));
+	if (!tok)
+		return (TRUE);
+	if (REDIRECT == tok->type)
+		return (FALSE);
+	return (TRUE);
+}
+
+static t_error_code	laxer_create_token(t_shell_op *sp, char **s)
+{
+	t_token_list	*tok_lst;
 	t_error_code	err;
 	t_token_type	type;
 	t_token			*tok;
+	char			*tmp;
 
-	type = laxer_get_token_type(s);
-	err = token_create(&tok, s, type);
+	tok_lst = sp->token_list;
+	type = laxer_get_token_type(*s);
+	if (able_to_expand(tok_lst))
+	{
+		tmp = *s;
+		*s = expander_expand_var(sp, *s);
+		free(tmp);
+	}
+	err = token_create(&tok, *s, type);
 	if (SUCCESS != err)
 		return (err);
 	err = token_list_add_last(tok_lst, tok);
@@ -42,7 +64,7 @@ t_error_code	laxer_create_token_list(t_shell_op *sp)
 	i = 0;
 	while (sp->input[i])
 	{
-		err = laxer_create_token(sp->token_list, sp->input[i]);
+		err = laxer_create_token(sp, &sp->input[i]);
 		if (SUCCESS != err)
 		{
 			token_list_destroy(&(sp->token_list));
