@@ -13,6 +13,18 @@
 #include "laxer.h"
 #include "expander.h"
 
+static	t_bool	able_to_expand(t_token_list *tok_lst)
+{
+	t_token	*tok;
+
+	tok = token_list_get_token(dll_get_last_elem(token_list_get_node(tok_lst)));
+	if (!tok)
+		return (TRUE);
+	if (REDIRECT == tok->type)
+		return (FALSE);
+	return (TRUE);
+}
+
 static t_error_code	laxer_create_token(t_shell_op *sp, char **s)
 {
 	t_token_list	*tok_lst;
@@ -23,9 +35,12 @@ static t_error_code	laxer_create_token(t_shell_op *sp, char **s)
 
 	tok_lst = sp->token_list;
 	type = laxer_get_token_type(*s);
-	tmp = *s;
-	*s = expander_expand_var(sp, *s);
-	free(tmp);
+	if (able_to_expand(tok_lst))
+	{
+		tmp = *s;
+		*s = expander_expand_var(sp, *s);
+		free(tmp);
+	}
 	err = token_create(&tok, *s, type);
 	if (SUCCESS != err)
 		return (err);
