@@ -60,6 +60,7 @@ t_error_code	reader_get_tab(t_shell_op *sp)
 {
 	t_error_code	err;
 	char			*line;
+	char			*tmp;
 
 	line = readline(MAIN_PROMPT);
 	if (!line)
@@ -68,6 +69,11 @@ t_error_code	reader_get_tab(t_shell_op *sp)
 	err = close_opened_quote(&line);
 	if (SUCCESS != err)
 		return (err);
+	if (!line)
+		return (ERROR);
+	tmp = line;
+	line = expander_expand_var(sp, line);
+	free(tmp);
 	if (!line)
 		return (ERROR);
 	err = reader_split_by_token(line, &(sp->input));
