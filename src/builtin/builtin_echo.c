@@ -18,7 +18,10 @@ static void	print_string(char **tab, t_bool nl, int fd)
 
 	i = 0;
 	while (*(tab + i))
+	{
 		ft_putstr_fd(*(tab + i++), fd);
+		ft_putstr_fd(" ", fd);
+	}
 	if (nl)
 		ft_putstr_fd("\n", fd);
 }
