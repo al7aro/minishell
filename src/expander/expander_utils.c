@@ -23,3 +23,12 @@ t_bool	is_end_of_var_name(char c)
 		return (TRUE);
 	return (FALSE);
 }
+
+t_bool	ready_to_expand(char *str, int i)
+{
+	if (i < 0)
+		return (FALSE);
+	if (is_redirect(str + i))
+		return (TRUE);
+	return (FALSE);
+}
