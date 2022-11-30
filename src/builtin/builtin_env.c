@@ -19,7 +19,10 @@ static void	print_string(char **str, int fd)
 
 	i = 0;
 	while (*(str + i))
+	{
 		ft_putstr_fd(*(str + i++), fd);
+		ft_putstr_fd("\n", fd);
+	}
 	ft_putstr_fd("\n", fd);
 }
 
