@@ -19,57 +19,55 @@ static t_bool	key_is_valid(char *str)
 {
 	while (*str)
 	{
-		if (!ft_isalnum(*str))
+		if (!ft_isalnum(*str) && *str != '_')
 			return (FALSE);
 		str++;
 	}
 	return (TRUE);
 }
 
-static t_bool	str_is_valid(char *str)
+static t_bool	value_is_valid(char *str)
 {
-	int	cnt;
-
-	cnt = 0;
-	while (*str)
-	{
-		if (*str == EQUAL_CHAR)
-				cnt++;
-		str++;
-	}
-	if (1 < cnt)
-		return (FALSE);
+	(void)str;
 	return (TRUE);
 }
 
-static char	*get_expanded_var(t_shell_op *sp, char *str)
+static t_error_code	get_key_value(char *str, char **key, char **value)
 {
-	char	*ret;
+	size_t	i;
 
-	ret = expander_expand_var(sp, str);
-	return (ret);
+	i = -1;
+	while (*(str + ++i))
+	{
+		if (EQUAL_CHAR == *(str + i))
+		{
+			*key = ft_substr(str, 0, i);
+			*value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
+			break ;
+		}
+	}
+	if (!key_is_valid(*key) || !value_is_valid(*value))
+		return (ERROR);
+	return (SUCCESS);
 }
 
 t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
 {
-	char	**spl;
+	t_error_code	err;
+	char			*key;
+	char			*value;
 
 	c->builtin_ret_val = ERROR;
 	if (2 != tab_count(c->argv))
 		return (SUCCESS);
-	spl = ft_split(*(c->argv + 1), EQUAL_CHAR);
-	if (2 != tab_count(spl) || !str_is_valid(*(c->argv + 1)))
+	err = get_key_value(*(c->argv + 1), &key, &value);
+	if (SUCCESS != err)
 	{
-		tab_deep_destroy(&spl);
-		return (SUCCESS);
-	}
-	if (!key_is_valid(*(spl)))
-	{
-		tab_deep_destroy(&spl);
+		free(key);
+		free(value);
 		return (SUCCESS);
 	}
 	c->builtin_ret_val = SUCCESS;
-	env_setvar(&sp->envp, *spl, get_expanded_var(sp, *(spl + 1)));
-	tab_deep_destroy(&spl);
+	env_setvar(&sp->envp, key, value);
 	return (SUCCESS);
 }
