@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: al7aro <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/11/01 22:56:11 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:35:50 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "reader.h"
+#include "expander.h"
 
 static t_bool	is_quote_closed(char *str)
 {
@@ -55,29 +56,21 @@ static t_error_code	close_opened_quote(char **line)
 	return (SUCCESS);
 }
 
-t_error_code	reader_get_tab(t_shell_op *sp, char ***ret)
+t_error_code	reader_get_tab(t_shell_op *sp)
 {
 	t_error_code	err;
 	char			*line;
-	char			*tmp;
 
 	line = readline(MAIN_PROMPT);
 	if (!line)
 		return (ERROR);
 	add_history(line);
 	err = close_opened_quote(&line);
-	tmp = line;
-	if (sp)
-	{
-		tmp = line;
-		line = expander_expand_var(sp, line);
-		free(tmp);
-	}
 	if (SUCCESS != err)
 		return (err);
 	if (!line)
 		return (ERROR);
-	err = reader_split_by_token(line, ret);
+	err = reader_split_by_token(line, &(sp->input));
 	free(line);
 	return (err);
 }

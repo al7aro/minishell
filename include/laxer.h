@@ -21,7 +21,6 @@
 # include "token_list.h"
 
 t_token_type	laxer_get_token_type(char *s);
-t_error_code	laxer_create_token(t_token_list *tok_lst, char *s);
 t_error_code	laxer_create_token_list(t_shell_op *sp);
 
 #endif

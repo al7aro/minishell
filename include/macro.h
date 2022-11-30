@@ -6,7 +6,7 @@
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 15:31:13 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:53:35 by r3dc4t-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,21 @@
 # define HEREDOC_PROMPT		"\e[0m> "
 # define EMPTY_STRING		""
 # define NEW_PROC			0
+# define C_FLAG_STR				"-c"
 # define EXPANDER_CHAR		'$'
+# define EXPANDER_STRING	"$"
+# define QUESTION_MARK_CHAR	'?'
 # define R_BRACKET			')'
 # define L_BRACKET			'('
 # define MINISHELL_STR		"\e[0mminishell"
 # define EXEC_CMD_NOT_FOUND_STR	"command not found: "
 # define EXEC_PREM_ERR_STR		"permission denied: "
+# define EXEC_DIR_ERR_STR		": Is a directory"
 # define PIPE_READ				0
 # define PIPE_WRITE				1
+# define PWD_VAR			"PWD"
+# define OLDPWD_VAR			"OLDPWD"
+# define HOME_VAR			"HOME"
 
 typedef enum e_bool
 {

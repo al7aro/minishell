@@ -70,12 +70,12 @@ char	*expander_remove_line_quotes(char *str)
 			if (p2)
 			{
 				str = remove_pair_from_str(str, str + i, str + p2);
-				i = p2;
+				i = p2 - 1;
 			}
 		}
-		if (!p2)
+		if (!p2 || !i)
 			i++;
-		if (!(*(str + i - 1)))
+		else if (!(*(str + i - 1)))
 			break ;
 	}
 	return (str);

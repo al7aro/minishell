@@ -33,6 +33,7 @@ void	heredoc_line(char **line, char *eol)
 		free(tmp);
 		str = readline(HEREDOC_PROMPT);
 	}
+	free(str);
 }
 
 void	heredoc_tab_destroy(char ***heredoc_tab)
@@ -40,19 +41,24 @@ void	heredoc_tab_destroy(char ***heredoc_tab)
 	tab_shallow_destroy(heredoc_tab);
 }
 
-#include <time.h>
-char	*heredoc_get_temp_path(char *eol)
+char	*heredoc_get_temp_path(char *base_path)
 {
 	char	*path;
 	char	*aux;
 	int		n;
 
-	(void)eol;
-	srand(time(NULL));
-	n = rand();
+	n = 0;
 	aux = ft_itoa(n);
-	path = ft_strjoin("/tmp/hd_file", aux);
+	path = ft_strjoin(base_path, aux);
 	free(aux);
+	while (0 == access(path, F_OK))
+	{
+		n++;
+		free(path);
+		aux = ft_itoa(n);
+		path = ft_strjoin(base_path, aux);
+		free(aux);
+	}
 	return (path);
 }
 
@@ -62,8 +68,7 @@ char	*heredoc_handle_heredoc(char *eol)
 	char	*tmp_path;
 	int		fd;
 
-	tmp_path = heredoc_get_temp_path(eol);
-	line = ft_strdup("");
+	tmp_path = heredoc_get_temp_path("/tmp/hd_file");
 	heredoc_line(&line, eol);
 	fd = open(tmp_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	write(fd, line, ft_strlen(line));

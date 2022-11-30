@@ -27,6 +27,7 @@ typedef enum e_cmd_stt
 {
 	OK = 0,
 	CMD_NOT_FOUND,
+	CMD_IS_DIR,
 	PREM_DENIED,
 	CMD_EMPTY,
 	REDIRECT_ERROR,
@@ -46,6 +47,8 @@ typedef struct s_cmd
 	int				builtin_ret_val;
 	t_redirect_list	*redirect;
 	t_pipe_pair		*pp;
+	int				in_stream;
+	int				out_stream;
 }	t_cmd;
 
 t_error_code	cmd_create(t_cmd **ret);
@@ -54,5 +57,6 @@ t_error_code	cmd_add_arg(t_cmd *c, char *arg);
 char			*cmd_get_cmd(t_cmd *c);
 void			cmd_set_pipe_in(t_cmd *c, int fd);
 void			cmd_set_pipe_out(t_cmd *c, int fd);
+void			cmd_set_stream(t_cmd *c, t_redirect *r);
 
 #endif

@@ -29,7 +29,14 @@
 # include "cleaner.h"
 # include "expander.h"
 # include "heredoc.h"
+# include "mode_mngr.h"
 
-typedef t_error_code	(*t_read_input)(t_shell_op *sp, char ***tab);
+typedef t_error_code	(*t_read_input)(t_shell_op *sp);
+
+t_error_code	handle_input(t_shell_op *sp, t_read_input read_func);
+t_error_code	handle_valid_input(t_shell_op *sp);
+t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func);
+t_error_code	internal_flow(char *cli_input, char **envp, \
+	t_read_input read_func);
 
 #endif

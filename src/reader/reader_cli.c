@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_test_util.h                                   :+:      :+:    :+:   */
+/*   reader_cli.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 10:20:37 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/22 11:06:12 by yoav             ###   ########.fr       */
+/*   Created: 2022/10/22 23:28:27 by alopez-g          #+#    #+#             */
+/*   Updated: 2022/11/20 16:44:40 by yoav             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UNIT_TEST_UTIL_H
-# define UNIT_TEST_UTIL_H
+#include "reader.h"
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+t_error_code	reader_get_tab_from_cli(t_shell_op *sp)
+{
+	t_error_code	err;
 
-# include "libft.h"
-# include "tab.h"
-# include "error_code.h"
-# include "unit_test.h"
-
-char	**util_create_tab(int size, ...);
-void	util_check_file_and_remove(char *filename);
-void	util_read_msg_from_read(char *file, char *msg);
-
-#endif
+	if (!sp->cli_input)
+		return (EOF_SUCCESS);
+	err = reader_split_by_token(sp->cli_input, &(sp->input));
+	sp->cli_input = NULL;
+	return (err);
+}
