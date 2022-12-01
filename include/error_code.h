@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_code.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:45:15 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/02 17:40:44 by yoav             ###   ########.fr       */
+/*   Updated: 2022/12/01 11:15:19 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef enum s_error_code
 {
 	ERROR = -1,
 	SUCCESS = 0,
+	BUILTIN_RET_VAL_ERROR = 1,
 	NO_BUILTIN_ERROR,
 	ALLOCATION_ERROR,
 	SYNTAX_ERROR,

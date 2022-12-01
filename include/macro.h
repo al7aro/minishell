@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/20 17:53:35 by r3dc4t-g         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:30:17 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 # define MINISHELL_STR		"\e[0mminishell"
 # define EXEC_CMD_NOT_FOUND_STR	"command not found: "
 # define EXEC_PREM_ERR_STR		"permission denied: "
+# define CD_INVALID_PATH_STR	": No such file or directory"
+# define CD_TOO_MANY_ARGS		"too many arguments"
+# define CD_ERR_STR				"cd: "
 # define EXEC_DIR_ERR_STR		": Is a directory"
 # define PIPE_READ				0
 # define PIPE_WRITE				1
