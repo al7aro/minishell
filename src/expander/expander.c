@@ -6,14 +6,11 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/12/02 19:33:02 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/02 19:40:25 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
-#include "macro.h"
-#include "reader.h"
-#include "tab.h"
 
 static char	*str_append_char(char **str, char c, t_bool sufix)
 {

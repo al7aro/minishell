@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 09:24:16 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/12/02 19:33:39 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/02 19:40:08 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# include "reader.h"
+# include "tab.h"
 # include "error_code.h"
 # include "shell_op.h"
 # include "libft.h"

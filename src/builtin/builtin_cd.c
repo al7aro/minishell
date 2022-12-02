@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "builtin.h"
-#include "env.h"
 
 static t_error_code	get_dir(t_shell_op *sp, char *new_dir)
 {
