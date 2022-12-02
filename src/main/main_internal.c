@@ -31,6 +31,8 @@ t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 	if (SUCCESS != err)
 		return (err);
 	err = parser_check_tokens(sp);
+	if (SUCCESS != err)
+		cleaner_on_pipe_error(sp);
 	return (err);
 }
 
@@ -52,32 +54,6 @@ t_error_code	handle_valid_input(t_shell_op *sp)
 		return (err);
 	cleaner_round_clean(sp);
 	return (SUCCESS);
-}
-
-t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
-{
-	t_error_code	err;
-
-	err = SUCCESS;
-	while (sp->run && SUCCESS == err)
-	{
-		err = handle_input(sp, read_func);
-		if (EOF_SUCCESS == err)
-			return (SUCCESS);
-		if (SYNTAX_PIPE_STILL_OPEN == err)
-		{
-			sp->open_pipe = TRUE;
-			continue ;
-		}
-		if (SYNTAX_ERROR == err || NO_INPUT == err)
-		{
-			err = SUCCESS;
-			continue ;
-		}
-		if (SUCCESS == err)
-			err = handle_valid_input(sp);
-	}
-	return (err);
 }
 
 // TODO reader should handle open pipe then FALSE it

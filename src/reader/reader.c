@@ -63,7 +63,7 @@ t_error_code	reader_get_tab(t_shell_op *sp)
 
 	line = readline(MAIN_PROMPT);
 	if (!line)
-		return (ERROR);
+		return (END_OF_TRANSMISSION);
 	add_history(line);
 	err = close_opened_quote(&line);
 	if (SUCCESS != err)
