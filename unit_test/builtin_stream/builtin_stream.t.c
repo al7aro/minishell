@@ -6,7 +6,11 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:56:36 by yoav              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/08 16:05:06 by yrabby           ###   ########.fr       */
+=======
+/*   Updated: 2022/12/08 17:47:47 by yrabby           ###   ########.fr       */
+>>>>>>> ExitTester
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +47,6 @@ void	test_builtin_out_stream(void)
 	init_sp(&sp);
 	err = executer_run_all_cmds(sp);
 	CU_ASSERT_EQUAL_FATAL(SUCCESS, err);
-	util_read_msg_from_read(TEST_FILE, "a");
+	util_read_msg_from_read(TEST_FILE, "a\n");
 	shell_op_destroy(&sp);
 }
