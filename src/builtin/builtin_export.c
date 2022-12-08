@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:01:18 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/12/04 15:24:01 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:57:40 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,36 @@ static t_error_code	get_key_value(char *str, char **key, char **value)
 	return (SUCCESS);
 }
 
+static void	print_key_and_value(char *s, int fd)
+{
+	while (*s && *s != EQUAL_CHAR)
+	{
+		ft_putchar_fd(*s, fd);
+		++s;
+	}
+	ft_putchar_fd(*s, fd);
+	++s;
+	ft_putstr_fd(DOUBLE_QUOTE_STR, fd);
+	ft_putstr_fd(s, fd);
+	ft_putstr_fd(DOUBLE_QUOTE_STR, fd);
+}
+
+static t_error_code	export_print_all(char **tab, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_putstr_fd(EXPORT_PREFIX, fd);
+		print_key_and_value(tab[i], fd);
+		ft_putstr_fd("\n", fd);
+		++i;
+	}
+	ft_putstr_fd("\n", fd);
+	return (SUCCESS);
+}
+
 t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
 {
 	t_error_code	err;
@@ -38,6 +68,8 @@ t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
 	char			*value;
 
 	c->builtin_ret_val = ERROR;
+	if (1 == tab_count(c->argv))
+		return (export_print_all(sp->envp, c->out_stream));
 	if (2 != tab_count(c->argv))
 		return (SUCCESS);
 	err = get_key_value(*(c->argv + 1), &key, &value);

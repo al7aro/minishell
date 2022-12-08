@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/04 15:21:01 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 15:50:21 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define NEW_LINE_STR			"\n"
 # define SINGLE_QUOTE_CHAR		'\''
 # define DOUBLE_QUOTE_CHAR		'\"'
+# define DOUBLE_QUOTE_STR		"\""
 # define SPACE_CHAR				' '
 # define EQUAL_CHAR				'='
 # define UNDERSCORE_CHAR		'_'
@@ -57,6 +58,7 @@
 # define PWD_VAR				"PWD"
 # define OLDPWD_VAR				"OLDPWD"
 # define HOME_VAR				"HOME"
+# define EXPORT_PREFIX			"declare -x "
 # define PIPE_LIMIT				70
 
 typedef enum e_bool
