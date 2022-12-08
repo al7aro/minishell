@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:01:18 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/12/08 15:57:40 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:07:47 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
 	char			*key;
 	char			*value;
 
-	c->builtin_ret_val = ERROR;
+	c->builtin_ret_val = (unsigned char)ERROR;
 	if (1 == tab_count(c->argv))
 		return (export_print_all(sp->envp, c->out_stream));
 	if (2 != tab_count(c->argv))
@@ -79,7 +79,7 @@ t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
 		free(value);
 		return (SUCCESS);
 	}
-	c->builtin_ret_val = SUCCESS;
+	c->builtin_ret_val = (unsigned char)SUCCESS;
 	env_setvar(&sp->envp, key, value);
 	return (SUCCESS);
 }
