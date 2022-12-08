@@ -6,44 +6,20 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:01:18 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/12/08 16:31:19 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 17:05:49 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-static t_error_code	check_key(char *s)
-{
-	if (!ft_isalpha(*s) && *s != '_')
-		return (ERROR);
-	++s;
-	while (*s)
-	{
-		if (!ft_isalnum(*s) && *s != '_')
-			return (ERROR);
-		++s;
-	}
-	return (SUCCESS);
-}
-
-static t_error_code	export_is_input_valid(char *input)
-{
-	size_t	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (EQUAL_CHAR == input[i])
-			return (SUCCESS);
-		++i;
-	}
-	return (ERROR);
-}
-
 static t_error_code	get_key_value(char *str, char **key, char **value)
 {
 	size_t	i;
 
+	if (!export_is_input_valid(str))
+		return (EXPORT_INVALID_INPUT);
+	if (export_should_ignore_input(str))
+		return (EXPORT_IGNORE_INPUT);
 	i = -1;
 	while (*(str + ++i))
 	{
@@ -59,53 +35,30 @@ static t_error_code	get_key_value(char *str, char **key, char **value)
 	return (SUCCESS);
 }
 
-static void	print_key_and_value(char *s, int fd)
-{
-	while (*s && *s != EQUAL_CHAR)
-	{
-		ft_putchar_fd(*s, fd);
-		++s;
-	}
-	ft_putchar_fd(*s, fd);
-	++s;
-	ft_putstr_fd(DOUBLE_QUOTE_STR, fd);
-	ft_putstr_fd(s, fd);
-	ft_putstr_fd(DOUBLE_QUOTE_STR, fd);
-}
-
-static t_error_code	export_print_all(char **tab, int fd)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_putstr_fd(EXPORT_PREFIX, fd);
-		print_key_and_value(tab[i], fd);
-		ft_putstr_fd("\n", fd);
-		++i;
-	}
-	ft_putstr_fd("\n", fd);
-	return (SUCCESS);
-}
-
 static t_error_code	export_one(t_shell_op *sp, t_cmd *c, char *line)
 {
 	t_error_code	err;
 	char			*key;
 	char			*value;
 
+	c->builtin_ret_val = (unsigned char)SUCCESS;
 	err = get_key_value(line, &key, &value);
+	if (EXPORT_IGNORE_INPUT == err)
+		return (SUCCESS);
+	if (EXPORT_INVALID_INPUT == err)
+	{
+		error_code_print(3, EXPORT_ERR_STR, line, EXPORT_INVALID_ARG);
+		c->builtin_ret_val = (unsigned char)BUILTIN_RET_VAL_ERROR;
+		return (SUCCESS);
+	}
 	if (SUCCESS != err)
 	{
-		error_code_print(3 ,EXPORT_ERR_STR, line, EXPORT_INVALID_ARG);
 		free(key);
 		free(value);
 		c->builtin_ret_val = (unsigned char)BUILTIN_RET_VAL_ERROR;
 		return (err);
 	}
 	err = env_setvar(&sp->envp, key, value);
-	c->builtin_ret_val = (unsigned char)SUCCESS;
 	return (err);
 }
 
