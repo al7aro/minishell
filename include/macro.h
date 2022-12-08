@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/02 12:30:17 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 14:52:35 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define SPACE_CHAR				' '
 # define EQUAL_CHAR				'='
 # define MINUS_CHAR				'-'
+# define PLUS_CHAR				'+'
 # define EQUAL_STR				"="
 # define COLON_CHAR				':'
 # define SLASH_CHAR				'/'
@@ -48,6 +49,9 @@
 # define CD_INVALID_PATH_STR	": No such file or directory"
 # define CD_TOO_MANY_ARGS		"too many arguments"
 # define CD_ERR_STR				"cd: "
+# define EXIT_ERR_STR			"exit: "
+# define EXIT_NUM_ERR_STR		": numeric argument required"
+# define EXIT_TOO_MANY_ARGS		"too many arguments"
 # define EXEC_DIR_ERR_STR		": Is a directory"
 # define SIGQUIT_STR			"Quit: "
 # define PIPE_READ				0
