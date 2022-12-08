@@ -6,11 +6,39 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 00:01:18 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/12/08 16:07:47 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:31:19 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+
+static t_error_code	check_key(char *s)
+{
+	if (!ft_isalpha(*s) && *s != '_')
+		return (ERROR);
+	++s;
+	while (*s)
+	{
+		if (!ft_isalnum(*s) && *s != '_')
+			return (ERROR);
+		++s;
+	}
+	return (SUCCESS);
+}
+
+static t_error_code	export_is_input_valid(char *input)
+{
+	size_t	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (EQUAL_CHAR == input[i])
+			return (SUCCESS);
+		++i;
+	}
+	return (ERROR);
+}
 
 static t_error_code	get_key_value(char *str, char **key, char **value)
 {
@@ -61,25 +89,40 @@ static t_error_code	export_print_all(char **tab, int fd)
 	return (SUCCESS);
 }
 
-t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
+static t_error_code	export_one(t_shell_op *sp, t_cmd *c, char *line)
 {
 	t_error_code	err;
 	char			*key;
 	char			*value;
 
-	c->builtin_ret_val = (unsigned char)ERROR;
-	if (1 == tab_count(c->argv))
-		return (export_print_all(sp->envp, c->out_stream));
-	if (2 != tab_count(c->argv))
-		return (SUCCESS);
-	err = get_key_value(*(c->argv + 1), &key, &value);
+	err = get_key_value(line, &key, &value);
 	if (SUCCESS != err)
 	{
+		error_code_print(3 ,EXPORT_ERR_STR, line, EXPORT_INVALID_ARG);
 		free(key);
 		free(value);
-		return (SUCCESS);
+		c->builtin_ret_val = (unsigned char)BUILTIN_RET_VAL_ERROR;
+		return (err);
 	}
+	err = env_setvar(&sp->envp, key, value);
 	c->builtin_ret_val = (unsigned char)SUCCESS;
-	env_setvar(&sp->envp, key, value);
+	return (err);
+}
+
+t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
+{
+	t_error_code	err;
+	size_t			i;
+
+	err = SUCCESS;
+	c->builtin_ret_val = (unsigned char)SUCCESS;
+	if (1 == tab_count(c->argv))
+		return (export_print_all(sp->envp, c->out_stream));
+	i = 1;
+	while (err == SUCCESS && c->argv[i])
+	{
+		err = export_one(sp, c, c->argv[i]);
+		++i;
+	}
 	return (SUCCESS);
 }

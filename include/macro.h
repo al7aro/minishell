@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/08 16:05:57 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:25:48 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define CD_INVALID_PATH_STR	": No such file or directory"
 # define CD_TOO_MANY_ARGS		"too many arguments"
 # define CD_ERR_STR				"cd: "
+# define EXPORT_INVALID_ARG		"\': not a valid identifier"
+# define EXPORT_ERR_STR			"export: `"
 # define UNSET_ERR_STR			"unset: `"
 # define EXIT_ERR_STR			"exit: "
 # define EXIT_NUM_ERR_STR		": numeric argument required"
