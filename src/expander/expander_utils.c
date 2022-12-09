@@ -34,3 +34,19 @@ t_bool	ready_to_expand(char *str, int i)
 		return (TRUE);
 	return (FALSE);
 }
+
+t_bool	is_valid_tilde(char *str, int i, t_bool in_quote)
+{
+	if (!in_quote || TILDE_CHAR != str[i])
+		return (FALSE);
+	if (0 < i && SPACE_CHAR != str[i - 1])
+		return (FALSE);
+	if (!str[i + 1] || SPACE_CHAR == str[i + 1] || SLASH_CHAR == str[i + 1])
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	should_expand(char *str, int i, t_bool in)
+{
+	return (EXPANDER_CHAR == *(str + i) && in && !ready_to_expand(str, i - 1));
+}
