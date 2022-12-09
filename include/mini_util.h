@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   mini_util.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 12:25:38 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/09 11:26:33 by yrabby           ###   ########.fr       */
+/*   Created: 2022/12/08 14:38:22 by yrabby            #+#    #+#             */
+/*   Updated: 2022/12/08 15:40:13 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef MINI_UTIL_H
+# define MINI_UTIL_H
 
 # include "macro.h"
 # include "error_code.h"
-# include "shell_op.h"
-# include "cmd_list.h"
+# include "libft.h"
 
-t_error_code	parser_check_tokens(t_shell_op *sp);
-t_error_code	is_token_valid(t_dll *node, int *skip);
-t_dll			*get_next_node(t_dll *node, int i);
+t_bool	util_is_valid_int(char *s);
 
 #endif
