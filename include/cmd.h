@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:46:10 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/30 16:49:41 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/09 12:17:31 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 typedef enum e_cmd_stt
 {
 	OK = 0,
-	CMD_IS_DIR,
 	PREM_DENIED,
 	CMD_EMPTY,
 	REDIRECT_ERROR,
+	CMD_IS_DIR = 126,
 	CMD_NOT_FOUND = 127,
 	CMD_EXIT_SIG_INT = 130,
 	CMD_EXIT_SIG_QUIT = 131,
