@@ -16,13 +16,13 @@
 # define PIPE_CHAR				'|'
 # define RR_CHAR				'>'
 # define RL_CHAR				'<'
-# define SEMICOLON_CHAR			';'
 # define NEW_LINE_CHAR			'\n'
 # define NEW_LINE_STR			"\n"
 # define SINGLE_QUOTE_CHAR		'\''
 # define DOUBLE_QUOTE_CHAR		'\"'
 # define SPACE_CHAR				' '
 # define EQUAL_CHAR				'='
+# define UNDERSCORE_CHAR		'_'
 # define MINUS_CHAR				'-'
 # define PLUS_CHAR				'+'
 # define EQUAL_STR				"="
@@ -38,6 +38,7 @@
 # define NEW_PROC				0
 # define C_FLAG_STR				"-c"
 # define EXPANDER_CHAR			'$'
+# define TILDE_CHAR				'~'
 # define EXPANDER_STRING		"$"
 # define QUESTION_MARK_CHAR		'?'
 # define R_BRACKET				')'
@@ -46,6 +47,7 @@
 # define EXEC_CMD_NOT_FOUND_STR	"command not found: "
 # define PIPE_LIMIT_ERROR_STR	"pipe limit reached"
 # define EXEC_PREM_ERR_STR		"permission denied: "
+# define UNSET_INVALID_ERR_STR	"': not a valid identifier"
 # define CD_INVALID_PATH_STR	": No such file or directory"
 # define CD_TOO_MANY_ARGS		"too many arguments"
 # define CD_ERR_STR				"cd: "
