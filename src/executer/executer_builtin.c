@@ -28,7 +28,7 @@ t_error_code	run_single_builtin(t_shell_op *sp, t_cmd *c)
 
 	if (OK != c->stt)
 	{
-		sp->last_cmd_stt = c->stt;
+		sp->last_cmd_stt = (unsigned char)c->stt;
 		return (SUCCESS);
 	}
 	redirecter_set_stream_if_needed(c);

@@ -28,6 +28,6 @@ static void	print_string(char **str, int fd)
 t_error_code	builtin_env(t_shell_op *sp, t_cmd *c)
 {
 	print_string(sp->envp, c->out_stream);
-	c->builtin_ret_val = SUCCESS;
+	c->builtin_ret_val = (unsigned char)SUCCESS;
 	return (SUCCESS);
 }

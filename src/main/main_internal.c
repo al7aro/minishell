@@ -60,7 +60,7 @@ t_error_code	handle_valid_input(t_shell_op *sp)
 t_error_code	internal_flow(char *cli_input, char **envp, \
 	t_read_input read_func)
 {
-	int				ret;
+	unsigned char	ret;
 	t_error_code	err;
 	t_shell_op		*sp;
 

@@ -12,16 +12,16 @@
 
 #include "executer.h"
 
-void	hndl_child_signal_exit(int *ret, int sig)
+void	hndl_child_signal_exit(unsigned char *ret, int sig)
 {
 	if (SIGINT == sig)
 	{
-		*ret = CMD_EXIT_SIG_INT;
+		*ret = (unsigned char)CMD_EXIT_SIG_INT;
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
 	else if (SIGQUIT == sig)
 	{
-		*ret = CMD_EXIT_SIG_QUIT;
+		*ret = (unsigned char)CMD_EXIT_SIG_QUIT;
 		ft_putstr_fd(SIGQUIT_STR, STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
