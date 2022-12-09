@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:31:58 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/09 10:24:13 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/13 11:01:51 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "token_list.h"
 # include "pipe_list.h"
 # include "cmd_list.h"
+# include "terminaler.h"
 
 typedef struct s_shell_op
 {
@@ -32,6 +33,7 @@ typedef struct s_shell_op
 	int				last_cmd_stt;
 	t_pipe_list		*pipe_list;
 	char			*cli_input;
+	t_terminaler	*t;
 }	t_shell_op;
 
 t_error_code	shell_op_create(t_shell_op **ret, char **envp);
@@ -39,5 +41,6 @@ void			shell_op_destroy(t_shell_op **sp);
 void			shell_op_set_token_list(t_shell_op *sp, t_token_list *tok_lst);
 void			shell_op_set_input(t_shell_op *sp, char **input);
 t_cmd_list		*shell_op_get_cmd_list(t_shell_op *sp);
+t_shell_op		*shell_op_get_sp(t_shell_op *param);
 
 #endif

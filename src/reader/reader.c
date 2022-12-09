@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 00:12:35 by al7aro            #+#    #+#             */
-/*   Updated: 2022/12/01 10:59:34 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/13 11:04:27 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ t_error_code	reader_get_tab(t_shell_op *sp)
 	char			*line;
 	char			*tmp;
 
+	terminaler_set_out_to_err(sp->t);
 	line = readline(MAIN_PROMPT);
+	terminaler_set_out_to_out(sp->t);
 	if (!line)
 		return (END_OF_TRANSMISSION);
 	add_history(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup_wrapper.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:58:41 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/31 15:59:13 by yoav             ###   ########.fr       */
+/*   Updated: 2022/12/09 15:55:04 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 # include "error_code.h"
 
-t_error_code	dup_wrapper(int oldfd, int newfd);
+t_error_code	dup_wrapper(int src, int dest);
 
 #endif
