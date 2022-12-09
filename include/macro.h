@@ -68,6 +68,7 @@
 # define HOME_VAR				"HOME"
 # define EXPORT_PREFIX			"declare -x "
 # define PIPE_LIMIT				70
+# define PATH_SIZE_LIMIT  2048
 
 typedef enum e_bool
 {
