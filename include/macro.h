@@ -37,6 +37,7 @@
 # define NEW_PROC				0
 # define C_FLAG_STR				"-c"
 # define EXPANDER_CHAR			'$'
+# define TILDE_CHAR				'~'
 # define EXPANDER_STRING		"$"
 # define QUESTION_MARK_CHAR		'?'
 # define R_BRACKET				')'
