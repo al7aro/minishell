@@ -72,12 +72,22 @@ void	wait_all_cmds(t_shell_op *sp)
 t_error_code	executer_run_all_cmds(t_shell_op *sp)
 {
 	t_error_code	err;
+	t_dll			*n;
 
+	err = SUCCESS;
 	mini_signal_disable();
+	n = cmd_list_get_list(shell_op_get_cmd_list(sp));
 	if (!is_forks_in_cmd(sp))
-		err = run_single_builtin(sp);
-	else
-		err = executer_run_many_cmds(sp);
+		return (run_single_builtin(sp, n->value));
+	while (n && SUCCESS == err)
+	{
+		err = executer_run_cmd(sp, n->value);
+		n = cmd_list_get_next_cmd(n);
+	}
+	if (SUCCESS != err)
+		return (err);
+	piper_close_pipes(sp);
+	wait_all_cmds(sp);
 	mini_signal_interactive_mode();
 	return (err);
 }
