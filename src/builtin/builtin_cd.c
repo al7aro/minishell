@@ -38,19 +38,19 @@ t_error_code	builtin_cd(t_shell_op *sp, t_cmd *c)
 	if (2 < tab_count(c->argv))
 	{
 		error_code_print(2, CD_ERR_STR, CD_TOO_MANY_ARGS);
-		c->builtin_ret_val = (unsigned char)BUILTIN_RET_VAL_ERROR;
+		c->builtin_ret_val = BUILTIN_RET_VAL_ERROR;
 		return (SUCCESS);
 	}
 	if (1 == tab_count(c->argv))
 	{
 		if (SUCCESS != get_dir(sp, env_getvar(sp->envp, HOME_VAR)))
-			c->builtin_ret_val = (unsigned char)BUILTIN_RET_VAL_ERROR;
+			c->builtin_ret_val = BUILTIN_RET_VAL_ERROR;
 		return (SUCCESS);
 	}
 	if (SUCCESS != get_dir(sp, *(c->argv + 1)))
 	{
 		error_code_print(3, CD_ERR_STR, *(c->argv + 1), CD_INVALID_PATH_STR);
-		c->builtin_ret_val = (unsigned char)BUILTIN_RET_VAL_ERROR;
+		c->builtin_ret_val = BUILTIN_RET_VAL_ERROR;
 	}
 	return (SUCCESS);
 }

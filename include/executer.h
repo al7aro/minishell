@@ -34,6 +34,6 @@ void			executer_child_logic(t_shell_op *sp, t_cmd *c);
 t_error_code	executer_run_all_cmds(t_shell_op *sp);
 t_error_code	executer_run_builtin(t_shell_op *sp, t_cmd *c);
 t_error_code	run_single_builtin(t_shell_op *sp, t_cmd *c);
-void			hndl_child_signal_exit(unsigned char *ret, int sig);
+void			hndl_child_signal_exit(int *ret, int sig);
 
 #endif

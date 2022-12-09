@@ -46,7 +46,7 @@ typedef struct s_cmd
 	char			**argv;
 	t_cmd_stt		stt;
 	pid_t			pid;
-	unsigned char	builtin_ret_val;
+	int				builtin_ret_val;
 	t_redirect_list	*redirect;
 	t_pipe_pair		*pp;
 	int				in_stream;
