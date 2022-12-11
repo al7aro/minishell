@@ -54,3 +54,12 @@ t_error_code	env_inc_shlvl(char ***env)
 	free(lvl_str);
 	return (err);
 }
+
+void	env_set_pwd(char ***env)
+{
+	char	*tmp;
+
+	tmp = getcwd(NULL, 0);
+	env_setvar(env, PWD_VAR, tmp);
+	free(tmp);
+}

@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   expander_tilde.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 00:40:07 by r3dc4t            #+#    #+#             */
-/*   Updated: 2022/12/11 11:07:40 by yrabby           ###   ########.fr       */
+/*   Created: 2022/10/16 10:05:08 by alopez-g          #+#    #+#             */
+/*   Updated: 2022/12/11 10:46:45 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "expander.h"
 
-static void	print_string(char **str, int fd)
+char	*get_tilde(t_shell_op *sp)
 {
-	size_t	i;
+	char	*ret;
 
-	i = 0;
-	while (*(str + i))
-	{
-		ft_putstr_fd(*(str + i++), fd);
-		ft_putstr_fd("\n", fd);
-	}
-}
-
-t_error_code	builtin_env(t_shell_op *sp, t_cmd *c)
-{
-	print_string(sp->envp, c->out_stream);
-	c->builtin_ret_val = SUCCESS;
-	return (SUCCESS);
+	ret = env_getvar(sp->envp, HOME_VAR);
+	if (!ret)
+		ret = EMPTY_STRING;
+	return (ret);
 }
