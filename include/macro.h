@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/10 17:16:06 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/11 14:39:21 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@
 # define PWD_VAR				"PWD"
 # define OLDPWD_VAR				"OLDPWD"
 # define HOME_VAR				"HOME"
+# define HEREDOC_TMP_PATH		"/tmp/hd_file"
 # define EXPORT_PREFIX			"declare -x "
 # define PIPE_LIMIT				70
 

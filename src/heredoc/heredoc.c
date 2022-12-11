@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/12/11 12:34:43 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/11 15:43:22 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,18 @@ char	*heredoc_get_temp_path(char *base_path)
 	return (path);
 }
 
-char	*heredoc_handle_heredoc(char *eol)
+void	heredoc_handle_heredoc(t_redirect *r)
 {
+	char	*eol;
 	char	*line;
 	char	*tmp_path;
 	int		fd;
 
-	tmp_path = heredoc_get_temp_path("/tmp/hd_file");
-	heredoc_line(&line, eol);
+	eol = r->path;
+	tmp_path = r->heredoc_tmp_path;
 	fd = open(tmp_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	heredoc_line(&line, eol);
 	write(fd, line, ft_strlen(line));
 	close(fd);
 	free(line);
-	return (tmp_path);
 }

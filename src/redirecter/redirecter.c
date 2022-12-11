@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:29:37 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/01 10:59:41 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/11 15:16:26 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,24 @@ static int	handle_redirect(t_dll *elem, void *param)
 	(void)param;
 	r = elem->value;
 	if (HEREDOC == r->type)
-		r->path = heredoc_handle_heredoc(r->path);
+	{
+		r->heredoc_tmp_path = heredoc_get_temp_path(HEREDOC_TMP_PATH);
+		err = heredoc_run_child(r);
+		r->path = r->heredoc_tmp_path;
+		if (HEREDOC_SIGNAL_EXIT == err)
+		{
+			r->fd = ERROR;
+			return (err);
+		}
+		r->should_del_tmp = TRUE;
+	}
 	err = open_file(r);
 	if (SUCCESS != err)
 		error_code_print(3, r->path, ": ", strerror(errno));
 	return (err);
 }
 
+// TODO check this OPEN_ERR
 static int	handle_cmd(t_dll *elem, void *param)
 {
 	t_error_code	err;

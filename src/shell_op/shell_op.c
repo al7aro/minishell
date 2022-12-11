@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:52:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/11/17 14:56:26 by alopez-g         ###   ########.fr       */
+/*   Updated: 2022/12/11 12:56:59 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_error_code	shell_op_create(t_shell_op **ret, char **envp)
 		free(*ret);
 		return (err);
 	}
+	shell_op_get_sp(*ret);
 	return (SUCCESS);
 }
 
