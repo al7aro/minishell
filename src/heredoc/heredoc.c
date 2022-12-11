@@ -6,11 +6,21 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:24:41 by al7aro            #+#    #+#             */
-/*   Updated: 2022/12/01 10:59:09 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/11 12:34:43 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "heredoc.h"
+
+static char	*heredoc_readline(char *eol)
+{
+	char	*ret;
+
+	ret = readline(HEREDOC_PROMPT);
+	if (!ret)
+		ret = ft_strdup(eol);
+	return (ret);
+}
 
 void	heredoc_line(char **line, char *eol)
 {
@@ -19,7 +29,7 @@ void	heredoc_line(char **line, char *eol)
 
 	if (!eol)
 		return ;
-	str = readline(HEREDOC_PROMPT);
+	str = heredoc_readline(eol);
 	*line = ft_strdup("");
 	while (ft_strcmp(str, eol))
 	{
@@ -30,7 +40,7 @@ void	heredoc_line(char **line, char *eol)
 		tmp = *line;
 		*line = ft_strjoin(*line, "\n");
 		free(tmp);
-		str = readline(HEREDOC_PROMPT);
+		str = heredoc_readline(eol);
 	}
 	free(str);
 }
