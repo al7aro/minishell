@@ -6,7 +6,7 @@
 #    By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/05 22:01:15 by alopez-g          #+#    #+#              #
-#    Updated: 2022/12/08 10:39:52 by yrabby           ###   ########.fr        #
+#    Updated: 2022/12/12 14:57:43 by yrabby           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ check: $(TEST_EXEC)
 
 check/leaks: $(TEST_EXEC)
 	@bash $(TEST_SCRIPT) memory
+	cat $(VALGRIND_OUTPUT)
 
 check/norm:
 	@bash $(TEST_SCRIPT) norm
