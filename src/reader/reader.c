@@ -58,8 +58,9 @@ static t_error_code	close_opened_quote(char **line)
 t_error_code	reader_get_tab(t_shell_op *sp)
 {
 	t_error_code	err;
+	char			*full_expansion;
+	char			*semi_expansion;
 	char			*line;
-	char			*tmp;
 
 	line = readline(MAIN_PROMPT);
 	if (!line)
@@ -70,12 +71,14 @@ t_error_code	reader_get_tab(t_shell_op *sp)
 		return (err);
 	if (!line)
 		return (ERROR);
-	tmp = line;
-	line = expander_expand_var(sp, line);
-	free(tmp);
-	if (!line)
+	full_expansion = expander_expand_var(sp, line, TRUE);
+	semi_expansion = expander_expand_var(sp, line, FALSE);
+	if (!full_expansion || !semi_expansion)
 		return (ERROR);
-	err = reader_split_by_token(line, &(sp->input));
+	err = reader_split_by_token(full_expansion, &(sp->input_full_expansion));
+	err = reader_split_by_token(semi_expansion, &(sp->input));
+	free(full_expansion);
+	free(semi_expansion);
 	free(line);
 	return (err);
 }

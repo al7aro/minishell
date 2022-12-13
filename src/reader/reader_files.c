@@ -58,7 +58,7 @@ t_error_code	reader_get_tab_from_file(t_shell_op *sp)
 		return (ERROR);
 	}
 	tmp = line;
-	line = expander_expand_var(sp, line);
+	line = expander_expand_var(sp, line, FALSE);
 	free(tmp);
 	err = reader_split_by_token(line, &(sp->input));
 	free(line);

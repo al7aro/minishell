@@ -18,7 +18,7 @@ t_error_code	reader_get_tab_from_cli(t_shell_op *sp)
 
 	if (!sp->cli_input)
 		return (EOF_SUCCESS);
-	sp->cli_input = expander_expand_var(sp, sp->cli_input);
+	sp->cli_input = expander_expand_var(sp, sp->cli_input, FALSE);
 	err = reader_split_by_token(sp->cli_input, &(sp->input));
 	free(sp->cli_input);
 	sp->cli_input = NULL;

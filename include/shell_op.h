@@ -24,6 +24,7 @@
 typedef struct s_shell_op
 {
 	char			**input;
+	char			**input_full_expansion;
 	char			**envp;
 	t_token_list	*token_list;
 	t_cmd_list		*cmd_list;

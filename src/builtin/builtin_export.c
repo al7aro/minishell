@@ -69,12 +69,12 @@ t_error_code	builtin_export(t_shell_op *sp, t_cmd *c)
 
 	err = SUCCESS;
 	c->builtin_ret_val = SUCCESS;
-	if (1 == tab_count(c->argv))
+	if (1 == tab_count(sp->input_full_expansion))
 		return (export_print_all(sp->envp, c->out_stream));
 	i = 1;
-	while (err == SUCCESS && c->argv[i])
+	while (err == SUCCESS && sp->input_full_expansion[i])
 	{
-		err = export_one(sp, c, c->argv[i]);
+		err = export_one(sp, c, sp->input_full_expansion[i]);
 		++i;
 	}
 	return (SUCCESS);

@@ -38,7 +38,7 @@ typedef struct s_quote
 	t_bool		in;
 }	t_quote;
 
-char			*expander_expand_var(t_shell_op *sp, char *str);
+char			*expander_expand_var(t_shell_op *sp, char *str, t_bool is_full);
 t_error_code	expander_remove_all_quotes(t_shell_op *sp);
 char			*expander_remove_line_quotes(char *str);
 char			*str_insert_char_after(char *str, char c, size_t pos);

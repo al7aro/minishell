@@ -29,15 +29,24 @@ static char	*str_append_char(char **str, char c, t_bool sufix)
 	return (ret);
 }
 
-static char	*word_encloser(char *str)
+static char	*word_encloser(char *str, t_bool is_full)
 {
 	char	*first_part;
 	char	*last_part;
 	char	*final_ret;
 
-	if (!ft_strchr(str, ' '))
-		return (ft_strdup(str));
+	if (is_full || !ft_strchr(str, ' '))
+	{
+		if (*str == DOUBLE_QUOTE_CHAR)
+			return (ft_strdup(str));
+		final_ret = ft_strdup(str);
+		final_ret = str_append_char(&final_ret, DOUBLE_QUOTE_CHAR, FALSE);
+		final_ret = str_append_char(&final_ret, DOUBLE_QUOTE_CHAR, TRUE);
+		return (final_ret);
+	}
 	first_part = ft_substr(str, 0, ft_strchr(str, ' ') - str);
+	first_part = str_append_char(&first_part, DOUBLE_QUOTE_CHAR, FALSE);
+	first_part = str_append_char(&first_part, DOUBLE_QUOTE_CHAR, TRUE);
 	first_part = str_append_char(&first_part, SPACE_CHAR, TRUE);
 	last_part = ft_substr(str, ft_strchr(str, ' ') - str + 1, ft_strlen(str));
 	last_part = str_append_char(&last_part, DOUBLE_QUOTE_CHAR, FALSE);
@@ -78,15 +87,15 @@ static int	expander_get_var(t_shell_op *sp, char *str, char **ret, \
 	return (0);
 }
 
-static void	hndl_exp(char **exp, char **ret, char *tmp)
+static void	hndl_exp(char **exp, char **ret, char *tmp, t_bool is_full)
 {
-	*exp = word_encloser(*exp);
+	*exp = word_encloser(*exp, is_full);
 	*ret = ft_strjoin(tmp, *exp);
 	free(*exp);
 	free(tmp);
 }
 
-char	*expander_expand_var(t_shell_op *sp, char *str)
+char	*expander_expand_var(t_shell_op *sp, char *str, t_bool is_full)
 {
 	char	*ret;
 	char	*exp;
@@ -107,7 +116,7 @@ char	*expander_expand_var(t_shell_op *sp, char *str)
 				i += expander_get_var(sp, str + i, &exp, q_stt);
 			else
 				exp = get_tilde(sp);
-			hndl_exp(&exp, &ret, tmp);
+			hndl_exp(&exp, &ret, tmp, is_full);
 		}
 		else
 			ret = str_append_char(&ret, *(str + i), 1);

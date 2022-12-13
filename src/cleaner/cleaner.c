@@ -21,6 +21,8 @@ void	cleaner_round_clean(t_shell_op *sp)
 		cmd_list_destroy(&(sp->cmd_list));
 		pipe_list_clean(sp->pipe_list);
 	}
+	if (sp->input_full_expansion)
+		tab_deep_destroy(&(sp->input_full_expansion));
 }
 
 void	cleaner_on_pipe_error(t_shell_op *sp)
@@ -30,4 +32,6 @@ void	cleaner_on_pipe_error(t_shell_op *sp)
 		tab_deep_destroy(&(sp->input));
 		token_list_destroy(&(sp->token_list));
 	}
+	if (sp->input_full_expansion)
+		tab_deep_destroy(&(sp->input_full_expansion));
 }
