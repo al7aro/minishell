@@ -30,6 +30,7 @@
 # define PLUS_CHAR				'+'
 # define EQUAL_STR				"="
 # define COLON_CHAR				':'
+# define DOT_CHAR				'.'
 # define SLASH_CHAR				'/'
 # define SLASH_STR				"/"
 # define QUOTE_STR				"'"
@@ -56,6 +57,7 @@
 # define CD_ERR_STR				"cd: "
 # define HEREDOC_ERR_STR		"heredoc: "
 # define HEREDOC_INTER_ERR_STR	"heredoc are only available on interactive mode"
+# define CD_HOME_ERR_STR		"HOME not set"
 # define EXPORT_INVALID_ARG		"\': not a valid identifier"
 # define EXPORT_ERR_STR			"export: `"
 # define UNSET_ERR_STR			"unset: `"
