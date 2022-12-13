@@ -55,6 +55,7 @@
 # define CD_INVALID_PATH_STR	": No such file or directory"
 # define CD_TOO_MANY_ARGS		"too many arguments"
 # define CD_ERR_STR				"cd: "
+# define CD_HOME_ERR_STR		"HOME not set"
 # define EXPORT_INVALID_ARG		"\': not a valid identifier"
 # define EXPORT_ERR_STR			"export: `"
 # define UNSET_ERR_STR			"unset: `"
