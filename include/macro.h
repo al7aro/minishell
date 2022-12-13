@@ -30,6 +30,7 @@
 # define PLUS_CHAR				'+'
 # define EQUAL_STR				"="
 # define COLON_CHAR				':'
+# define DOT_CHAR				'.'
 # define SLASH_CHAR				'/'
 # define SLASH_STR				"/"
 # define QUOTE_STR				"'"
