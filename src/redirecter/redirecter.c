@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:29:37 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/13 12:23:44 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/13 16:32:11 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int	handle_cmd(t_dll *elem, void *param)
 	err = dll_iterate(c->redirect->lst, handle_redirect, NULL);
 	if (OPEN_ERROR == err)
 	{
-		redirect_list_destroy(&(c->redirect));
 		c->stt = REDIRECT_ERROR;
 		err = SUCCESS;
 	}
