@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:52:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/14 14:53:05 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:43:02 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_error_code	shell_op_create(t_shell_op **ret, char **envp)
 		free(*ret);
 		return (err);
 	}
+	terminaler_create(&((*ret)->t));
 	shell_op_get_sp(*ret);
 	return (SUCCESS);
 }
@@ -48,6 +49,8 @@ void	shell_op_destroy(t_shell_op **sp)
 		env_destroy(&((*sp)->envp));
 	if ((*sp)->pipe_list)
 		pipe_list_destroy(&((*sp)->pipe_list));
+	if ((*sp)->t)
+		terminaler_destroy(&((*sp)->t));
 	if ((*sp)->clean_history)
 		rl_clear_history();
 	ft_bzero(*sp, sizeof(t_shell_op));

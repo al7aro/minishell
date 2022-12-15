@@ -6,17 +6,17 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/12/14 16:13:52 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:16 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static t_error_code	get_input_status(t_error_code err)
+static t_error_code	get_input_status(int term_fd, t_error_code err)
 {
 	if (END_OF_TRANSMISSION == err)
 	{
-		printf("exit\n");
+		ft_putstr_fd("exit\n", term_fd);
 		return (END);
 	}
 	if ((PIPE_LIMIT_ERROR == err) || (SYNTAX_ERROR == err) || \
@@ -35,7 +35,7 @@ t_error_code	internal_loop(t_shell_op *sp, t_read_input read_func)
 	while (sp->run && SUCCESS == err)
 	{
 		err = handle_input(sp, read_func);
-		err = get_input_status(err);
+		err = get_input_status(sp->t->term_fd, err);
 		if (CONTINUE == err)
 		{
 			err = SUCCESS;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader_files.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 23:28:27 by alopez-g          #+#    #+#             */
-/*   Updated: 2022/11/20 16:41:46 by yoav             ###   ########.fr       */
+/*   Updated: 2022/12/13 11:04:20 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,22 @@ static t_bool	is_quote_valid(char *line)
 	return (TRUE);
 }
 
+// TODO move this string to macros
+// todo write into the terminal fd
 t_error_code	reader_get_tab_from_file(t_shell_op *sp)
 {
 	t_error_code	err;
 	char			*line;
 	char			*tmp;
 
+	terminaler_set_out_to_null(sp->t);
 	line = readline(NULL);
+	terminaler_set_out_to_out(sp->t);
 	if (!line)
 		return (ERROR);
 	if (!is_quote_valid(line))
 	{
-		printf("Unexpected EOF while looking for matching quote");
+		error_code_print(1, EOF_ERR_STR);
 		return (ERROR);
 	}
 	tmp = line;

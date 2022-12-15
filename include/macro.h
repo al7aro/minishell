@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 12:35:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/13 12:23:30 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:03 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define R_BRACKET				')'
 # define L_BRACKET				'('
 # define MINISHELL_STR			"\e[0mminishell"
+# define EOF_ERR_STR			"Unexpected EOF while looking for matching \
+	 quote"
 # define EXEC_CMD_NOT_FOUND_STR	"command not found: "
 # define PIPE_LIMIT_ERROR_STR	"pipe limit reached"
 # define EXEC_PREM_ERR_STR		"permission denied: "

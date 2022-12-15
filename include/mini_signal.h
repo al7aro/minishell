@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 12:26:18 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/11 14:55:54 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:05 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <signal.h>
 
 # include "macro.h"
+# include "shell_op.h"
 # include "error_code.h"
 # include "shell_op.h"
 

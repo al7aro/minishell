@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_wrapper.c                                      :+:      :+:    :+:   */
+/*   terminaler_set.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 15:57:09 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/09 15:54:55 by yrabby           ###   ########.fr       */
+/*   Created: 2022/12/09 13:11:06 by yrabby            #+#    #+#             */
+/*   Updated: 2022/12/13 11:08:14 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dup_wrapper.h"
+#include "terminaler.h"
 
-t_error_code	dup_wrapper(int src, int dest)
+void	terminaler_set_out_to_null(t_terminaler *t)
 {
-	if (ERROR == dup2(src, dest))
-		return (ERROR);
-	return (SUCCESS);
+	t->should_close_stdout = TRUE;
+	dup_wrapper(t->null_fd, STDOUT_FILENO);
+}
+
+void	terminaler_set_out_to_err(t_terminaler *t)
+{
+	t->should_close_stdout = TRUE;
+	dup_wrapper(t->stderr_fd, STDOUT_FILENO);
+}
+
+void	terminaler_set_out_to_out(t_terminaler *t)
+{
+	t->should_close_stdout = TRUE;
+	dup_wrapper(t->stdout_fd, STDOUT_FILENO);
 }
