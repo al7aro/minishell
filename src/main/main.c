@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/12/09 13:26:27 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:19 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,24 @@ static t_error_code	file_logic(char **argv, char **envp)
 	return (err);
 }
 
-// TODO error class
 int	main(int argc, char **argv, char **envp)
 {
 	t_error_code	err;
 
 	err = mini_signal_disable();
 	if (SUCCESS != err)
-		return (err);
+		return (error_code_print_internal_err(err));
 	if (mode_mngr_is_cli(argc, argv))
+	{
+		close(STDIN_FILENO);
 		return (internal_flow(argv[2], envp, reader_get_tab_from_cli));
+	}
 	if (mode_mngr_is_file(argc))
 		return (file_logic(argv, envp));
-	if (mode_mngr_is_stdin())
+	if (!mode_mngr_is_interactive())
 		return (internal_flow(NULL, envp, reader_get_tab_from_file));
 	err = mini_signal_interactive_mode();
 	if (SUCCESS != err)
-		return (err);
+		return (error_code_print_internal_err(err));
 	return (internal_flow(NULL, envp, reader_get_tab));
 }

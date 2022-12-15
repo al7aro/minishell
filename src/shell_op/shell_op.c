@@ -6,7 +6,7 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 16:52:42 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/13 11:05:02 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:43:02 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	shell_op_destroy(t_shell_op **sp)
 		pipe_list_destroy(&((*sp)->pipe_list));
 	if ((*sp)->t)
 		terminaler_destroy(&((*sp)->t));
+	if ((*sp)->clean_history)
+		rl_clear_history();
 	ft_bzero(*sp, sizeof(t_shell_op));
 	free(*sp);
 	*sp = NULL;

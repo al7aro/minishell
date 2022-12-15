@@ -6,12 +6,16 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:31:58 by yoav              #+#    #+#             */
-/*   Updated: 2022/12/13 11:01:51 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/15 12:42:07 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHELL_OP_H
 # define SHELL_OP_H
+
+# include <stdio.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 # include "error_code.h"
 # include "libft.h"
@@ -29,7 +33,7 @@ typedef struct s_shell_op
 	t_token_list	*token_list;
 	t_cmd_list		*cmd_list;
 	t_bool			run;
-	t_bool			open_pipe;
+	t_bool			clean_history;
 	int				last_cmd_stt;
 	t_pipe_list		*pipe_list;
 	char			*cli_input;

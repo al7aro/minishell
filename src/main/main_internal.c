@@ -6,13 +6,12 @@
 /*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 09:50:39 by al7aro            #+#    #+#             */
-/*   Updated: 2022/12/11 11:05:36 by yrabby           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:19:56 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-// TODO SYNTAX_ERROR create error_code handler -- NO printf
 t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 {
 	t_error_code	err;
@@ -32,7 +31,7 @@ t_error_code	handle_input(t_shell_op *sp, t_read_input read_func)
 		return (err);
 	err = parser_check_tokens(sp);
 	if (SUCCESS != err)
-		cleaner_on_pipe_error(sp);
+		cleaner_on_parse_error(sp);
 	return (err);
 }
 
@@ -45,7 +44,11 @@ t_error_code	handle_valid_input(t_shell_op *sp)
 		return (err);
 	err = redirecter_setup_files(sp);
 	if (SUCCESS != err)
+	{
+		if (HEREDOC_SIGNAL_EXIT == err)
+			cleaner_round_clean(sp);
 		return (err);
+	}
 	err = piper_init_pipes(sp);
 	if (SUCCESS != err)
 		return (err);
@@ -56,7 +59,6 @@ t_error_code	handle_valid_input(t_shell_op *sp)
 	return (SUCCESS);
 }
 
-// TODO reader should handle open pipe then FALSE it
 t_error_code	internal_flow(char *cli_input, char **envp, \
 	t_read_input read_func)
 {

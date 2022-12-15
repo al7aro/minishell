@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commander_path_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoav <yoav@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yrabby <yrabby@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 09:45:24 by yoav              #+#    #+#             */
-/*   Updated: 2022/10/23 15:40:49 by yoav             ###   ########.fr       */
+/*   Updated: 2022/12/14 16:07:58 by yrabby           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static t_error_code	add_slash_if_needed_line(char **ret)
 
 	path = *ret;
 	last_slash = ft_strrchr(path, SLASH_CHAR);
+	if (!last_slash)
+		return (SUCCESS);
 	if (last_slash[1])
 	{
 		tmp = path;
@@ -48,7 +50,6 @@ static t_error_code	add_slash_if_needed(char **tab)
 	return (SUCCESS);
 }
 
-// TODO add test on a bad PATH var
 t_error_code	get_path_tab(char ***ret, char **env)
 {
 	t_error_code	err;
