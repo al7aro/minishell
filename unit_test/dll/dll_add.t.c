@@ -25,7 +25,7 @@ void	test_dll_add_after(void)
 	i1 = 1;
 	i2 = 2;
 	dll_add_after(lst, new);
-	CU_ASSERT_EQUAL(*(int *)lst->value, 12222);
+	CU_ASSERT_EQUAL(*(int *)lst->value, 1);
 	CU_ASSERT_EQUAL(*(int *)lst->next->value, 2);
 	CU_ASSERT_EQUAL(lst->next, new);
 	dll_clear_list(lst, NULL);
