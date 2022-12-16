@@ -148,7 +148,6 @@ SRC 					= \
 #---------- OBJ ----------
 OBJ_DIR 				= obj
 OBJ						= $(subst $(SRC_DIR),$(OBJ_DIR), $(SRC:.c=.o))
-OBJ_NO_MAIN	 			= $(filter-out obj/main/main.o,$(OBJ))
 
 #---------- LIBFT ----------
 LIBFT_NAME				= libft.a
