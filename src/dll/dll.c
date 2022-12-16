@@ -26,7 +26,6 @@ t_dll	*dll_create_elem(void *value)
 void	dll_destroy_elem(t_dll *elem)
 {
 	ft_bzero(elem, sizeof(t_dll));
-	free(elem);
 }
 
 void	dll_clear_list(register t_dll *lst, t_dll_destroy_func f)

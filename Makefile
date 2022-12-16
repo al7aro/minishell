@@ -159,6 +159,9 @@ LIBFT_DIR				= libft
 LIBFT_HEAD_DIR			= $(LIBFT_DIR)
 LIBFT					= $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
+
+
+
 #---------- TEST ----------
 TEST_DIR				= unit_test
 TEST_HEAD_DIR			= $(addprefix $(TEST_DIR)/, include)
